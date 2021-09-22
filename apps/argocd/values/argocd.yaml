@@ -1,0 +1,93 @@
+createAggregateRoles: true
+
+global:
+  image:
+    repository: alinbalutoiu/argocd
+    tag: linux-arm64-v2.0.5
+
+  securityContext:
+    runAsUser: 65534
+    runAsGroup: 65534
+    fsGroup: 65534
+
+controller:
+  logFormat: json
+  logLevel: warn
+
+  containerSecurityContext:
+    capabilities:
+      drop:
+        - all
+    readOnlyRootFilesystem: true
+    runAsNonRoot: true
+
+  metrics:
+    enabled: true
+    service:
+      annotations:
+        prometheus.io/scrape: "true"
+
+dex:
+  containerSecurityContext:
+    capabilities:
+      drop:
+        - all
+    readOnlyRootFilesystem: true
+
+  metrics:
+    enabled: true
+    service:
+      annotations:
+        prometheus.io/scrape: "true"
+
+redis:
+  image:
+    repository: arm64v8/redis
+    tag: 6.2-alpine
+
+  containerSecurityContext:
+    capabilities:
+      drop:
+        - all
+    readOnlyRootFilesystem: true
+
+  metrics:
+    enabled: true
+
+    image:
+      repository: oliver006/redis_exporter
+      tag: latest-arm64
+      pullPolicy: Always
+    service:
+      annotations:
+        prometheus.io/scrape: "true"
+
+server:
+  name: server
+
+  autoscaling:
+    enabled: true
+    minReplicas: 1
+    maxReplicas: 2
+    targetCPUUtilizationPercentage: 60
+    targetMemoryUtilizationPercentage: 60
+
+  logFormat: json
+  logLevel: warn
+
+  containerSecurityContext:
+    capabilities:
+      drop:
+        - all
+    readOnlyRootFilesystem: true
+
+  metrics:
+    enabled: true
+    service:
+      annotations:
+        prometheus.io/scrape: "true"
+
+  ingress:
+    enabled: true
+    hosts:
+      - argocd.rpi4.lan.dixon.rocks

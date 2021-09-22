@@ -1,0 +1,25 @@
+image:
+  name: arm64v8/traefik
+
+ingressClass:
+  enabled: true
+  isDefaultClass: true
+
+ingressRoute:
+  dashboard:
+    enabled: true
+
+service:
+  enabled: true
+  type: NodePort
+
+ports:
+  web:
+    nodePort: 32080
+  websecure:
+    nodePort: 32443
+
+logs:
+  access:
+    enabled: true
+    format: json

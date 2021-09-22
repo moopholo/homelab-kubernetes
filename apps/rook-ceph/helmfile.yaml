@@ -1,0 +1,18 @@
+repositories:
+  - name: rook-release
+    url: https://charts.rook.io/release
+
+releases:
+  - name: rook-ceph-operator
+    namespace: rook-ceph
+    chart: rook-release/rook-ceph
+    missingFileHandler: Warn
+    values:
+      - values/rook-ceph-operator.yaml
+
+  - name: rook-ceph-cluster
+    namespace: rook-ceph
+    chart: rook-release/rook-ceph-cluster
+    missingFileHandler: Warn
+    values:
+      - values/rook-ceph-cluster.yaml

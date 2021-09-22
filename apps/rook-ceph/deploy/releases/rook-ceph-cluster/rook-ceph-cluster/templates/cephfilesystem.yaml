@@ -1,0 +1,36 @@
+---
+# Source: rook-ceph-cluster/templates/cephfilesystem.yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: ceph-filesystem
+provisioner: rook-ceph.cephfs.csi.ceph.com
+parameters:
+  fsName: ceph-filesystem
+  pool: ceph-filesystem-data0
+  clusterID: rook-ceph
+  csi.storage.k8s.io/controller-expand-secret-name: rook-csi-cephfs-provisioner
+  csi.storage.k8s.io/controller-expand-secret-namespace: rook-ceph
+  csi.storage.k8s.io/fstype: ext4
+  csi.storage.k8s.io/node-stage-secret-name: rook-csi-cephfs-node
+  csi.storage.k8s.io/node-stage-secret-namespace: rook-ceph
+  csi.storage.k8s.io/provisioner-secret-name: rook-csi-cephfs-provisioner
+  csi.storage.k8s.io/provisioner-secret-namespace: rook-ceph
+reclaimPolicy: Delete
+---
+# Source: rook-ceph-cluster/templates/cephfilesystem.yaml
+apiVersion: ceph.rook.io/v1
+kind: CephFilesystem
+metadata:
+  name: ceph-filesystem
+spec:
+  dataPools:
+  - failureDomain: host
+    replicated:
+      size: 3
+  metadataPool:
+    replicated:
+      size: 3
+  metadataServer:
+    activeCount: 1
+    activeStandby: true

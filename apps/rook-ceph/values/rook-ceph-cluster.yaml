@@ -1,0 +1,14 @@
+operatorNamespace: rook-ceph
+
+cephClusterSpec:
+  cephVersion:
+    image: quay.io/ceph/ceph:v16.2
+    allowUnsupported: true
+
+  network:
+    provider: host
+
+  storage:
+    useAllNodes: true
+    useAllDevices: false
+    deviceFilter: "^sd."

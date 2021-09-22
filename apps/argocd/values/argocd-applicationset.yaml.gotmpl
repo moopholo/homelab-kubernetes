@@ -1,0 +1,14 @@
+image:
+  repository: albertdixon/argocd-applicationset
+  tag: arm64-master
+
+args:
+  namespace: {{ .Release.Namespace }}
+
+securityContext:
+  capabilities:
+    drop:
+      - ALL
+  readOnlyRootFilesystem: true
+  runAsNonRoot: true
+  runAsUser: 1000

@@ -1,0 +1,15 @@
+repositories:
+  - name: traefik
+    url: https://helm.traefik.io/traefik
+
+apiVersions:
+  - "networking.k8s.io/v1/IngressClass"
+
+releases:
+  - name: traefik
+    namespace: traefik
+    chart: traefik/traefik
+    version: "~10"
+    missingFileHandler: Warn
+    values:
+      - values/traefik.yaml

@@ -1,0 +1,25 @@
+repositories:
+  - name: argo
+    url: https://argoproj.github.io/argo-helm
+
+values:
+  - argocd-applicationset:
+      enabled: true
+
+releases:
+  - name: argocd
+    namespace: argocd
+    chart: argo/argo-cd
+    version: "~3"
+    missingFileHandler: Warn
+    values:
+      - values/argocd.yaml
+
+  - name: argocd-applicationset
+    namespace: argocd
+    chart: argo/argocd-applicationset
+    version: "~1"
+    condition: argocd-applicationset.enabled
+    missingFileHandler: Warn
+    values:
+      - values/argocd-applicationset.yaml.gotmpl

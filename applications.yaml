@@ -1,0 +1,39 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: homelab
+  namespace: argocd
+spec:
+  generators:
+    - git:
+        repoURL: https://github.com/albertrdixon/homelab-kubernetes.git
+        revision: main
+        directories:
+          - path: apps/*
+          - path: apps/coredns
+            exclude: true
+  template:
+    metadata:
+      name: "{{path.basename}}"
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/albertrdixon/homelab-kubernetes.git
+        targetRevision: main
+        path: "{{path}}/deploy"
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: "{{path.basename}}"
+      syncPolicy:
+        syncOptions:
+          - CreateNamespace=true
+          - PrunePropagationPolicy=background
+          - PruneLast=true
+        automated:
+          prune: true
+          selfHeal: true
+        retry:
+          limit: 3
+          backoff:
+            duration: 15s
+            factor: 3
