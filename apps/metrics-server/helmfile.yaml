@@ -4,7 +4,7 @@ repositories:
 
 releases:
   - name: metrics-server
-    namespace: metrics-server
+    namespace: "{{ env `NAMESPACE` }}"
     chart: metrics-server/metrics-server
     version: "~3"
     missingFileHandler: Warn
