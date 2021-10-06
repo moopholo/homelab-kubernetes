@@ -31,7 +31,8 @@ function apps_with_changes_json_array() {
 
   echo "--> Looking for changes refs=$(join_by ":" $refs) root=$dir" >&2
   for app_dir in "$dir"/apps/*; do
-    local -r app_name=$(basename "$app_dir")
+    local app_name
+    app_name=$(basename "$app_dir")
 
     ## paths to look for changes in
     ## paths are defined in .github/set-changed-apps-matrix.paths
