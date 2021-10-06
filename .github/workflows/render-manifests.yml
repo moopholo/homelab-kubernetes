@@ -45,7 +45,7 @@ jobs:
 
       - uses: docker://ghcr.io/yannh/kubeconform:v0.4.12-alpine
         with:
-          args: -skip CustomResourceDefinition -n 8 -summary /github/workspace/apps/${{ matrix.app-name }}/deploy/releases
+          args: -ignore-missing-schemas -n 8 -summary /github/workspace/apps/${{ matrix.app-name }}/deploy/releases
 
       - name: Commit Updates
         uses: EndBug/add-and-commit@v7
