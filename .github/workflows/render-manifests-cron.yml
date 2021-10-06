@@ -1,0 +1,60 @@
+name: Render Manifests
+on:
+  schedule:
+    - cron: "0 */6 * * *"
+
+jobs:
+  list-apps:
+    name: cron / list-apps
+    runs-on: ubuntu-latest
+
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.result }}
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: master
+
+      - id: set-matrix
+        uses: actions/github-script@v3
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs')
+            return { 'app-name': fs.readdirSync(`${process.env.GITHUB_WORKSPACE}/apps`) }
+
+  render:
+    name: cron / render-manifests
+    runs-on: ubuntu-latest
+    needs: [list-apps]
+
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix: ${{ fromJson(needs.list-apps.outputs.matrix) }}
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: master
+
+      - uses: albertrdixon/helmfile-render@v0
+        with:
+          app: ${{ matrix.app-name }}
+
+      - uses: docker://ghcr.io/yannh/kubeconform:v0.4.12-alpine
+        with:
+          args: -ignore-missing-schemas -n 8 -summary /github/workspace/apps/${{ matrix.app-name }}/deploy/releases
+
+      - uses: peter-evans/create-pull-request@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          committer: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
+          author: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
+          delete-branch: true
+
+          branch: chore/render-manifests/${{ matrix.app-name }}
+          title: "manifests(${{ matrix.app-name }}): Automated Manifest Updates"
+          body: |
+            Automated manifest render for ${{ matrix.app-name }}
