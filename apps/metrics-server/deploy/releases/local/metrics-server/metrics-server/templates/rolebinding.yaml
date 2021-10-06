@@ -18,4 +18,4 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: metrics-server
-    namespace: default
+    namespace: metrics-server

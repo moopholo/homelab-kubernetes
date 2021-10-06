@@ -16,6 +16,6 @@ spec:
   insecureSkipTLSVerify: true
   service:
     name: metrics-server
-    namespace: default
+    namespace: metrics-server
   version: v1beta1
   versionPriority: 100
