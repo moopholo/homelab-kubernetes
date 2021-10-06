@@ -1,0 +1,8 @@
+### set-changed-apps-matrix paths
+###   defines the paths apps-matrix-output-from-git-diff.sh will use to detect changes in the repository
+###   __app__ is replaced with the current app or \$app
+###   The paths use `git pathspec` syntax.
+###   `git pathspec` reference: https://git-scm.com/docs/gitglossary#Documentation/gitglossary.txt-aiddefpathspecapathspec
+
+:(glob,top)**/__app__/**
+:(glob,top,exclude)**/__app__/deploy/releases/**

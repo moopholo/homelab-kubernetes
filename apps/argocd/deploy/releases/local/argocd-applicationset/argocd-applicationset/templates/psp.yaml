@@ -1,0 +1,77 @@
+---
+# Source: argocd-applicationset/templates/psp.yaml
+apiVersion: policy/v1beta1
+kind: PodSecurityPolicy
+metadata:
+  name: argocd-applicationset
+  labels:
+    helm.sh/chart: argocd-applicationset-1.5.1
+    app.kubernetes.io/name: argocd-applicationset
+    app.kubernetes.io/instance: argocd-applicationset
+    app.kubernetes.io/version: "v0.2.0"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: argo-cd-applicationset
+    app.kubernetes.io/component: controller
+  annotations:
+    seccomp.security.alpha.kubernetes.io/allowedProfileNames: '*'
+spec:
+  privileged: false
+  hostIPC: false
+  hostNetwork: false
+  hostPID: false
+  readOnlyRootFilesystem: false
+  allowPrivilegeEscalation: false
+  allowedCapabilities:
+    - '*'
+  fsGroup:
+    rule: RunAsAny
+  runAsUser:
+    rule: RunAsAny
+  seLinux:
+    rule: RunAsAny
+  supplementalGroups:
+    rule: RunAsAny
+  volumes:
+    - '*'
+---
+# Source: argocd-applicationset/templates/psp.yaml
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: argocd-applicationset-psp
+  labels:
+    helm.sh/chart: argocd-applicationset-1.5.1
+    app.kubernetes.io/name: argocd-applicationset
+    app.kubernetes.io/instance: argocd-applicationset
+    app.kubernetes.io/version: "v0.2.0"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: argo-cd-applicationset
+    app.kubernetes.io/component: controller
+rules:
+  - apiGroups: ['policy']
+    resources: ['podsecuritypolicies']
+    verbs:     ['use']
+    resourceNames:
+      - argocd-applicationset
+---
+# Source: argocd-applicationset/templates/psp.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: argocd-applicationset-psp
+  labels:
+    helm.sh/chart: argocd-applicationset-1.5.1
+    app.kubernetes.io/name: argocd-applicationset
+    app.kubernetes.io/instance: argocd-applicationset
+    app.kubernetes.io/version: "v0.2.0"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: argo-cd-applicationset
+    app.kubernetes.io/component: controller
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: argocd-applicationset-psp
+subjects:
+  - kind: ServiceAccount
+    name: argocd-applicationset
+    namespace: argocd

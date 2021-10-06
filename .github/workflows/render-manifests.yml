@@ -1,0 +1,56 @@
+name: Render Manifests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    types: [opened, ready_for_review, synchronize]
+    branches: [main]
+
+jobs:
+  find-changes:
+    name: runner / set-matrix
+    runs-on: ubuntu-latest
+    if: github.event_name != 'issue_comment'
+
+    outputs:
+      matrix: ${{ steps.changed-apps.outputs.matrix }}
+      changes: ${{ steps.changed-apps.outputs.changes }}
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 3
+      - id: changed-apps
+        run: |
+          ./.github/scripts/apps-matrix-output-from-git-diff.sh
+
+  render-changes:
+    name: runner / render-manifests
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    needs: [find-changes]
+    if: needs.find-changes.outputs.changes == 'true'
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix: ${{ fromJson(needs.find-changes.outputs.matrix) }}
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: albertrdixon/helmfile-render@v0
+        with:
+          app: ${{ matrix.app-name }}
+
+      - uses: docker://ghcr.io/yannh/kubeconform:v0.4.12-alpine
+        with:
+          args: -ignore-missing-schemas -n 8 -summary /github/workspace/apps/${{ matrix.app-name }}/deploy/releases
+
+      - name: Commit Updates
+        uses: EndBug/add-and-commit@v7
+        with:
+          message: "${{ matrix.app-name }}: update manifests"
+          add: apps
+          author_name: github-actions[bot]
+          author_email: 41898282+github-actions[bot]@users.noreply.github.com
