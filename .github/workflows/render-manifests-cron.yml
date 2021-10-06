@@ -17,7 +17,7 @@ jobs:
           ref: master
 
       - id: set-matrix
-        uses: actions/github-script@v3
+        uses: actions/github-script@v5
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
