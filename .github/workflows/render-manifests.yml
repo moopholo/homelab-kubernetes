@@ -39,7 +39,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - uses: albertdixon/helmfile-render@v0
+      - uses: albertrdixon/helmfile-render@v0
         with:
           app: ${{ matrix.app-name }}
 
