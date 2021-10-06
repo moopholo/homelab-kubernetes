@@ -30,12 +30,13 @@ function apps_with_changes_json_array() {
   local -a apps
 
   echo "--> Looking for changes refs=$(join_by ":" $refs) root=$dir" >&2
-  for app in "$dir"/apps/*; do
+  for app_dir in "$dir"/apps/*; do
+    local -r app_name=$(basename "$app_dir")
 
     ## paths to look for changes in
     ## paths are defined in .github/set-changed-apps-matrix.paths
     readarray -t paths < <(
-      sed "/^#/d" <"$PROJECT_DIR/.github/git-diff.paths" | sed "/^[[:space:]]*$/d" | sed "s/__app__/$app/g"
+      cat "$PROJECT_DIR/.github/git-diff.paths" | sed "/^#/d" | sed "/^[[:space:]]*$/d" | sed "s/__app__/$app_name/g"
     )
 
     ## Find any changes between the given \$refs with any files matching the given paths
@@ -53,7 +54,7 @@ function apps_with_changes_json_array() {
 
     case "$git_diff_status" in
     0)
-      echo "--> No changes detected for $app" >&2
+      echo "--> No changes detected for $app_name" >&2
       continue
       ;;
     1)
@@ -62,7 +63,7 @@ function apps_with_changes_json_array() {
         echo "$git_diff_output"
         echo
       } >&2
-      apps+=($app)
+      apps+=($app_name)
       ;;
     *)
       echo "[ERR] Failed to run git diff: $git_diff_output" >&2
