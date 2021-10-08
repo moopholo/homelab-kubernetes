@@ -12,6 +12,8 @@ jobs:
     name: runner / set-matrix
     runs-on: ubuntu-latest
     if: github.event_name != 'issue_comment'
+    permissions:
+      contents: read
 
     outputs:
       matrix: ${{ steps.changed-apps.outputs.matrix }}
