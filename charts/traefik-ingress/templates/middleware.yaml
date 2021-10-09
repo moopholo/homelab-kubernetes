@@ -1,0 +1,15 @@
+{{- range $name, $config := .Values.middlewares }}
+---
+apiVersion: {{ $.Values.ingressroute.apiVersion }}
+kind: Middleware
+metadata:
+  name: {{ $name }}
+  namespace: {{ $.Release.Namespace }}
+  labels:
+    {{- include "traefik-ingress.labels" (dict "name" $name "context" $) | nindent 4 }}
+{{- with $config.annotations }}
+  annotations:
+    {{- . | toYaml | nindent 4 }}{{ end }}
+spec:
+  {{- omit $config "annotations" "labels" | toYaml | nindent 2 }}
+{{ end -}}

@@ -1,0 +1,12 @@
+ingressroute:
+  apiVersion: traefik.containo.us/v1alpha1
+
+middleware:
+  apiVersion: traefik.containo.us/v1alpha1
+
+global:
+  labels: {}
+  annotations: {}
+
+routes: {}
+middlewares: {}

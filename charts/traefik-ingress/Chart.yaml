@@ -1,0 +1,6 @@
+apiVersion: v2
+name: traefik-ingress
+description: Generate traefik ingress CRD resources
+type: application
+
+version: 0.1.0
