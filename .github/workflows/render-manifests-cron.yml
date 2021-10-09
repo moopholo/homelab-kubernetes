@@ -44,7 +44,7 @@ jobs:
         with:
           ref: main
 
-      - uses: albertrdixon/helmfile-render@v0
+      - uses: moopholo/helmfile-render@v0
         with:
           app: ${{ matrix.app-name }}
 

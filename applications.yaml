@@ -6,7 +6,7 @@ metadata:
 spec:
   generators:
     - git:
-        repoURL: https://github.com/albertrdixon/homelab-kubernetes.git
+        repoURL: https://github.com/moopholo/homelab-kubernetes.git
         revision: main
         # files:
         #   - path: apps/**/deploy/targets/*.yaml
@@ -20,7 +20,7 @@ spec:
     spec:
       project: default
       source:
-        repoURL: https://github.com/albertrdixon/homelab-kubernetes.git
+        repoURL: https://github.com/moopholo/homelab-kubernetes.git
         targetRevision: main
         path: "{{path}}/deploy/releases"
       destination:
