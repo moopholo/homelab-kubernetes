@@ -1,0 +1,26 @@
+image:
+  registry: k8s.gcr.io
+  repository: metrics-server/metrics-server
+  tag: v0.5.0
+
+apiService:
+  create: true
+
+command: []
+extraArgs:
+  kubelet-use-node-status-port: ""
+  kubelet-preferred-address-types: Hostname
+  metric-resolution: 15s
+  cert-dir: /tmp
+
+extraVolumes:
+  - name: tmpdir
+    emptyDir: {}
+
+extraVolumeMounts:
+  - name: tmpdir
+    mountPath: /tmp
+
+podSecurityContext:
+  enabled: true
+  fsGroup: 65534
