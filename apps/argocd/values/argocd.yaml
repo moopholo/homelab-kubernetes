@@ -94,3 +94,6 @@ server:
     enabled: true
     hosts:
       - argocd.microk8s
+
+  config:
+    url: https://argocd.microk8s

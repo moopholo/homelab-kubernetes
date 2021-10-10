@@ -13,4 +13,4 @@ metadata:
     app.kubernetes.io/part-of: argocd
 data:
     application.instanceLabelKey: argocd.argoproj.io/instance
-    url: https://argocd.example.com
+    url: https://argocd.microk8s
