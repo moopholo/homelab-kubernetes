@@ -1,6 +1,9 @@
 image:
   name: arm64v8/traefik
 
+deployment:
+  enabled: true
+
 ingressClass:
   enabled: true
   isDefaultClass: true
@@ -14,12 +17,22 @@ service:
   type: NodePort
 
 ports:
+  traefik:
+    port: 9000
+    expose: true
+    exposedPort: 9000
+    nodePort: 30090
   web:
+    port: 8000
     nodePort: 32080
   websecure:
+    port: 8443
     nodePort: 32443
 
 logs:
   access:
     enabled: true
     format: json
+    filters:
+      statuscodes: 400-599
+      retryattempts: true

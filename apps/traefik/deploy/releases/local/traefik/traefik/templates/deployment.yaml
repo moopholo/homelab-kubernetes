@@ -100,6 +100,8 @@ spec:
           - "--providers.kubernetesingress"
           - "--accesslog=true"
           - "--accesslog.format=json"
+          - "--accesslog.filters.statuscodes=400-599"
+          - "--accesslog.filters.retryattempts"
           - "--accesslog.fields.defaultmode=keep"
           - "--accesslog.fields.headers.defaultmode=drop"
       volumes:
