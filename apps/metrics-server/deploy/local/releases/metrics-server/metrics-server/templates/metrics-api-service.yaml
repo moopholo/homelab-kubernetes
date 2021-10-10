@@ -1,21 +1,20 @@
 ---
-# Source: metrics-server/templates/apiservice.yaml
+# Source: metrics-server/templates/metrics-api-service.yaml
 apiVersion: apiregistration.k8s.io/v1
 kind: APIService
 metadata:
   name: v1beta1.metrics.k8s.io
   labels:
-    helm.sh/chart: metrics-server-3.5.0
     app.kubernetes.io/name: metrics-server
+    helm.sh/chart: metrics-server-5.10.4
     app.kubernetes.io/instance: metrics-server
-    app.kubernetes.io/version: "0.5.0"
     app.kubernetes.io/managed-by: Helm
 spec:
-  group: metrics.k8s.io
-  groupPriorityMinimum: 100
-  insecureSkipTLSVerify: true
   service:
     name: metrics-server
     namespace: metrics-server
+  group: metrics.k8s.io
   version: v1beta1
+  insecureSkipTLSVerify: true
+  groupPriorityMinimum: 100
   versionPriority: 100
