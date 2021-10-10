@@ -1,0 +1,12 @@
+repositories:
+  - name: sops
+    url: https://isindir.github.io/sops-secrets-operator/
+
+releases:
+  - name: sops-operator
+    namespace: sops-operator
+    chart: sops/sops-secrets-operator
+    version: "~0"
+    missingFileHandler: Warn
+    values:
+      - values/sops-operator.yaml

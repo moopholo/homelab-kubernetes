@@ -1,0 +1,11 @@
+nameOverride: sops-operator
+fullnameOverride: sops-operator
+
+secretsAsFiles:
+  - name: age-keys
+    mountPath: /data/age
+    secretName: age-keys
+
+extraEnv:
+  - name: SOPS_AGE_KEY_FILE
+    value: /data/age/keys.txt
