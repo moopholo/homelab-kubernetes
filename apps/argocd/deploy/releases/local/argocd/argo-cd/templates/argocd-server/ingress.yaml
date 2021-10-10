@@ -13,7 +13,7 @@ metadata:
     app.kubernetes.io/part-of: argocd
 spec:
   rules:
-    - host: argocd.rpi4.lan.dixon.rocks
+    - host: argocd.microk8s
       http:
         paths:
           - path: /
