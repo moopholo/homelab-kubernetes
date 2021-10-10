@@ -3,7 +3,6 @@ image:
 
 deployment:
   enabled: true
-  kind: DaemonSet
 
 ingressClass:
   enabled: true
@@ -14,7 +13,7 @@ ingressRoute:
     enabled: true
 
 service:
-  enabled: false
+  enabled: true
 
 hostNetwork: true
 ports:
@@ -22,12 +21,13 @@ ports:
     port: 9000
     expose: true
     exposedPort: 9000
+    nodePort: 30090
   web:
     port: 8000
-    hostPort: 8000
+    nodePort: 32080
   websecure:
     port: 8443
-    hostPort: 8443
+    nodePort: 32443
 
 logs:
   access:
