@@ -14,6 +14,7 @@ ingressRoute:
 
 service:
   enabled: true
+  type: NodePort
 
 ports:
   traefik:
