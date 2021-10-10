@@ -15,7 +15,6 @@ ingressRoute:
 service:
   enabled: true
 
-hostNetwork: true
 ports:
   traefik:
     port: 9000
