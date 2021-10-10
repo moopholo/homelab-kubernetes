@@ -1,0 +1,25 @@
+---
+# Source: coredns/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: coredns-coredns
+  labels:
+    app.kubernetes.io/managed-by: "Helm"
+    app.kubernetes.io/instance: "coredns"
+    helm.sh/chart: "coredns-1.16.3"
+    k8s-app: "coredns"
+    kubernetes.io/cluster-service: "true"
+    kubernetes.io/name: "CoreDNS"
+    app.kubernetes.io/name: coredns
+  annotations:
+    {}
+spec:
+  selector:
+    app.kubernetes.io/instance: "coredns"
+    k8s-app: "coredns"
+    app.kubernetes.io/name: coredns
+  ports:
+  - {port: 53, protocol: UDP, name: udp-53}
+  - {port: 53, protocol: TCP, name: tcp-53}
+  type: ClusterIP
