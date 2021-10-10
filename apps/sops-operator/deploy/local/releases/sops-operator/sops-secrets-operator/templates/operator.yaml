@@ -1,0 +1,70 @@
+---
+# Source: sops-secrets-operator/templates/operator.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sops-operator
+  labels:
+    app.kubernetes.io/name: sops-secrets-operator
+    helm.sh/chart: sops-secrets-operator-0.9.5
+    app.kubernetes.io/instance: sops-operator
+    app.kubernetes.io/version: "0.3.5"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: sops-secrets-operator
+      app.kubernetes.io/instance: sops-operator
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: sops-secrets-operator
+        app.kubernetes.io/instance: sops-operator
+    spec:
+      serviceAccountName: sops-operator
+      containers:
+        - name: sops-secrets-operator
+          image: "isindir/sops-secrets-operator:0.3.5"
+          imagePullPolicy: Always
+          volumeMounts:
+          - name: age-keys
+            mountPath: /data/age
+            readOnly: true
+          command:
+          - /usr/local/bin/manager
+          args:
+          # The address the metric endpoint binds to. (default ":8080")
+          #- "--metrics-bind-address=127.0.0.1:8080"
+          - "--health-probe-bind-address=:8081"
+          # Enable leader election for controller manager. Enabling this will ensure there is only one active controller manager.
+          - "--leader-elect"
+          - "--requeue-decrypt-after=5"
+          - "--zap-encoder=json"
+          - "--zap-log-level=info"
+          - "--zap-stacktrace-level=error"
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8081
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          readinessProbe:
+            httpGet:
+              path: /readyz
+              port: 8081
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          env:
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: SOPS_AGE_KEY_FILE
+              value: "/data/age/keys.txt"
+          resources:
+            {}
+      volumes:
+      - name: age-keys
+        secret:
+          secretName: age-keys

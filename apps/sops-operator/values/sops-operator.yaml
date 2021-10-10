@@ -1,4 +1,3 @@
-nameOverride: sops-operator
 fullnameOverride: sops-operator
 
 secretsAsFiles:

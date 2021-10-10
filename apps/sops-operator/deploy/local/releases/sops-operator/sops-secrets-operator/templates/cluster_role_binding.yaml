@@ -1,0 +1,20 @@
+---
+# Source: sops-secrets-operator/templates/cluster_role_binding.yaml
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: sops-operator
+  labels:
+    app.kubernetes.io/name: sops-secrets-operator
+    helm.sh/chart: sops-secrets-operator-0.9.5
+    app.kubernetes.io/instance: sops-operator
+    app.kubernetes.io/version: "0.3.5"
+    app.kubernetes.io/managed-by: Helm
+subjects:
+- kind: ServiceAccount
+  name: sops-operator
+  namespace: sops-operator
+roleRef:
+  kind: ClusterRole
+  name: sops-operator
+  apiGroup: rbac.authorization.k8s.io
