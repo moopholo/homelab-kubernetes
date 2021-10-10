@@ -65,6 +65,9 @@ redis:
 server:
   name: server
 
+  extraArgs:
+    - --insecure
+
   autoscaling:
     enabled: true
     minReplicas: 1
@@ -90,4 +93,4 @@ server:
   ingress:
     enabled: true
     hosts:
-      - argocd.rpi4.lan.dixon.rocks
+      - argocd.microk8s
