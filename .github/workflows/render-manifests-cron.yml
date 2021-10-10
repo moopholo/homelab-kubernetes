@@ -50,7 +50,7 @@ jobs:
 
       - uses: docker://ghcr.io/yannh/kubeconform:v0.4.12-alpine
         with:
-          args: -ignore-missing-schemas -n 8 -summary /github/workspace/apps/${{ matrix.app-name }}/deploy/releases
+          args: -ignore-missing-schemas -n 8 -summary /github/workspace/apps/${{ matrix.app-name }}/deploy/local
 
       - uses: peter-evans/create-pull-request@v3
         with:
