@@ -5,4 +5,4 @@
 ###   `git pathspec` reference: https://git-scm.com/docs/gitglossary#Documentation/gitglossary.txt-aiddefpathspecapathspec
 
 :(glob,top)**/__app__/**
-:(glob,top,exclude)**/__app__/deploy/releases/**
+:(glob,top,exclude)**/__app__/deploy/**/releases/**

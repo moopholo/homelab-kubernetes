@@ -22,7 +22,9 @@ spec:
       source:
         repoURL: https://github.com/moopholo/homelab-kubernetes.git
         targetRevision: main
-        path: "{{path}}/deploy/releases/local"
+        path: "{{path}}/deploy/local"
+        directory:
+          recurse: true
       destination:
         server: https://kubernetes.default.svc
         namespace: "{{path.basename}}"
