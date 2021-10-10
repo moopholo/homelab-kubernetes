@@ -93,4 +93,4 @@ server:
   ingress:
     enabled: true
     hosts:
-      - argocd.
+      - argocd.microk8s
