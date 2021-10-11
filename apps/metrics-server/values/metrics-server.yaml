@@ -9,7 +9,8 @@ apiService:
 command: []
 extraArgs:
   kubelet-use-node-status-port: ""
-  kubelet-preferred-address-types: Hostname
+  kubelet-insecure-tls: ""
+  kubelet-preferred-address-types: InternalIP,Hostname
   metric-resolution: 15s
   cert-dir: /tmp
 
