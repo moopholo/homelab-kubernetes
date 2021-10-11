@@ -11,7 +11,7 @@ metadata:
     heritage: Helm
 spec:
   acme:
-    email: 'adixon415@gmail.com'
+    email: adixon415@gmail.com
     privateKeySecretRef:
       name: cert-manager-webhook-dnsimple-staging
     server: https://acme-staging-v02.api.letsencrypt.org/directory
