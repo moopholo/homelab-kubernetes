@@ -19,7 +19,7 @@ routes:
             port: 80
 
   argocd-ui-https:
-    entrypoints: [websecure]
+    entryPoints: [websecure]
     tls:
       secretName: {{ $domainSlug }}-tls
     routes:

@@ -34,7 +34,7 @@ metadata:
     app.kubernetes.io/instance: argocd-ui
     app.kubernetes.io/managed-by: Helm
 spec:
-  entrypoints:
+  entryPoints:
   - websecure
   routes:
   - kind: Rule
