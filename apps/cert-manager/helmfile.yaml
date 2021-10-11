@@ -1,0 +1,21 @@
+repositories:
+  - name: neoskop
+    url: https://charts.neoskop.dev
+  - name: jetstack
+    url: https://charts.jetstack.io
+
+releases:
+  - name: cert-manager
+    namespace: cert-manager
+    chart: jetstack/cert-manager
+    version: ~1.5
+    missingFileHandler: Warn
+    values:
+      - values/cert-manager.yaml
+
+  - name: cert-manager-webhook-dnsimple
+    namespace: cert-manager
+    chart: neoskop/cert-manager-webhook-dnsimple
+    missingFileHandler: Warn
+    values:
+      - values/cert-manager-webhook-dnsimple.yaml.gotmpl

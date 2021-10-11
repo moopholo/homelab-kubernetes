@@ -1,0 +1,21 @@
+---
+# Source: cert-manager-webhook-dnsimple/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: cert-manager-webhook-dnsimple
+  labels:
+    app: cert-manager-webhook-dnsimple
+    chart: cert-manager-webhook-dnsimple-0.1.0
+    release: cert-manager-webhook-dnsimple
+    heritage: Helm
+spec:
+  type: ClusterIP
+  ports:
+    - port: 443
+      targetPort: https
+      protocol: TCP
+      name: https
+  selector:
+    app: cert-manager-webhook-dnsimple
+    release: cert-manager-webhook-dnsimple

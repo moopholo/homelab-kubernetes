@@ -1,0 +1,14 @@
+image:
+  repository: ghcr.io/moopholo/cert-manager-webhook-dnsimple
+  tag: sha-6bd78fa
+
+dnsimple:
+  existingTokenSecret: true
+  tokenSecretName: api-token-dnsimple
+
+clusterIssuer:
+  email: "{{ env `EMAIL` }}"
+  production:
+    enabled: true
+  staging:
+    enabled: true

@@ -1,0 +1,58 @@
+---
+# Source: cert-manager-webhook-dnsimple/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cert-manager-webhook-dnsimple
+  labels:
+    app: cert-manager-webhook-dnsimple
+    chart: cert-manager-webhook-dnsimple-0.1.0
+    release: cert-manager-webhook-dnsimple
+    heritage: Helm
+spec:
+  replicas: 
+  selector:
+    matchLabels:
+      app: cert-manager-webhook-dnsimple
+      release: cert-manager-webhook-dnsimple
+  template:
+    metadata:
+      labels:
+        app: cert-manager-webhook-dnsimple
+        release: cert-manager-webhook-dnsimple
+    spec:
+      serviceAccountName: cert-manager-webhook-dnsimple
+      containers:
+        - name: cert-manager-webhook-dnsimple
+          image: "ghcr.io/moopholo/cert-manager-webhook-dnsimple:sha-6bd78fa"
+          imagePullPolicy: IfNotPresent
+          args:
+            - --tls-cert-file=/tls/tls.crt
+            - --tls-private-key-file=/tls/tls.key
+          env:
+            - name: GROUP_NAME
+              value: "acme.neoskop.de"
+          ports:
+            - name: https
+              containerPort: 443
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              scheme: HTTPS
+              path: /healthz
+              port: https
+          readinessProbe:
+            httpGet:
+              scheme: HTTPS
+              path: /healthz
+              port: https
+          volumeMounts:
+            - name: certs
+              mountPath: /tls
+              readOnly: true
+          resources:
+            {}
+      volumes:
+        - name: certs
+          secret:
+            secretName: cert-manager-webhook-dnsimple-webhook-tls

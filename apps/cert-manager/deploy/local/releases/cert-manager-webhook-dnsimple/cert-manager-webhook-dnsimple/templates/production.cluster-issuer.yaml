@@ -1,0 +1,26 @@
+---
+# Source: cert-manager-webhook-dnsimple/templates/production.cluster-issuer.yaml
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: cert-manager-webhook-dnsimple-production
+  labels:
+    app: cert-manager-webhook-dnsimple
+    chart: cert-manager-webhook-dnsimple-0.1.0
+    release: cert-manager-webhook-dnsimple
+    heritage: Helm
+spec:
+  acme:
+    email: 'adixon415@gmail.com'
+    privateKeySecretRef:
+      name: cert-manager-webhook-dnsimple-production
+    server: https://acme-v02.api.letsencrypt.org/directory
+    solvers:
+    - dns01:
+        webhook:
+          config:
+            tokenSecretRef:
+              key: token
+              name: api-token-dnsimple
+          groupName: acme.neoskop.de
+          solverName: dnsimple

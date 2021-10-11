@@ -1,0 +1,15 @@
+installCRDs: true
+
+leaderElection:
+  namespace: cert-manager
+
+extraArgs:
+  - --cluster-resource-namespace=kube-system
+  - --enable-certificate-owner-ref=true
+
+containerSecurityContext:
+  capabilities:
+    drop:
+      - ALL
+  readOnlyRootFilesystem: true
+  runAsNonRoot: true
