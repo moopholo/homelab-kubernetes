@@ -10,7 +10,7 @@ metadata:
   labels:
     {{- include "traefik-ingress.labels" (dict "name" $name "context" $) | nindent 4 }}
     {{- with ($config.labels | default (dict) | mustDeepCopy | mustMergeOverwrite (mustDeepCopy $globalLabels)) }}
-      {{- . | toYaml | nindent 2 }}{{ end }}
+      {{- . | toYaml | nindent 4 }}{{ end }}
 {{- with ($config.annotations | default (dict) | mustDeepCopy | mustMergeOverwrite (mustDeepCopy $globalAnnotations)) }}
   annotations:
     {{- . | toYaml | nindent 4 }}{{ end }}

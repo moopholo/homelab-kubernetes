@@ -13,7 +13,21 @@ releases:
     version: "~3"
     missingFileHandler: Warn
     values:
-      - values/argocd.yaml
+      - values/argocd.yaml.gotmpl
+
+  - name: argocd-ui-certificate
+    namespace: argocd
+    chart: ../../charts/cert-manager-tls
+    missingFileHandler: Warn
+    values:
+      - values/argocd-ui-certificate.yaml.gotmpl
+
+  - name: argocd-ui
+    namespace: argocd
+    chart: ../../charts/traefik-ingress
+    missingFileHandler: Warn
+    values:
+      - values/argocd-ui.yaml.gotmpl
 
   - name: argocd-applicationset
     namespace: argocd

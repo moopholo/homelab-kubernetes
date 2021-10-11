@@ -1,0 +1,21 @@
+{{- $globalAnnotations := .Values.global.annotations | default (dict) -}}
+{{- $globalLabels := .Values.global.labels | default (dict) -}}
+{{- range $name, $issuer := .Values.issuers }}
+{{- $kind := $issuer.kind | default "Issuer"  }}
+---
+apiVersion: {{ $.Values.apiVersion }}
+kind: {{ $kind }}
+metadata:
+  name: {{ $name }}
+  {{- if eq $kind "Issuer" }}
+  namespace: {{ $.Release.Namespace }}{{ end }}
+  labels:
+    {{- include "cert-manager-tls.labels" (dict "name" $name "context" $) | nindent 4 }}
+    {{- with ($issuer.labels | default (dict) | mustDeepCopy | mustMergeOverwrite (mustDeepCopy $globalLabels)) }}
+      {{- . | toYaml | nindent 4 }}{{ end }}
+  {{- with ($issuer.annotations | default (dict) | mustDeepCopy | mustMergeOverwrite (mustDeepCopy $globalAnnotations)) }}
+  annotations:
+    {{- . | toYaml | nindent 4 }}{{ end }}
+spec:
+  {{- omit $issuer "kind" "labels" "annotations" | toYaml | nindent 2 }}
+{{- end }}

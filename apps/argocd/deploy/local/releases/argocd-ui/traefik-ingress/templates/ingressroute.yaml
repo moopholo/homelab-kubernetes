@@ -1,0 +1,46 @@
+---
+# Source: traefik-ingress/templates/ingressroute.yaml
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: argocd-ui-http
+  namespace: argocd
+  labels:
+    helm.sh/chart: traefik-ingress-0.1.0
+    app.kubernetes.io/name: argocd-ui-http
+    app.kubernetes.io/instance: argocd-ui
+    app.kubernetes.io/managed-by: Helm
+spec:
+  entryPoints:
+  - web
+  routes:
+  - kind: Rule
+    match: Host(`argocd.thedixon.net`)
+    middlewares:
+    - name: https-redirect
+    services:
+    - name: argocd-server
+      port: 80
+---
+# Source: traefik-ingress/templates/ingressroute.yaml
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: argocd-ui-https
+  namespace: argocd
+  labels:
+    helm.sh/chart: traefik-ingress-0.1.0
+    app.kubernetes.io/name: argocd-ui-https
+    app.kubernetes.io/instance: argocd-ui
+    app.kubernetes.io/managed-by: Helm
+spec:
+  entrypoints:
+  - websecure
+  routes:
+  - kind: Rule
+    match: Host(`argocd.thedixon.net`)
+    services:
+    - name: argocd-server
+      port: 443
+  tls:
+    secretName: argocd-thedixon-net-tls

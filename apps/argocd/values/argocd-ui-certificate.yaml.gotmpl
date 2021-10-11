@@ -1,0 +1,9 @@
+{{ $domainSlug := env `ARGOCD_UI_DOMAIN` | replace `.` `-` }}
+
+certificates:
+  {{ $domainSlug }}:
+    secretName: {{ $domainSlug }}-tls
+    dnsNames: ["{{ env `ARGOCD_UI_DOMAIN` }}"]
+    issuerRef:
+      kind: ClusterIssuer
+      name: {{ env "ARGOCD_UI_CERTIFICATE_ISSUER" }}
