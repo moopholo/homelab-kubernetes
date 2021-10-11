@@ -1,0 +1,4 @@
+argocd-ui:
+  domain: argocd.thedixon.net
+  certificate:
+    issuer: cert-manager-webhook-dnsimple-production

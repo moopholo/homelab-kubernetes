@@ -1,0 +1,19 @@
+{{- $globalAnnotations := .Values.global.annotations | default (dict) -}}
+{{- $globalLabels := .Values.global.labels | default (dict) -}}
+{{- range $name, $cert := .Values.certificates }}
+---
+apiVersion: {{ $.Values.apiVersion }}
+kind: Certificate
+metadata:
+  name: {{ $name }}
+  namespace: {{ $.Release.Namespace }}
+  labels:
+    {{- include "cert-manager-tls.labels" (dict "name" $name "context" $) | nindent 4 }}
+    {{- with ($cert.labels | default (dict) | mustDeepCopy | mustMergeOverwrite (mustDeepCopy $globalLabels)) }}
+      {{- . | toYaml | nindent 4 }}{{ end }}
+  {{- with ($cert.annotations | default (dict) | mustDeepCopy | mustMergeOverwrite (mustDeepCopy $globalAnnotations)) }}
+  annotations:
+    {{- . | toYaml | nindent 4 }}{{ end }}
+spec:
+  {{- omit $cert "labels" "annotations"  | toYaml | nindent 2 }}
+{{- end }}

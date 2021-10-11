@@ -65,9 +65,6 @@ redis:
 server:
   name: server
 
-  extraArgs:
-    - --insecure
-
   autoscaling:
     enabled: true
     minReplicas: 1
@@ -91,9 +88,7 @@ server:
         prometheus.io/scrape: "true"
 
   ingress:
-    enabled: true
-    hosts:
-      - argocd.microk8s
+    enabled: false
 
   config:
-    url: https://argocd.microk8s
+    url: https://{{ env `ARGOCD_UI_DOMAIN` }}
