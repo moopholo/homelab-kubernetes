@@ -1,4 +1,4 @@
 argocd-ui:
-  domain: argocd.thedixon.net
+  domain: argocd.homelab.monetact.net
   certificate:
     issuer: cert-manager-webhook-dnsimple-production

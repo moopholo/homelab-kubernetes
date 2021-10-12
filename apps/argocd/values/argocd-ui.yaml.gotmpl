@@ -1,5 +1,3 @@
-{{ $domainSlug := env `ARGOCD_UI_DOMAIN` | replace `.` `-` }}
-
 middlewares:
   https-redirect:
     redirectScheme:
@@ -10,7 +8,7 @@ routes:
   argocd-ui-http:
     entryPoints: [web]
     routes:
-      - match: Host(`{{ env `ARGOCD_UI_DOMAIN` }}`)
+      - match: Host(`{{ requiredEnv `ARGOCD_UI_DOMAIN` }}`)
         middlewares:
           - name: https-redirect
         kind: Rule
@@ -21,9 +19,10 @@ routes:
   argocd-ui-https:
     entryPoints: [websecure]
     tls:
-      secretName: {{ $domainSlug }}-tls
+      store:
+        name: default
     routes:
-      - match: Host(`{{ env `ARGOCD_UI_DOMAIN` }}`)
+      - match: Host(`{{ requiredEnv `ARGOCD_UI_DOMAIN` }}`)
         kind: Rule
         services:
           - name: argocd-server
