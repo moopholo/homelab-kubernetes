@@ -44,9 +44,8 @@ spec:
           imagePullPolicy: IfNotPresent
           args:
           - --v=2
-          - --cluster-resource-namespace=$(POD_NAMESPACE)
-          - --leader-election-namespace=kube-system
-          - --cluster-resource-namespace=kube-system
+          - --cluster-resource-namespace=cert-manager
+          - --leader-election-namespace=cert-manager
           - --enable-certificate-owner-ref=true
           ports:
           - containerPort: 9402
