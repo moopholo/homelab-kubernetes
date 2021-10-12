@@ -25,14 +25,11 @@ items:
         name: traefik
         targetPort: "traefik"
         protocol: "TCP"
-        nodePort: 30090
       - port: 80
         name: web
         targetPort: "web"
         protocol: "TCP"
-        nodePort: 32080
       - port: 443
         name: websecure
         targetPort: "websecure"
         protocol: "TCP"
-        nodePort: 32443
