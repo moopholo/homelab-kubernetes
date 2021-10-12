@@ -1,12 +1,9 @@
-ingressroute:
-  apiVersion: traefik.containo.us/v1alpha1
-
-middleware:
-  apiVersion: traefik.containo.us/v1alpha1
-
 global:
+  apiVersion: traefik.containo.us/v1alpha1
   labels: {}
   annotations: {}
 
 routes: {}
 middlewares: {}
+tlsStores: {}
+tlsOptions: {}

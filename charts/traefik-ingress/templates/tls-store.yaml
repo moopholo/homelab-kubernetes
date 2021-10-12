@@ -1,10 +1,10 @@
-{{- $apiVersion := .Values.routes.apiVersion | default .Values.global.apiVersion -}}
+{{- $apiVersion := .Values.tlsStores.apiVersion | default .Values.global.apiVersion -}}
 {{- $globalAnnotations := .Values.global.annotations | default (dict) -}}
 {{- $globalLabels := .Values.global.labels | default (dict) -}}
-{{- range $name, $config := omit .Values.routes "apiVersion" }}
+{{- range $name, $config := omit .Values.tlsStores "apiVersion" }}
 ---
 apiVersion: {{ $apiVersion }}
-kind: IngressRoute
+kind: TLSStore
 metadata:
   name: {{ $name }}
   namespace: {{ $.Release.Namespace }}

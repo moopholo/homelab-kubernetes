@@ -1,8 +1,9 @@
+{{- $apiVersion := .Values.middlewares.apiVersion | default .Values.global.apiVersion -}}
 {{- $globalAnnotations := .Values.global.annotations | default (dict) -}}
 {{- $globalLabels := .Values.global.labels | default (dict) -}}
-{{- range $name, $config := .Values.middlewares }}
+{{- range $name, $config := omit .Values.middlewares "apiVersion" }}
 ---
-apiVersion: {{ $.Values.ingressroute.apiVersion }}
+apiVersion: {{ $apiVersion }}
 kind: Middleware
 metadata:
   name: {{ $name }}
