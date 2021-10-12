@@ -1,4 +1,4 @@
-groupName: acme.thedixon.net
+groupName: "{{ env `WEBHOOK_GROUP_NAME` }}"
 
 image:
   repository: ghcr.io/moopholo/cert-manager-webhook-dnsimple
@@ -9,7 +9,7 @@ dnsimple:
   tokenSecretName: api-token-dnsimple
 
 clusterIssuer:
-  email: "{{ env `EMAIL` }}"
+  email: "{{ env `WEBHOOK_CLUSTER_ISSUER_EMAIL` }}"
   production:
     enabled: true
   staging:

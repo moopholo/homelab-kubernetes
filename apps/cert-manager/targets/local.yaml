@@ -1,1 +1,3 @@
-email: adixon415@gmail.com
+webhook:
+  cluster-issuer-email: adixon415@gmail.com
+  group-name: acme.thedixon.net
