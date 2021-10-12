@@ -23,7 +23,7 @@ metadata:
     heritage: Helm
 rules:
   - apiGroups:
-      - acme.neoskop.de
+      - acme.thedixon.net
     resources:
       - '*'
     verbs:
