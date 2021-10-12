@@ -1,7 +1,7 @@
 ---
-# Source: traefik/templates/deployment.yaml
+# Source: traefik/templates/daemonset.yaml
 apiVersion: apps/v1
-kind: Deployment
+kind: DaemonSet
 metadata:
   name: traefik
   labels:
@@ -11,15 +11,13 @@ metadata:
     app.kubernetes.io/instance: traefik
   annotations:
 spec:
-  replicas: 1
   selector:
     matchLabels:
       app.kubernetes.io/name: traefik
       app.kubernetes.io/instance: traefik
-  strategy:
+  updateStrategy:
     type: RollingUpdate
     rollingUpdate:
-      maxSurge: 1
       maxUnavailable: 1
   template: 
     metadata:
@@ -65,12 +63,15 @@ spec:
           protocol: "TCP"
         - name: "traefik"
           containerPort: 9000
+          hostPort: 9000
           protocol: "TCP"
         - name: "web"
           containerPort: 8000
+          hostPort: 80
           protocol: "TCP"
         - name: "websecure"
           containerPort: 8443
+          hostPort: 443
           protocol: "TCP"
         securityContext:
           capabilities:
