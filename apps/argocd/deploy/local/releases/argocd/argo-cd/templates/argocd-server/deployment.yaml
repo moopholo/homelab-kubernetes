@@ -54,6 +54,7 @@ spec:
         - warn
         - --redis
         - argocd-redis:6379
+        - --insecure
         securityContext:
           capabilities:
             drop:

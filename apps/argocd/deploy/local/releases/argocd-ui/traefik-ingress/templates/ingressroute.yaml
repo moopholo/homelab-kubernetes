@@ -41,6 +41,6 @@ spec:
     match: Host(`argocd.thedixon.net`)
     services:
     - name: argocd-server
-      port: 443
+      port: 80
   tls:
     secretName: argocd-thedixon-net-tls

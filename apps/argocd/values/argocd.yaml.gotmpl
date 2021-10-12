@@ -88,6 +88,9 @@ server:
       annotations:
         prometheus.io/scrape: "true"
 
+  extraArgs:
+    - --insecure
+
   ingress:
     enabled: false
 
