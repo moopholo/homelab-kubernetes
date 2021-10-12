@@ -1,0 +1,23 @@
+---
+# Source: cert-manager-tls/templates/certificate.yaml
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: star-homelab-monetact-net
+  namespace: traefik
+  labels:
+    helm.sh/chart: cert-manager-tls-1.0.1
+    app.kubernetes.io/name: star-homelab-monetact-net
+    app.kubernetes.io/instance: traefik-default-certificate
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: traefik
+  annotations:
+    argocd.argoproj.io/sync-wave: 1
+spec:
+  dnsNames:
+  - homelab.monetact.net
+  - '*.homelab.monetact.net'
+  issuerRef:
+    kind: ClusterIssuer
+    name: cert-manager-webhook-dnsimple-production
+  secretName: star-homelab-monetact-net-tls
