@@ -7,5 +7,5 @@ certificates:
       - {{ requiredEnv `DEFAULT_CERTIFICATE_DOMAIN` | squote }}
       - {{ requiredEnv `DEFAULT_CERTIFICATE_DOMAIN` | printf "*.%s" | squote }}
     issuerRef:
-      kind: ClusterIssuer
-      name: {{ requiredEnv `DEFAULT_CERTIFICATE_ISSUER` }}
+      kind: {{ requiredEnv `DEFAULT_CERTIFICATE_ISSUER_KIND` }}
+      name: {{ requiredEnv `DEFAULT_CERTIFICATE_ISSUER_NAME` }}

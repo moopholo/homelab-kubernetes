@@ -1,3 +1,5 @@
 default-certificate:
   domain: homelab.monetact.net
-  issuer: cert-manager-webhook-dnsimple-production
+  issuer:
+    kind: ClusterIssuer
+    name: cert-manager-webhook-dnsimple-production

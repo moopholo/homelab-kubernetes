@@ -25,6 +25,11 @@ releases:
     missingFileHandler: Warn
     values:
       - values/traefik-default-certificate.yaml.gotmpl
+      - global:
+          labels:
+            app.kubernetes.io/part-of: traefik
+          annotations:
+            argocd.argoproj.io/sync-wave: 1
 
   - name: traefik-default-certificate-store
     namespace: traefik
@@ -32,4 +37,9 @@ releases:
     condition: default-certificate.enabled
     missingFileHandler: Warn
     values:
-      - values/traefik-default-certificate-store.yaml
+      - values/traefik-default-certificate-store.yaml.gotmpl
+      - global:
+          labels:
+            app.kubernetes.io/part-of: traefik
+          annotations:
+            argocd.argoproj.io/sync-wave: 2
