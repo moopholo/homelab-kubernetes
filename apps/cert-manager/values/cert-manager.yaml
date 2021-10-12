@@ -1,10 +1,12 @@
 installCRDs: true
 
-leaderElection:
-  namespace: cert-manager
+global:
+  leaderElection:
+    namespace: cert-manager
+
+clusterResourceNamespace: cert-manager
 
 extraArgs:
-  - --cluster-resource-namespace=cert-manager
   - --enable-certificate-owner-ref=true
 
 containerSecurityContext:
