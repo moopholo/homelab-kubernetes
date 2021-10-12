@@ -5,6 +5,10 @@ repositories:
 apiVersions:
   - "networking.k8s.io/v1/IngressClass"
 
+values:
+  - default-certificate:
+      enabled: true
+
 releases:
   - name: traefik
     namespace: traefik
@@ -13,3 +17,29 @@ releases:
     missingFileHandler: Warn
     values:
       - values/traefik.yaml
+
+  - name: traefik-default-certificate
+    namespace: traefik
+    chart: ../../charts/cert-manager-tls
+    condition: default-certificate.enabled
+    missingFileHandler: Warn
+    values:
+      - values/traefik-default-certificate.yaml.gotmpl
+      - global:
+          labels:
+            app.kubernetes.io/part-of: traefik
+          annotations:
+            argocd.argoproj.io/sync-wave: 1
+
+  - name: traefik-default-certificate-store
+    namespace: traefik
+    chart: ../../charts/traefik-ingress
+    condition: default-certificate.enabled
+    missingFileHandler: Warn
+    values:
+      - values/traefik-default-certificate-store.yaml.gotmpl
+      - global:
+          labels:
+            app.kubernetes.io/part-of: traefik
+          annotations:
+            argocd.argoproj.io/sync-wave: 2

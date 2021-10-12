@@ -1,0 +1,11 @@
+{{ $domainSlug := requiredEnv `DEFAULT_CERTIFICATE_DOMAIN` | replace `.` `-` }}
+
+certificates:
+  star-{{ $domainSlug }}:
+    secretName: star-{{ $domainSlug }}-tls
+    dnsNames:
+      - {{ requiredEnv `DEFAULT_CERTIFICATE_DOMAIN` | squote }}
+      - {{ requiredEnv `DEFAULT_CERTIFICATE_DOMAIN` | printf "*.%s" | squote }}
+    issuerRef:
+      kind: {{ requiredEnv `DEFAULT_CERTIFICATE_ISSUER_KIND` }}
+      name: {{ requiredEnv `DEFAULT_CERTIFICATE_ISSUER_NAME` }}

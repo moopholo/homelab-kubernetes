@@ -1,0 +1,6 @@
+{{ $domainSlug := requiredEnv `DEFAULT_CERTIFICATE_DOMAIN` | replace `.` `-` }}
+
+tlsStores:
+  default:
+    defaultCertificate:
+      secretName: star-{{ $domainSlug }}-tls
