@@ -4,7 +4,7 @@ leaderElection:
   namespace: cert-manager
 
 extraArgs:
-  - --cluster-resource-namespace=kube-system
+  - --cluster-resource-namespace=cert-manager
   - --enable-certificate-owner-ref=true
 
 containerSecurityContext:
