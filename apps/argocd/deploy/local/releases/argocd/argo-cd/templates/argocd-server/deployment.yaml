@@ -51,7 +51,7 @@ spec:
         - --logformat
         - json
         - --loglevel
-        - warn
+        - error
         - --redis
         - argocd-redis:6379
         - --insecure

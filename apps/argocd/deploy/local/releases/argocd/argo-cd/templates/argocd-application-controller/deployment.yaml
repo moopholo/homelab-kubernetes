@@ -52,7 +52,7 @@ spec:
         - --logformat
         - json
         - --loglevel
-        - warn
+        - error
         - --redis
         - argocd-redis:6379
         image: alinbalutoiu/argocd:linux-arm64-v2.0.5

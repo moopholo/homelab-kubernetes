@@ -12,7 +12,7 @@ global:
 
 controller:
   logFormat: json
-  logLevel: warn
+  logLevel: error
 
   containerSecurityContext:
     capabilities:
@@ -74,7 +74,7 @@ server:
     enabled: false
 
   logFormat: json
-  logLevel: warn
+  logLevel: error
 
   containerSecurityContext:
     capabilities:
@@ -107,7 +107,7 @@ server:
       connectors:
         - type: github
           id: github
-          name: Github
+          name: GitHub
           config:
             clientID: $dex.github.client.id
             clientSecret: $dex.github.client.secret
@@ -142,3 +142,21 @@ server:
     resource.customizations.ignoreDifferences.admissionregistration.k8s.io_MutatingWebhookConfiguration: |
       jqPathExpressions:
         - .webhooks[]?.clientConfig.caBundle
+
+  rbacConfig:
+    policy.default: role:readonly-limited
+    policy.csv: |
+      p, role:readonly-limited, applications, get, */*, allow
+      p, role:readonly-limited, projects, get, *, allow
+      p, role:readonly-limited, clusters, get, *, allow
+
+      p, role:sync, applications, sync, */*, allow
+
+      p, role:application-admin, applications, *, */*, allow
+      p, role:account-admin, accounts, *, *, allow
+
+      g, role:sync, role:readonly
+      g, role:application:admin, role:readonly
+      g, role:account-admin, role:readonly
+      g, moopholo:family, role:application-admin
+      g, moopholo:family, tole:account-admin
