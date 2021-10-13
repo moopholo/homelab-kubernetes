@@ -1,12 +1,12 @@
 ---
-# Source: traefik-ingress/templates/tls-store.yaml
+# Source: traefik-custom-resources/templates/tls-store.yaml
 apiVersion: traefik.containo.us/v1alpha1
 kind: TLSStore
 metadata:
   name: default
   namespace: traefik
   labels:
-    helm.sh/chart: traefik-ingress-0.1.0
+    helm.sh/chart: traefik-custom-resources-0.1.0
     app.kubernetes.io/name: default
     app.kubernetes.io/instance: traefik-default-certificate-store
     app.kubernetes.io/managed-by: Helm
