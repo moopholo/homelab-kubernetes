@@ -1,6 +1,10 @@
 operatorNamespace: rook-ceph
 
 cephClusterSpec:
+  dashboard:
+    enabled: true
+    port: 8080
+
   cephVersion:
     image: quay.io/ceph/ceph:v16.2
     allowUnsupported: true
