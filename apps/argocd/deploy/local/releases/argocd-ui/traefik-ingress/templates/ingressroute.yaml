@@ -15,7 +15,7 @@ spec:
   - web
   routes:
   - kind: Rule
-    match: Host(`argocd.thedixon.net`)
+    match: Host(`argocd.homelab.monetact.net`)
     middlewares:
     - name: https-redirect
     services:
@@ -38,9 +38,10 @@ spec:
   - websecure
   routes:
   - kind: Rule
-    match: Host(`argocd.thedixon.net`)
+    match: Host(`argocd.homelab.monetact.net`)
     services:
     - name: argocd-server
       port: 80
   tls:
-    secretName: argocd-thedixon-net-tls
+    store:
+      name: default

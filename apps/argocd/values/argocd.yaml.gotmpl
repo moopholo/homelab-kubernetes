@@ -94,6 +94,9 @@ server:
   ingress:
     enabled: false
 
+  secret:
+    createSecret: false
+
   config:
     url: https://{{ env `ARGOCD_UI_DOMAIN` }}
 

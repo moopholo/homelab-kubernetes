@@ -15,13 +15,6 @@ releases:
     values:
       - values/argocd.yaml.gotmpl
 
-  - name: argocd-ui-certificate
-    namespace: argocd
-    chart: ../../charts/cert-manager-tls
-    missingFileHandler: Warn
-    values:
-      - values/argocd-ui-certificate.yaml.gotmpl
-
   - name: argocd-ui
     namespace: argocd
     chart: ../../charts/traefik-ingress
