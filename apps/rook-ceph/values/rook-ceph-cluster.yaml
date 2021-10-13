@@ -3,6 +3,7 @@ operatorNamespace: rook-ceph
 cephClusterSpec:
   dashboard:
     enabled: true
+    ssl: false
     port: 8080
 
   cephVersion:
