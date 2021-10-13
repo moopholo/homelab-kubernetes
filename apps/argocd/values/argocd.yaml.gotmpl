@@ -100,6 +100,20 @@ server:
   config:
     url: https://{{ env `ARGOCD_UI_DOMAIN` }}
 
+    dex.config: |
+      logger:
+        level: error
+        format: json
+      connectors:
+        - type: github
+          id: github
+          name: Github
+          config:
+            clientID: $dex.github.client.id
+            clientSecret: $dex.github.client.secret
+            orgs:
+              - name: $dex.github.organization
+
     resource.compareoptions: |
       ignoreResourceStatusField: all
 
