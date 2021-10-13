@@ -19,7 +19,7 @@ releases:
 
   - name: rook-ceph-dashboard
     namespace: rook-ceph
-    chart: ../../chart/traefik-ingress
+    chart: ../../charts/traefik-ingress
     missingFileHandler: Warn
     values:
       - values/rook-ceph-dashboard.yaml.gotmpl
