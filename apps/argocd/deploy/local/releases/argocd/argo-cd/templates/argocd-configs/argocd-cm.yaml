@@ -13,6 +13,19 @@ metadata:
     app.kubernetes.io/part-of: argocd
 data:
     application.instanceLabelKey: argocd.argoproj.io/instance
+    dex.config: |
+      logger:
+        level: error
+        format: json
+      connectors:
+        - type: github
+          id: github
+          name: Github
+          config:
+            clientID: $dex.github.client.id
+            clientSecret: $dex.github.client.secret
+            orgs:
+              - name: $dex.github.organization
     resource.compareoptions: |
       ignoreResourceStatusField: all
     resource.customizations.health.cert-manager.io_Certificate: |
