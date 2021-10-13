@@ -17,7 +17,7 @@ releases:
 
   - name: argocd-ui
     namespace: argocd
-    chart: ../../charts/traefik-ingress
+    chart: ../../charts/traefik-custom-resources
     missingFileHandler: Warn
     values:
       - values/argocd-ui.yaml.gotmpl

@@ -33,7 +33,7 @@ releases:
 
   - name: traefik-default-certificate-store
     namespace: traefik
-    chart: ../../charts/traefik-ingress
+    chart: ../../charts/traefik-custom-resources
     condition: default-certificate.enabled
     missingFileHandler: Warn
     values:
