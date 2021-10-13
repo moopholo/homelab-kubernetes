@@ -45,6 +45,7 @@ spec:
             - --policy=sync
             - --debug=false
             - --dry-run=false
+            - --loglevel=error
           image: "albertdixon/argocd-applicationset:arm64-master"
           imagePullPolicy: IfNotPresent
           ports:

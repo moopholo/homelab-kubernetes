@@ -11,3 +11,20 @@ metadata:
     app.kubernetes.io/component: server
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: argocd
+data:
+    policy.csv: |
+      p, role:readonly-limited, applications, get, */*, allow
+      p, role:readonly-limited, projects, get, *, allow
+      p, role:readonly-limited, clusters, get, *, allow
+    
+      p, role:sync, applications, sync, */*, allow
+    
+      p, role:application-admin, applications, *, */*, allow
+      p, role:account-admin, accounts, *, *, allow
+    
+      g, role:sync, role:readonly
+      g, role:application:admin, role:readonly
+      g, role:account-admin, role:readonly
+      g, moopholo:family, role:application-admin
+      g, moopholo:family, tole:account-admin
+    policy.default: role:readonly-limited
