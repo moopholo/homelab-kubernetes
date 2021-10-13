@@ -15,4 +15,11 @@ releases:
     chart: rook-release/rook-ceph-cluster
     missingFileHandler: Warn
     values:
-      - values/rook-ceph-cluster.yaml
+      - values/rook-ceph-cluster.yaml.gotmpl
+
+  - name: rook-ceph-dashboard
+    namespace: rook-ceph
+    chart: ../../chart/traefik-ingress
+    missingFileHandler: Warn
+    values:
+      - values/rook-ceph-dashboard.yaml.gotmpl
