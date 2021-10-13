@@ -95,9 +95,6 @@ server:
     enabled: false
 
   config:
-    secret:
-      createSecret: false
-
     url: https://{{ env `ARGOCD_UI_DOMAIN` }}
 
     dex.config: |
@@ -159,3 +156,7 @@ server:
       g, role:application:admin, role:readonly
       g, role:account-admin, role:readonly
       g, moopholo:family, role:admin
+
+configs:
+  secret:
+    createSecret: false
