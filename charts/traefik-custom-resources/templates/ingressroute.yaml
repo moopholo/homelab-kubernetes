@@ -1,15 +1,15 @@
-{{- $apiVersion := .Values.tlsStores.apiVersion | default .Values.global.apiVersion -}}
+{{- $apiVersion := .Values.routes.apiVersion | default .Values.global.apiVersion -}}
 {{- $globalAnnotations := .Values.global.annotations | default (dict) -}}
 {{- $globalLabels := .Values.global.labels | default (dict) -}}
-{{- range $name, $config := omit .Values.tlsStores "apiVersion" }}
+{{- range $name, $config := omit .Values.routes "apiVersion" }}
 ---
 apiVersion: {{ $apiVersion }}
-kind: TLSStore
+kind: IngressRoute
 metadata:
   name: {{ $name }}
   namespace: {{ $.Release.Namespace }}
   labels:
-    {{- include "traefik-ingress.labels" (dict "name" $name "context" $) | nindent 4 }}
+    {{- include "traefik-custom-resources.labels" (dict "name" $name "context" $) | nindent 4 }}
     {{- with ($config.labels | default (dict) | mustDeepCopy | mustMergeOverwrite (mustDeepCopy $globalLabels)) }}
       {{- . | toYaml | nindent 4 }}{{ end }}
 {{- with ($config.annotations | default (dict) | mustDeepCopy | mustMergeOverwrite (mustDeepCopy $globalAnnotations)) }}

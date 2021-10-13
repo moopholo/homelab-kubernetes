@@ -1,5 +1,5 @@
 apiVersion: v2
-name: traefik-ingress
+name: traefik-custom-resources
 description: Generate traefik ingress CRD resources
 type: application
 
