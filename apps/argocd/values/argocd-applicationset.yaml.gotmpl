@@ -5,6 +5,9 @@ image:
 args:
   namespace: {{ .Release.Namespace }}
 
+extraArgs:
+  - --loglevel=error
+
 securityContext:
   capabilities:
     drop:
