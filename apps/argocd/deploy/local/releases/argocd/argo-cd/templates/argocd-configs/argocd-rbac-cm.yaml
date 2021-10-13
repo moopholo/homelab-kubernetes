@@ -25,6 +25,5 @@ data:
       g, role:sync, role:readonly
       g, role:application:admin, role:readonly
       g, role:account-admin, role:readonly
-      g, moopholo:family, role:application-admin
-      g, moopholo:family, tole:account-admin
+      g, moopholo:family, role:admin
     policy.default: role:readonly-limited
