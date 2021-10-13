@@ -94,10 +94,10 @@ server:
   ingress:
     enabled: false
 
-  secret:
-    createSecret: false
-
   config:
+    secret:
+      createSecret: false
+
     url: https://{{ env `ARGOCD_UI_DOMAIN` }}
 
     dex.config: |
