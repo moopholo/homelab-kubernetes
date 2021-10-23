@@ -1,9 +1,0 @@
-global:
-  apiVersion: traefik.containo.us/v1alpha1
-  labels: {}
-  annotations: {}
-
-routes: {}
-middlewares: {}
-tlsStores: {}
-tlsOptions: {}
