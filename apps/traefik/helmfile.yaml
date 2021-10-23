@@ -23,6 +23,7 @@ releases:
   - name: traefik-default-certificate
     namespace: traefik
     chart: moopholo/cert-manager-tls
+    version: "~1"
     condition: default-certificate.enabled
     missingFileHandler: Warn
     values:
@@ -35,7 +36,8 @@ releases:
 
   - name: traefik-default-certificate-store
     namespace: traefik
-    chart: moopholo/traefik-ingress
+    chart: moopholo/traefik-custom-resources
+    version: "~0"
     condition: default-certificate.enabled
     missingFileHandler: Warn
     values:
