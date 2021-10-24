@@ -17,3 +17,29 @@ cephClusterSpec:
     useAllNodes: true
     useAllDevices: false
     deviceFilter: "^sd."
+
+cephObjectStores:
+  - name: ceph-objectstore
+    spec:
+      metadataPool:
+        failureDomain: host
+        replicated:
+          size: 3
+      dataPool:
+        failureDomain: host
+        erasureCoded:
+          dataChunks: 2
+          codingChunks: 1
+      preservePoolsOnDelete: true
+      gateway:
+        port: {{ requiredEnv `ROOK_CEPH_OBJ_STORE_GATEWAY_PORT` }}
+        instances: 1
+      healthCheck:
+        bucket:
+          interval: 60s
+    storageClass:
+      enabled: true
+      name: ceph-bucket
+      reclaimPolicy: Delete
+      parameters:
+        region: us-east-1
