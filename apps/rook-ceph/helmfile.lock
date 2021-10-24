@@ -6,5 +6,8 @@ dependencies:
 - name: rook-ceph-cluster
   repository: https://charts.rook.io/release
   version: v1.7.6
-digest: sha256:95a2c1f0d61a3362ad4a972afd30174605dc25d3adbb2f0be996106599144e0a
-generated: "2021-10-23T10:10:34.663417866Z"
+- name: traefik-custom-resources
+  repository: https://helm.monetact.net
+  version: 0.2.15
+digest: sha256:be89a5540988a235f94250b17c7a47df36bfeec5f7932afda9655d973751c053
+generated: "2021-10-23T23:14:48.57514-07:00"
