@@ -6,5 +6,8 @@ dependencies:
 - name: argocd-applicationset
   repository: https://argoproj.github.io/argo-helm
   version: 1.6.0
-digest: sha256:23828194e8fc9f7e99584708b9ead63a914b57ca3aa6a30e8ffeb204e8e63bed
-generated: "2021-10-23T10:09:35.771984173Z"
+- name: traefik-custom-resources
+  repository: https://helm.monetact.net
+  version: 0.2.15
+digest: sha256:8d7b686913a9de6f7a9e1600f10e1184ee14adc4ab4c5a659a5a0505347ef3f3
+generated: "2021-10-23T18:44:30.436434-07:00"
