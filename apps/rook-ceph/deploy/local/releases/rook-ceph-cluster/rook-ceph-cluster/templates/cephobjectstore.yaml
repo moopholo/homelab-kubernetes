@@ -24,7 +24,7 @@ spec:
     failureDomain: host
   gateway:
     instances: 1
-    port: 80
+    port: 9080
   healthCheck:
     bucket:
       interval: 60s
