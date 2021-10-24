@@ -1,6 +1,8 @@
 repositories:
   - name: argo
     url: https://argoproj.github.io/argo-helm
+  - name: moopholo
+    url: https://helm.monetact.net
 
 values:
   - argocd-applicationset:
@@ -17,7 +19,8 @@ releases:
 
   - name: argocd-ui
     namespace: argocd
-    chart: ../../charts/traefik-ingress
+    chart: moopholo/traefik-custom-resources
+    version: "~0"
     missingFileHandler: Warn
     values:
       - values/argocd-ui.yaml.gotmpl

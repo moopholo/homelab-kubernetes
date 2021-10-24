@@ -271,23 +271,6 @@ rules:
   verbs:
   - get
   - list
-# Use a default dict to avoid 'can't give argument to non-function' errors from text/template
----
-# Source: rook-ceph/templates/clusterrole.yaml
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
-metadata:
-  name: rook-ceph-agent-mount
-  labels:
-    operator: rook
-    storage-backend: ceph
-rules:
-- apiGroups:
-  - ""
-  resources:
-  - secrets
-  verbs:
-  - get
 ---
 # Source: rook-ceph/templates/clusterrole.yaml
 kind: ClusterRole
@@ -469,7 +452,7 @@ metadata:
   labels:
     operator: rook
     storage-backend: ceph
-    chart: "rook-ceph-v1.7.5"
+    chart: "rook-ceph-v1.7.6"
 rules:
 - apiGroups:
   - policy
