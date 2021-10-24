@@ -1,0 +1,47 @@
+---
+# Source: traefik-custom-resources/templates/ingressroute.yaml
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: rook-ceph-dashboard-http
+  namespace: rook-ceph
+  labels:
+    helm.sh/chart: traefik-custom-resources-0.2.15
+    app.kubernetes.io/name: rook-ceph-dashboard-http
+    app.kubernetes.io/instance: rook-ceph-dashboard
+    app.kubernetes.io/managed-by: Helm
+spec:
+  entryPoints:
+  - web
+  routes:
+  - kind: Rule
+    match: Host(`rook-ceph.homelab.monetact.net`)
+    middlewares:
+    - name: https-redirect
+    services:
+    - name: rook-ceph-mgr-dashboard
+      port: 8080
+---
+# Source: traefik-custom-resources/templates/ingressroute.yaml
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: rook-ceph-dashboard-https
+  namespace: rook-ceph
+  labels:
+    helm.sh/chart: traefik-custom-resources-0.2.15
+    app.kubernetes.io/name: rook-ceph-dashboard-https
+    app.kubernetes.io/instance: rook-ceph-dashboard
+    app.kubernetes.io/managed-by: Helm
+spec:
+  entryPoints:
+  - websecure
+  routes:
+  - kind: Rule
+    match: Host(`rook-ceph.homelab.monetact.net`)
+    services:
+    - name: rook-ceph-mgr-dashboard
+      port: 8080
+  tls:
+    store:
+      name: default

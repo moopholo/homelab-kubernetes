@@ -1,6 +1,8 @@
 repositories:
   - name: rook-release
     url: https://charts.rook.io/release
+  - name: moopholo
+    url: https://helm.monetact.net
 
 releases:
   - name: rook-ceph-operator
@@ -15,4 +17,12 @@ releases:
     chart: rook-release/rook-ceph-cluster
     missingFileHandler: Warn
     values:
-      - values/rook-ceph-cluster.yaml
+      - values/rook-ceph-cluster.yaml.gotmpl
+
+  - name: rook-ceph-dashboard
+    namespace: rook-ceph
+    chart: moopholo/traefik-custom-resources
+    version: "~0"
+    missingFileHandler: Warn
+    values:
+      - values/rook-ceph-dashboard.yaml.gotmpl

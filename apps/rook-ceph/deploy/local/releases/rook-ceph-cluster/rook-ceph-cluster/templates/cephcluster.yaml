@@ -25,6 +25,8 @@ spec:
     disable: false
   dashboard:
     enabled: true
+    port: 8080
+    ssl: false
   dataDirHostPath: /var/lib/rook
   disruptionManagement:
     machineDisruptionBudgetNamespace: openshift-machine-api

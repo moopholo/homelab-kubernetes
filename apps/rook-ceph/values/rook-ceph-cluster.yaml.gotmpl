@@ -1,6 +1,11 @@
 operatorNamespace: rook-ceph
 
 cephClusterSpec:
+  dashboard:
+    enabled: true
+    ssl: false
+    port: {{ requiredEnv `ROOK_CEPH_DASHBOARD_PORT` }}
+
   cephVersion:
     image: quay.io/ceph/ceph:v16.2
     allowUnsupported: true

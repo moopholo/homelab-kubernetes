@@ -1,0 +1,29 @@
+middlewares:
+  https-redirect:
+    redirectScheme:
+      scheme: https
+      permanent: true
+
+routes:
+  rook-ceph-dashboard-http:
+    entryPoints: [web]
+    routes:
+      - match: Host(`{{ requiredEnv `ROOK_CEPH_DASHBOARD_DOMAIN` }}`)
+        middlewares:
+          - name: https-redirect
+        kind: Rule
+        services:
+          - name: rook-ceph-mgr-dashboard
+            port: {{ requiredEnv `ROOK_CEPH_DASHBOARD_PORT` }}
+
+  rook-ceph-dashboard-https:
+    entryPoints: [websecure]
+    tls:
+      store:
+        name: default
+    routes:
+      - match: Host(`{{ requiredEnv `ROOK_CEPH_DASHBOARD_DOMAIN` }}`)
+        kind: Rule
+        services:
+          - name: rook-ceph-mgr-dashboard
+            port: {{ requiredEnv `ROOK_CEPH_DASHBOARD_PORT` }}

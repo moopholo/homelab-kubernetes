@@ -1,0 +1,4 @@
+rook-ceph:
+  dashboard:
+    domain: rook-ceph.homelab.monetact.net
+    port: 8080
