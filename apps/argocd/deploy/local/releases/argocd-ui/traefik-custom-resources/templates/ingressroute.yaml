@@ -1,12 +1,12 @@
 ---
-# Source: traefik-ingress/templates/ingressroute.yaml
+# Source: traefik-custom-resources/templates/ingressroute.yaml
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   name: argocd-ui-http
   namespace: argocd
   labels:
-    helm.sh/chart: traefik-ingress-0.1.0
+    helm.sh/chart: traefik-custom-resources-0.2.15
     app.kubernetes.io/name: argocd-ui-http
     app.kubernetes.io/instance: argocd-ui
     app.kubernetes.io/managed-by: Helm
@@ -22,14 +22,14 @@ spec:
     - name: argocd-server
       port: 80
 ---
-# Source: traefik-ingress/templates/ingressroute.yaml
+# Source: traefik-custom-resources/templates/ingressroute.yaml
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   name: argocd-ui-https
   namespace: argocd
   labels:
-    helm.sh/chart: traefik-ingress-0.1.0
+    helm.sh/chart: traefik-custom-resources-0.2.15
     app.kubernetes.io/name: argocd-ui-https
     app.kubernetes.io/instance: argocd-ui
     app.kubernetes.io/managed-by: Helm
