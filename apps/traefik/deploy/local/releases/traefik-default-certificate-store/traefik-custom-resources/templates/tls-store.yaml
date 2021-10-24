@@ -1,0 +1,18 @@
+---
+# Source: traefik-custom-resources/templates/tls-store.yaml
+apiVersion: traefik.containo.us/v1alpha1
+kind: TLSStore
+metadata:
+  name: default
+  namespace: traefik
+  labels:
+    helm.sh/chart: traefik-custom-resources-0.2.15
+    app.kubernetes.io/name: default
+    app.kubernetes.io/instance: traefik-default-certificate-store
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: traefik
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+spec:
+  defaultCertificate:
+    secretName: star-homelab-monetact-net-tls
