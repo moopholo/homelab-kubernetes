@@ -45,6 +45,7 @@ jobs:
         uses: moopholo/helmfile-render@v1
         with:
           app: ${{ matrix.app-name }}
+          debug: true
 
       - uses: docker://ghcr.io/yannh/kubeconform:v0.4.12-alpine
         with:
