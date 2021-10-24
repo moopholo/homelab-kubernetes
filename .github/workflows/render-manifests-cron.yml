@@ -44,7 +44,8 @@ jobs:
         with:
           ref: main
 
-      - uses: moopholo/helmfile-render@v1
+      - id: render
+        uses: moopholo/helmfile-render@v1
         with:
           app: ${{ matrix.app-name }}
 
@@ -57,7 +58,9 @@ jobs:
           delete-branch: true
           labels: dependencies
           branch: feat/render-manifests/${{ matrix.app-name }}
-          commit-message: "feat(${{ matrix.app-name }}): update manifests"
+          commit-message: "feat(${{ matrix.app-name }}): ${{ steps.render.outputs.rendered }}"
           title: "feat(${{ matrix.app-name }}): Automated Manifest Updates"
           body: |
             Automated manifest render for ${{ matrix.app-name }}
+
+            Rendered chart releases ${{ steps.render.outputs.rendered }}
