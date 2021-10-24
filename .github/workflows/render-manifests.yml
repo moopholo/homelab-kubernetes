@@ -42,7 +42,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - id: render
-        uses: moopholo/helmfile-render@v1
+        uses: moopholo/helmfile-render@v1.2.0
         with:
           app: ${{ matrix.app-name }}
           debug: true
