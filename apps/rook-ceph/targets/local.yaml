@@ -4,4 +4,4 @@ rook-ceph:
     port: 8080
   obj-store:
     gateway:
-      port: 9080
+      port: 6080
