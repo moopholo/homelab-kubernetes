@@ -6,7 +6,7 @@ metadata:
   name: star-homelab-monetact-net
   namespace: traefik
   labels:
-    helm.sh/chart: cert-manager-tls-1.0.1
+    helm.sh/chart: cert-manager-tls-1.1.0
     app.kubernetes.io/name: star-homelab-monetact-net
     app.kubernetes.io/instance: traefik-default-certificate
     app.kubernetes.io/managed-by: Helm

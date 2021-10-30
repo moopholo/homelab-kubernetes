@@ -1,7 +1,13 @@
 version: v0.141.0
 dependencies:
+- name: cert-manager-tls
+  repository: https://helm.monetact.net
+  version: 1.1.0
 - name: traefik
   repository: https://helm.traefik.io/traefik
   version: 10.6.0
-digest: sha256:839fa7f5ab1341a14d617078b36fec932a2ae78ade4e6071fc7d6234b5519e14
-generated: "2021-10-23T10:11:07.700644286Z"
+- name: traefik-custom-resources
+  repository: https://helm.monetact.net
+  version: 0.2.15
+digest: sha256:dab6ab2e19a146809167a3eae967bd7574f3873f5a932b165d020958a591995a
+generated: "2021-10-30T10:11:12.219354234Z"
