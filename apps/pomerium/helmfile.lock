@@ -1,0 +1,10 @@
+version: v0.141.0
+dependencies:
+- name: cert-manager-tls
+  repository: https://helm.monetact.net
+  version: 1.1.0
+- name: pomerium
+  repository: https://helm.pomerium.io
+  version: 25.0.0
+digest: sha256:c937581ac85fa026f1bb98383af535e3ad7fdc0f845d562987d9f4a1da32acd9
+generated: "2021-10-31T00:47:58.3608026Z"

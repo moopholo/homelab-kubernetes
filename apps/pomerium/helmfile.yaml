@@ -1,0 +1,34 @@
+repositories:
+  - name: pomerium
+    url: https://helm.pomerium.io
+  - name: moopholo
+    url: https://helm.monetact.net
+
+releases:
+  - name: pomerium-tls
+    namespace: pomerium
+    chart: moopholo/cert-manager-tls
+    version: "~1"
+    missingFileHandler: Warn
+    values:
+      - values/pomerium-tls.yaml
+      - global:
+          annotations:
+            argocd.argoproj.io/sync-wave: "-1"
+
+  - name: pomerium
+    namespace: pomerium
+    chart: pomerium/pomerium
+    version: "^25"
+    missingFileHandler: Warn
+    values:
+      - values/pomerium.yaml.gotmpl
+      - values/pomerium-policy.yaml.gotmpl
+
+  - name: pomerium-ingress
+    namespace: pomerium
+    chart: moopholo/traefik-custom-resources
+    version: "~2"
+    missingFileHandler: Warn
+    values:
+      - values/pomerium-ingress.yaml.gotmpl

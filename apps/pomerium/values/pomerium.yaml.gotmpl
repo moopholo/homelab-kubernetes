@@ -1,0 +1,46 @@
+authenticate:
+  existingTLSSecret: pomerium-tls
+  proxied: false
+  idp:
+    provider: "github"
+
+
+
+proxy:
+  existingTLSSecret: pomerium-tls
+  service:
+    type: ClusterIP
+
+databroker:
+  existingTLSSecret: pomerium-tls
+  storage:
+    connectionString: rediss://pomerium-redis-master.pomerium.svc.cluster.local
+    type: redis
+    clientTLS:
+      existingSecretName: pomerium-tls
+      existingCASecretKey: ca.crt
+
+authorize:
+  existingTLSSecret: pomerium-tls
+
+redis:
+  enabled: true
+  auth:
+    enabled: false
+  usePassword: false
+  generateTLS: false
+  tls:
+    certificateSecret: pomerium-redis-tls
+
+ingress:
+  enabled: false
+
+forwardAuth:
+  enabled: true
+  internal: true
+
+config:
+  generateTLS: false
+  rootDomain: {{ env `POMERIUM_ROOT_DOMAIN` }}
+  existingCASecret: pomerium-tls
+  existingSharedSecret: pomerium-shared-env
