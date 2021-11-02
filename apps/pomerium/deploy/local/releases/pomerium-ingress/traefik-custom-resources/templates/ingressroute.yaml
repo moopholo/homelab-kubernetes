@@ -1,0 +1,49 @@
+---
+# Source: traefik-custom-resources/templates/ingressroute.yaml
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: pomerium-authenticate-http
+  namespace: pomerium
+  labels:
+    helm.sh/chart: traefik-custom-resources-2.0.6
+    app.kubernetes.io/name: pomerium-authenticate-http
+    app.kubernetes.io/instance: pomerium-ingress
+    app.kubernetes.io/managed-by: Helm
+spec:
+  entryPoints:
+  - web
+  routes:
+  - kind: Rule
+    match: Host(`authenticate.homelab.monetact.net`)
+    middlewares:
+    - name: https-redirect
+    services:
+    - name: pomerium-authenticate
+      port: 80
+---
+# Source: traefik-custom-resources/templates/ingressroute.yaml
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: pomerium-authenticate-https
+  namespace: pomerium
+  labels:
+    helm.sh/chart: traefik-custom-resources-2.0.6
+    app.kubernetes.io/name: pomerium-authenticate-https
+    app.kubernetes.io/instance: pomerium-ingress
+    app.kubernetes.io/managed-by: Helm
+spec:
+  entryPoints:
+  - websecure
+  routes:
+  - kind: Rule
+    match: Host(`authenticate.homelab.monetact.net`)
+    services:
+    - name: pomerium-authenticate
+      port: https
+      scheme: https
+      serversTransport: pomerium
+  tls:
+    store:
+      name: default

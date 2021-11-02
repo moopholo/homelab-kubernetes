@@ -1,0 +1,27 @@
+---
+# Source: pomerium/templates/databroker-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: pomerium-databroker
+  labels:
+    app.kubernetes.io/name: pomerium-databroker
+    helm.sh/chart: pomerium-25.0.0
+    app.kubernetes.io/instance: pomerium
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/component: databroker
+spec:
+  clusterIP: None
+  type: ClusterIP
+  ports:
+    - port: 443
+      targetPort: https
+      protocol: TCP
+      name: https
+    - name: metrics
+      port: 9090
+      protocol: TCP
+      targetPort: metrics
+  selector:
+    app.kubernetes.io/name: pomerium-databroker
+    app.kubernetes.io/instance: pomerium

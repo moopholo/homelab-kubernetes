@@ -6,5 +6,8 @@ dependencies:
 - name: pomerium
   repository: https://helm.pomerium.io
   version: 25.0.0
-digest: sha256:c937581ac85fa026f1bb98383af535e3ad7fdc0f845d562987d9f4a1da32acd9
-generated: "2021-10-31T00:47:58.3608026Z"
+- name: traefik-custom-resources
+  repository: https://helm.monetact.net
+  version: 2.0.6
+digest: sha256:71a20d3ac7dc7b6b16b640bd85a7f170f0473873a0b2dc741693914860409039
+generated: "2021-11-02T03:10:10.556282922Z"

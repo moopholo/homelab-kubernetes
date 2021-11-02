@@ -1,0 +1,16 @@
+---
+# Source: traefik-custom-resources/templates/middleware.yaml
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: https-redirect
+  namespace: pomerium
+  labels:
+    helm.sh/chart: traefik-custom-resources-2.0.6
+    app.kubernetes.io/name: https-redirect
+    app.kubernetes.io/instance: pomerium-ingress
+    app.kubernetes.io/managed-by: Helm
+spec:
+  redirectScheme:
+    permanent: true
+    scheme: https

@@ -1,0 +1,15 @@
+---
+# Source: traefik-custom-resources/templates/servers-transport.yaml
+apiVersion: traefik.containo.us/v1alpha1
+kind: ServersTransport
+metadata:
+  name: pomerium
+  namespace: pomerium
+  labels:
+    helm.sh/chart: traefik-custom-resources-2.0.6
+    app.kubernetes.io/name: pomerium
+    app.kubernetes.io/instance: pomerium-ingress
+    app.kubernetes.io/managed-by: Helm
+spec:
+  rootCAsSecrets:
+  - pomerium-ca-tls
