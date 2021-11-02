@@ -1,0 +1,20 @@
+repositories:
+  - name: prometheus-community
+    url: https://prometheus-community.github.io/helm-charts
+
+releases:
+  - name: prometheus
+    namespace: prometheus
+    chart: prometheus-community/prometheus
+    version: "~14"
+    missingFileHandler: Warn
+    values:
+      - values/prometheus.yaml
+
+  - name: prometheus-node-exporter
+    namespace: prometheus
+    chart: prometheus-community/prometheus-node-exporter
+    version: "~2"
+    missingFileHandler: Warn
+    values:
+      - values/prometheus-node-exporter.yaml
