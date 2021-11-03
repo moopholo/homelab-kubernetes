@@ -6,3 +6,15 @@ issuers:
     kind: Issuer
     ca:
       secretName: snapshot-controller-ca-tls
+
+certificates:
+  snapshot-controller-ca:
+    isCA: true
+    secretName: snapshot-controller-ca-tls
+    issuerRef:
+      name: snapshot-controller-selfsigned
+
+    commonName: snapshot-controller-ca
+    subject:
+      organizations: [moopholo]
+      oganizationalUnits: [snapshot-controller]
