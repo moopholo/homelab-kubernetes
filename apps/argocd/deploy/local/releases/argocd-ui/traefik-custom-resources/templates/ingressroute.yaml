@@ -6,7 +6,7 @@ metadata:
   name: argocd-ui-http
   namespace: argocd
   labels:
-    helm.sh/chart: traefik-custom-resources-0.2.15
+    helm.sh/chart: traefik-custom-resources-0.3.0
     app.kubernetes.io/name: argocd-ui-http
     app.kubernetes.io/instance: argocd-ui
     app.kubernetes.io/managed-by: Helm
@@ -29,7 +29,7 @@ metadata:
   name: argocd-ui-https
   namespace: argocd
   labels:
-    helm.sh/chart: traefik-custom-resources-0.2.15
+    helm.sh/chart: traefik-custom-resources-0.3.0
     app.kubernetes.io/name: argocd-ui-https
     app.kubernetes.io/instance: argocd-ui
     app.kubernetes.io/managed-by: Helm
