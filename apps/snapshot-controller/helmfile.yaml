@@ -5,13 +5,13 @@ repositories:
     url: https://helm.monetact.net
 
 releases:
-  - name: snapshot-controller-issuers
+  - name: snapshot-controller-webhook-ca
     namespace: snapshot-controller
     chart: moopholo/cert-manager-tls
     version: "~2"
     missingFileHandler: Warn
     values:
-      - values/snapshot-controller-issuers.yaml
+      - values/snapshot-controller-webhook-ca.yaml
       - common:
           annotations:
             argocd.argoproj.io/sync-wave: "-1"
