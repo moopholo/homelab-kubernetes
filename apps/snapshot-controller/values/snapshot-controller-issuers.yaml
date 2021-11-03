@@ -1,0 +1,8 @@
+issuers:
+  snapshot-controller-selfsigned:
+    kind: Issuer
+    selfSigned: {}
+  snapshot-controller-ca:
+    kind: Issuer
+    ca:
+      secretName: snapshot-controller-ca-tls
