@@ -15,3 +15,8 @@ containerSecurityContext:
       - ALL
   readOnlyRootFilesystem: true
   runAsNonRoot: true
+
+prometheus:
+  enabled: true
+  servicemonitor:
+    enabled: false
