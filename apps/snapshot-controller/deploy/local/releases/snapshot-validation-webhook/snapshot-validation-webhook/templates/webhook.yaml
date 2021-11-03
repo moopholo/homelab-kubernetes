@@ -20,7 +20,6 @@ spec:
   issuerRef:
     kind: Issuer
     name: snapshot-controller-ca
-    namespace: snapshot-controller
   privateKey:
     rotationPolicy: Always
 ---
