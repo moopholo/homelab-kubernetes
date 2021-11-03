@@ -1,0 +1,22 @@
+---
+# Source: snapshot-validation-webhook/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: snapshot-validation-webhook
+  labels:
+    helm.sh/chart: snapshot-validation-webhook-1.2.1
+    app.kubernetes.io/name: snapshot-validation-webhook
+    app.kubernetes.io/instance: snapshot-validation-webhook
+    app.kubernetes.io/version: "v4.2.1"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  type: ClusterIP
+  ports:
+    - port: 443
+      targetPort: https
+      protocol: TCP
+      name: https
+  selector:
+    app.kubernetes.io/name: snapshot-validation-webhook
+    app.kubernetes.io/instance: snapshot-validation-webhook
