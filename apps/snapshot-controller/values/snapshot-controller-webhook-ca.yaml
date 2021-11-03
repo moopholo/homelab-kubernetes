@@ -17,4 +17,4 @@ certificates:
     commonName: snapshot-controller-ca
     subject:
       organizations: [moopholo]
-      oganizationalUnits: [snapshot-controller]
+      organizationalUnits: [snapshot-controller]
