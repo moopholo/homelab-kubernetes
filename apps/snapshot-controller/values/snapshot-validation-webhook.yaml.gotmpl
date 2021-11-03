@@ -1,0 +1,5 @@
+tls:
+  certManagerIssuerRef:
+    kind: Issuer
+    name: snapshot-controller-ca
+    namespace: {{ .Release.Namespace }}
