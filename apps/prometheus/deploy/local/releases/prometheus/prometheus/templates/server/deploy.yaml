@@ -54,8 +54,6 @@ spec:
             - --web.console.templates=/etc/prometheus/consoles
             - --web.enable-lifecycle
             - --storage.tsdb.retention.size=540GB
-            - --storage.tsdb.retention.time=15d
-            - --storage.tsdb.wal-compression=true
           ports:
             - containerPort: 9090
           readinessProbe:
