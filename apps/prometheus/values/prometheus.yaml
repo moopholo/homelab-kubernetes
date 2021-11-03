@@ -10,9 +10,7 @@ server:
     tag: v2.31.0
 
   extraArgs:
-    storage.tsdb.retention.time: 15d
     storage.tsdb.retention.size: 540GB
-    storage.tsdb.wal-compression: true
 
   persistentVolume:
     storageClass: ceph-block
