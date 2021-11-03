@@ -12,7 +12,7 @@ server:
   extraArgs:
     storage.tsdb.retention.time: 15d
     storage.tsdb.retention.size: 540GB
-    storage.tsdb.wal-compression: true
+    storage.tsdb.wal-compression: ""
 
   persistentVolume:
     storageClass: ceph-block
