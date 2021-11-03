@@ -6,7 +6,7 @@ metadata:
   name: rook-ceph-dashboard-http
   namespace: rook-ceph
   labels:
-    helm.sh/chart: traefik-custom-resources-0.2.15
+    helm.sh/chart: traefik-custom-resources-0.3.0
     app.kubernetes.io/name: rook-ceph-dashboard-http
     app.kubernetes.io/instance: rook-ceph-dashboard
     app.kubernetes.io/managed-by: Helm
@@ -29,7 +29,7 @@ metadata:
   name: rook-ceph-dashboard-https
   namespace: rook-ceph
   labels:
-    helm.sh/chart: traefik-custom-resources-0.2.15
+    helm.sh/chart: traefik-custom-resources-0.3.0
     app.kubernetes.io/name: rook-ceph-dashboard-https
     app.kubernetes.io/instance: rook-ceph-dashboard
     app.kubernetes.io/managed-by: Helm
