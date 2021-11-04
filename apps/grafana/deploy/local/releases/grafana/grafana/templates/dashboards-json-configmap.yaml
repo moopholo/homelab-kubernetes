@@ -1,0 +1,17 @@
+---
+# Source: grafana/templates/dashboards-json-configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-dashboards-default
+  namespace: grafana
+  labels:
+    helm.sh/chart: grafana-6.17.4
+    app.kubernetes.io/name: grafana
+    app.kubernetes.io/instance: grafana
+    app.kubernetes.io/version: "8.2.2"
+    app.kubernetes.io/managed-by: Helm
+    dashboard-provider: default
+    grafana_dashboard: "1"
+data:
+  {}
