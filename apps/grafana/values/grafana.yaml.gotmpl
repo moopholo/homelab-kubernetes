@@ -30,8 +30,8 @@ grafana.ini:
     auth_url: https://github.com/login/oauth/authorize
     token_url: https://github.com/login/oauth/access_token
     api_url: https://api.github.com/user
-    allowed_organizations: moopholo
-    team_ids: 5230329
+    allowed_organizations: "{{ env `GRAFANA_AUTH_GITHUB_ALLOWED_ORGS` }}"
+    team_ids: "{{ env `GRAFANA_AUTH_GITHUB_TEAM_IDS` }}"
     client_id: ""
     client_secret: ""
 

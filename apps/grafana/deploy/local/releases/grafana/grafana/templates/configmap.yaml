@@ -24,7 +24,7 @@ data:
     client_secret = 
     enabled = true
     scopes = user:email,read:org
-    team_ids = 5.230329e+06
+    team_ids = 5230329
     token_url = https://github.com/login/oauth/access_token
     [grafana_net]
     url = https://grafana.com
