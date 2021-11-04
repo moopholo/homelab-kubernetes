@@ -1,11 +1,16 @@
 envFromSecret: grafana-env
 
+env:
+  GF_SECURITY_DISABLE_INITIAL_ADMIN_CREATION: true
+
 grafana.ini:
   server:
     domain: {{ env `GRAFANA_UI_DOMAIN` }}
     root_url: "%(protocol)s://%(domain)s"
   grafana_net:
     url: https://grafana.com
+  security:
+    disable_initial_admin_creation: true
   auth.github:
     enabled: true
     allow_sign_up: false
