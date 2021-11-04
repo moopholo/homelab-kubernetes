@@ -11,7 +11,7 @@ releases:
     version: "~6"
     missingFileHandler: Warn
     values:
-      - values/grafana.yaml
+      - values/grafana.yaml.gotmpl
 
   - name: grafana-ui
     namespace: grafana
