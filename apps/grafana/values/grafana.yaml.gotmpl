@@ -14,10 +14,13 @@ persistence:
 
 grafana.ini:
   server:
+    protocol: https
     domain: {{ env `GRAFANA_UI_DOMAIN` }}
     root_url: "%(protocol)s://%(domain)s"
   grafana_net:
     url: https://grafana.com
+  users:
+    auto_assign_org_role: Editor
   security:
     disable_initial_admin_creation: true
   auth.github:
