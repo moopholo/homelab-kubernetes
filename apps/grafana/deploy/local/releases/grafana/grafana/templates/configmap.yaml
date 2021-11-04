@@ -20,8 +20,8 @@ data:
     allowed_organizations = moopholo
     api_url = https://api.github.com/user
     auth_url = https://github.com/login/oauth/authorize
-    client_id = $__env{GRAFANA_AUTH_GITHUB_CLIENT_ID}
-    client_secret = $__env{GRAFANA_AUTH_GITHUB_CLIENT_SECRET}
+    client_id = 
+    client_secret = 
     enabled = true
     scopes = user:email,read:org
     team_ids = 5.230329e+06
