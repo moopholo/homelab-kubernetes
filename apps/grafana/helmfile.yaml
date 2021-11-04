@@ -8,7 +8,7 @@ releases:
   - name: grafana
     namespace: grafana
     chart: grafana/grafana
-    version: ""
+    version: "~6"
     missingFileHandler: Warn
     values:
       - values/grafana.yaml
