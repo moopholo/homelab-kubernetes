@@ -14,9 +14,8 @@ persistence:
 
 grafana.ini:
   server:
-    protocol: https
     domain: {{ env `GRAFANA_UI_DOMAIN` }}
-    root_url: "%(protocol)s://%(domain)s"
+    root_url: "https://%(domain)s"
     enable_gzip: true
   grafana_net:
     url: https://grafana.com
