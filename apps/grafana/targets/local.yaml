@@ -2,5 +2,6 @@ grafana:
   ui:
     domain: grafana.homelab.monetact.net
   auth:
-    team-ids: 5230329
-    allowed-orgs: moopholo
+    github:
+      team-ids: 5230329
+      allowed-orgs: moopholo
