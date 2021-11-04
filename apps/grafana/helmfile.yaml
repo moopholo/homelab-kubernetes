@@ -1,0 +1,22 @@
+repositories:
+  - name: grafana
+    url: https://grafana.github.io/helm-charts
+  - name: moopholo
+    url: https://helm.monetact.net
+
+releases:
+  - name: grafana
+    namespace: grafana
+    chart: grafana/grafana
+    version: "~6"
+    missingFileHandler: Warn
+    values:
+      - values/grafana.yaml.gotmpl
+
+  - name: grafana-ui
+    namespace: grafana
+    chart: moopholo/traefik-custom-resources
+    version: "~2"
+    missingFileHandler: Warn
+    values:
+      - values/grafana-ui.yaml.gotmpl

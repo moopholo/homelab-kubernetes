@@ -1,0 +1,55 @@
+envFromSecret: grafana-env
+
+env:
+  GF_SECURITY_DISABLE_INITIAL_ADMIN_CREATION: true
+
+admin:
+  existingSecret: grafana-admin-credentials
+  userKey: username
+  passwordKey: password
+
+persistence:
+  enabled: true
+  storageClassName: ceph-block
+
+grafana.ini:
+  server:
+    domain: {{ env `GRAFANA_UI_DOMAIN` }}
+    root_url: "%(protocol)s://%(domain)s"
+  grafana_net:
+    url: https://grafana.com
+  security:
+    disable_initial_admin_creation: true
+  auth.github:
+    enabled: true
+    allow_sign_up: true
+    scopes: user:email,read:org
+    auth_url: https://github.com/login/oauth/authorize
+    token_url: https://github.com/login/oauth/access_token
+    api_url: https://api.github.com/user
+    allowed_organizations: moopholo
+    team_ids: 5230329
+    client_id: $__env{GRAFANA_AUTH_GITHUB_CLIENT_ID}
+    client_secret: $__env{GRAFANA_AUTH_GITHUB_CLIENT_SECRET}
+
+datasources:
+  datasources.yaml:
+    apiVersion: 1
+    datasources:
+      - name: Prometheus
+        type: prometheus
+        url: http://prometheus-server.prometheus
+        access: proxy
+        isDefault: true
+
+dashboards:
+  default:
+    ceph-cluster:
+      gnetId: 2842
+      datasource: Prometheus
+    ceph-osd:
+      gnetId: 5336
+      datasource: Prometheus
+    ceph-pools:
+      gnetId: 5342
+      datasource: Prometheus

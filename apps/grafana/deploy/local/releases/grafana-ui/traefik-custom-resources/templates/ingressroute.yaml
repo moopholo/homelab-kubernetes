@@ -1,0 +1,47 @@
+---
+# Source: traefik-custom-resources/templates/ingressroute.yaml
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: grafana-ui-http
+  namespace: grafana
+  labels:
+    helm.sh/chart: traefik-custom-resources-2.0.6
+    app.kubernetes.io/name: grafana-ui-http
+    app.kubernetes.io/instance: grafana-ui
+    app.kubernetes.io/managed-by: Helm
+spec:
+  entryPoints:
+  - web
+  routes:
+  - kind: Rule
+    match: Host(`grafana.homelab.monetact.net`)
+    middlewares:
+    - name: https-redirect
+    services:
+    - name: grafana
+      port: 80
+---
+# Source: traefik-custom-resources/templates/ingressroute.yaml
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: grafana-ui-https
+  namespace: grafana
+  labels:
+    helm.sh/chart: traefik-custom-resources-2.0.6
+    app.kubernetes.io/name: grafana-ui-https
+    app.kubernetes.io/instance: grafana-ui
+    app.kubernetes.io/managed-by: Helm
+spec:
+  entryPoints:
+  - websecure
+  routes:
+  - kind: Rule
+    match: Host(`grafana.homelab.monetact.net`)
+    services:
+    - name: grafana
+      port: 80
+  tls:
+    store:
+      name: default
