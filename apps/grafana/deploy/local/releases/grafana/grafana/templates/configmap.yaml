@@ -39,7 +39,11 @@ data:
     disable_initial_admin_creation = true
     [server]
     domain = grafana.homelab.monetact.net
+    enable_gzip = true
+    protocol = https
     root_url = %(protocol)s://%(domain)s
+    [users]
+    auto_assign_org_role = Editor
 
   datasources.yaml: |
     apiVersion: 1
