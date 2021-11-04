@@ -8,6 +8,9 @@ admin:
   userKey: username
   passwordKey: password
 
+persistence:
+  enabled: true
+
 grafana.ini:
   server:
     domain: {{ env `GRAFANA_UI_DOMAIN` }}
