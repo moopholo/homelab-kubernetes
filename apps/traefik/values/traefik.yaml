@@ -29,6 +29,9 @@ ports:
   websecure:
     port: 8443
     hostPort: 443
+  minecraft:
+    port: 25565
+    hostPort: 25565
 
 logs:
   access:
