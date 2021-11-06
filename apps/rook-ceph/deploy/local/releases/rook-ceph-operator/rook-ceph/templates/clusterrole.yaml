@@ -452,7 +452,7 @@ metadata:
   labels:
     operator: rook
     storage-backend: ceph
-    chart: "rook-ceph-v1.7.6"
+    chart: "rook-ceph-v1.7.7"
 rules:
 - apiGroups:
   - policy
