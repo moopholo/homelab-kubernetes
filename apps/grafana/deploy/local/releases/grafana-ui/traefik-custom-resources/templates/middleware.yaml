@@ -6,7 +6,7 @@ metadata:
   name: https-redirect
   namespace: grafana
   labels:
-    helm.sh/chart: traefik-custom-resources-2.0.6
+    helm.sh/chart: traefik-custom-resources-2.0.7
     app.kubernetes.io/name: https-redirect
     app.kubernetes.io/instance: grafana-ui
     app.kubernetes.io/managed-by: Helm
