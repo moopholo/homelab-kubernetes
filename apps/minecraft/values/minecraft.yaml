@@ -8,20 +8,20 @@ minecraftServer:
   maxTickTime: "-1"
   viewDistance: "10"
 
+  rcon:
+    enabled: true
+    existingSecret: minecraft-rcon-credentials
+    secretKey: password
+
+  extraPorts:
+    - name: map
+      containerPort: 8123
+      protocol: TCP
+
 resources:
   requests:
     memory: 6Gi
     cpu: 2000m
-
-rcon:
-  enabled: true
-  existingSecret: minecraft-rcon-credentials
-  secretKey: password
-
-extraPorts:
-  - name: map
-    containerPort: 8123
-    protocol: TCP
 
 persistence:
   storageClass: ceph-block
