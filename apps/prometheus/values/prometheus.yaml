@@ -6,14 +6,14 @@ pushgateway:
   enabled: false
 
 alertmanager:
-  updateStrategy:
+  strategy:
     type: Recreate
 
 server:
   image:
     tag: v2.31.0
 
-  updateStrategy:
+  strategy:
     type: Recreate
 
   extraArgs:
