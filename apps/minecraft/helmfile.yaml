@@ -16,7 +16,7 @@ releases:
   - name: minecraft-ingress
     namespace: minecraft
     chart: moopholo/traefik-custom-resources
-    version: "~2"
+    version: "~2.0.7"
     missingFileHandler: Warn
     values:
       - values/minecraft-ingress.yaml
