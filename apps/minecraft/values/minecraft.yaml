@@ -25,6 +25,8 @@ minecraftServer:
       ingress:
         enabled: false
 
+strategyType: Recreate
+
 resources:
   requests:
     memory: 6Gi
