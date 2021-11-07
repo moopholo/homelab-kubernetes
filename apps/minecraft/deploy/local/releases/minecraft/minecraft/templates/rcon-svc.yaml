@@ -1,0 +1,22 @@
+---
+# Source: minecraft/templates/rcon-svc.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: "minecraft-minecraft-rcon"
+  annotations:
+    {}
+  labels:
+    app: minecraft-minecraft
+    chart: "minecraft-3.4.2"
+    release: "minecraft"
+    heritage: "Helm"
+spec:
+  type: ClusterIP
+  ports:
+  - name: rcon
+    port: 25575
+    targetPort: rcon
+    protocol: TCP
+  selector:
+    app: minecraft-minecraft

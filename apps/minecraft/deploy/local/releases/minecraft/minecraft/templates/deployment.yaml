@@ -1,0 +1,147 @@
+---
+# Source: minecraft/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: minecraft-minecraft
+  labels:
+    app: minecraft-minecraft
+    chart: "minecraft-3.4.2"
+    release: "minecraft"
+    heritage: "Helm"
+spec:
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: minecraft-minecraft
+  template:
+    metadata:
+      labels:
+        app: minecraft-minecraft
+    spec:
+      securityContext:
+        runAsUser: 1000
+        fsGroup: 2000
+      containers:
+      - name: minecraft-minecraft
+        image: "itzg/minecraft-server:latest"
+        imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: 2000m
+            memory: 6Gi
+        readinessProbe:
+          tcpSocket:
+            port: 25565
+          initialDelaySeconds: 30
+          periodSeconds: 5
+          failureThreshold: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        livenessProbe:
+          tcpSocket:
+            port: 25565
+          initialDelaySeconds: 30
+          periodSeconds: 5
+          failureThreshold: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        env:
+        - name: EULA
+          value: "TRUE"
+        - name: TYPE
+          value: "AIRPLANE"
+        - name: VERSION
+          value: "LATEST"
+        - name: DIFFICULTY
+          value: "normal"
+        - name: WHITELIST
+          value: ""
+        - name: OPS
+          value: ""
+        - name: ICON
+          value: ""
+        - name: MAX_PLAYERS
+          value: "20"
+        - name: MAX_WORLD_SIZE
+          value: "1000000"
+        - name: ALLOW_NETHER
+          value: "true"
+        - name: ANNOUNCE_PLAYER_ACHIEVEMENTS
+          value: "true"
+        - name: ENABLE_COMMAND_BLOCK
+          value: "true"
+        - name: FORCE_GAMEMODE
+          value: "true"
+        - name: GENERATE_STRUCTURES
+          value: "true"
+        - name: HARDCORE
+          value: "false"
+        - name: MAX_BUILD_HEIGHT
+          value: "256"
+        - name: MAX_TICK_TIME
+          value: "-1"
+        - name: SPAWN_ANIMALS
+          value: "true"
+        - name: SPAWN_MONSTERS
+          value: "true"
+        - name: SPAWN_NPCS
+          value: "true"
+        - name: VIEW_DISTANCE
+          value: "10"
+        - name: SEED
+          value: ""
+        - name: MODE
+          value: "survival"
+        - name: MOTD
+          value: "Welcome to Minecraft on Kubernetes!"
+        - name: PVP
+          value: "false"
+        - name: LEVEL_TYPE
+          value: "DEFAULT"
+        - name: GENERATOR_SETTINGS
+          value: ""
+        - name: LEVEL
+          value: "world"
+        - name: ONLINE_MODE
+          value: "true"
+        - name: MEMORY
+          value: "6G"
+        - name: JVM_OPTS
+          value: ""
+        - name: JVM_XX_OPTS
+          value: ""
+        - name: ENABLE_RCON
+          value: "true"
+        - name: RCON_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: minecraft-rcon-credentials
+              key: password
+        - name: GUI
+          value: "FALSE"
+        - name: SPIGET_RESOURCES
+          value: "81534,84278,39590,28140,34315,59773,76437"
+        - name: TZ
+          value: "America/Los_Angeles"
+        - name: USE_AIKAR_FLAGS
+          value: "TRUE"
+
+        ports:
+        - name: minecraft
+          containerPort: 25565
+          protocol: TCP
+        - name: rcon
+          containerPort: 25575
+          protocol: TCP
+        - name: dynmap
+          containerPort: 8123
+          protocol: TCP
+        volumeMounts:
+        - name: datadir
+          mountPath: /data
+      volumes:
+      - name: datadir
+        persistentVolumeClaim:
+          claimName: minecraft-minecraft-datadir
