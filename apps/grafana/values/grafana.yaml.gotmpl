@@ -12,6 +12,10 @@ persistence:
   enabled: true
   storageClassName: ceph-block
 
+revisionHistoryLimit: 2
+deploymentStrategy:
+  type: Recreate
+
 grafana.ini:
   server:
     domain: {{ env `GRAFANA_UI_DOMAIN` }}

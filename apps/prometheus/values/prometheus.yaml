@@ -5,9 +5,16 @@ nodeExporter:
 pushgateway:
   enabled: false
 
+alertmanager:
+  updateStrategy:
+    type: Recreate
+
 server:
   image:
     tag: v2.31.0
+
+  updateStrategy:
+    type: Recreate
 
   extraArgs:
     storage.tsdb.retention.size: 540GB
