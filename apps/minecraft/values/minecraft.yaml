@@ -14,9 +14,10 @@ minecraftServer:
     secretKey: password
 
   extraPorts:
-    - name: map
+    - name: dynmap
       containerPort: 8123
       protocol: TCP
+      enabled: true
 
 resources:
   requests:
