@@ -5,10 +5,10 @@ kind: PodSecurityPolicy
 metadata:
   name: grafana
   labels:
-    helm.sh/chart: grafana-6.17.4
+    helm.sh/chart: grafana-6.17.5
     app.kubernetes.io/name: grafana
     app.kubernetes.io/instance: grafana
-    app.kubernetes.io/version: "8.2.2"
+    app.kubernetes.io/version: "8.2.3"
     app.kubernetes.io/managed-by: Helm
   annotations:
     seccomp.security.alpha.kubernetes.io/allowedProfileNames: 'docker/default,runtime/default'
