@@ -1,5 +1,6 @@
 minecraftServer:
   eula: "TRUE"
+  type: PURPUR
   difficulty: normal
   memory: 6G
   maxWorldSize: "1000000"
@@ -29,8 +30,6 @@ persistence:
     Size: 1Ti
 
 extraEnv:
-  TYPE: PURPUR
-
   # -- Plugins and Mods
   # Chunky - https://www.spigotmc.org/resources/chunky.81534/
   # ChunkyBorder - https://www.spigotmc.org/resources/chunkyborder.84278/
