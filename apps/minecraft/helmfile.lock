@@ -1,0 +1,10 @@
+version: v0.141.0
+dependencies:
+- name: minecraft
+  repository: https://itzg.github.io/minecraft-server-charts/
+  version: 3.4.2
+- name: traefik-custom-resources
+  repository: https://helm.monetact.net
+  version: 2.0.6
+digest: sha256:08a8d024c9984e43e4fb2083b4b348b82906494ebd22841eabf4a4688e99cd55
+generated: "2021-11-07T06:44:04.434671864Z"

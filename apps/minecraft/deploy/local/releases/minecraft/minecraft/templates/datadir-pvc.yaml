@@ -1,0 +1,20 @@
+---
+# Source: minecraft/templates/datadir-pvc.yaml
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: minecraft-minecraft-datadir
+  labels:
+    app: minecraft-minecraft
+    chart: "minecraft-3.4.2"
+    release: "minecraft"
+    heritage: "Helm"
+  annotations:
+    volume.beta.kubernetes.io/storage-class: "ceph-block"
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: "1Ti"
+  storageClassName: "ceph-block"

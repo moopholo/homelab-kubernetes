@@ -1,0 +1,52 @@
+minecraftServer:
+  eula: "TRUE"
+  type: AIRPLANE
+  difficulty: normal
+  memory: 6G
+  maxWorldSize: "1000000"
+  forcegameMode: true
+  maxTickTime: "-1"
+  viewDistance: "10"
+
+  rcon:
+    enabled: true
+    existingSecret: minecraft-rcon-credentials
+    secretKey: password
+
+  extraPorts:
+    - name: dynmap
+      containerPort: 8123
+      protocol: TCP
+      service:
+        enabled: true
+        embedded: false
+        type: ClusterIP
+        port: 8123
+      ingress:
+        enabled: false
+
+resources:
+  requests:
+    memory: 6Gi
+    cpu: 2000m
+
+persistence:
+  storageClass: ceph-block
+  dataDir:
+    enabled: true
+    Size: 1Ti
+
+extraEnv:
+  # -- Plugins and Mods
+  # Chunky - https://www.spigotmc.org/resources/chunky.81534/
+  # ChunkyBorder - https://www.spigotmc.org/resources/chunkyborder.84278/
+  # BKCommonLibs - https://www.spigotmc.org/resources/bkcommonlib.39590/
+  # LuckPerms - https://www.spigotmc.org/resources/luckperms.28140/
+  # Vault - https://www.spigotmc.org/resources/vault.34315/
+  # ChestSort - https://www.spigotmc.org/resources/chestsort-api.59773/
+  # OhTheDungeon - https://www.spigotmc.org/resources/discontinued-oh-the-dungeons-youll-go.76437/
+  SPIGET_RESOURCES: 81534,84278,39590,28140,34315,59773,76437
+
+  USE_AIKAR_FLAGS: "TRUE"
+  GUI: "FALSE"
+  TZ: America/Los_Angeles

@@ -1,0 +1,22 @@
+repositories:
+  - name: minecraft
+    url: https://itzg.github.io/minecraft-server-charts/
+  - name: moopholo
+    url: https://helm.monetact.net
+
+releases:
+  - name: minecraft
+    namespace: minecraft
+    chart: minecraft/minecraft
+    version: "~3.4"
+    missingFileHandler: Warn
+    values:
+      - values/minecraft.yaml
+
+  - name: minecraft-ingress
+    namespace: minecraft
+    chart: moopholo/traefik-custom-resources
+    version: "~2"
+    missingFileHandler: Warn
+    values:
+      - values/minecraft-ingress.yaml

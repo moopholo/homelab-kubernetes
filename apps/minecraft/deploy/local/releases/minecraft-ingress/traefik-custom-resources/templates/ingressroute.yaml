@@ -1,0 +1,22 @@
+---
+# Source: traefik-custom-resources/templates/ingressroute.yaml
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRouteTCP
+metadata:
+  name: minecraft
+  namespace: minecraft
+  labels:
+    helm.sh/chart: traefik-custom-resources-2.0.6
+    app.kubernetes.io/name: minecraft
+    app.kubernetes.io/instance: minecraft-ingress
+    app.kubernetes.io/managed-by: Helm
+spec:
+  entryPoints:
+  - minecraft
+  routes:
+  - kind: Rule
+    match: HostSNI(`*`)
+    services:
+    - name: minecraft-minecraft
+      port: minecraft
+  tcp: true
