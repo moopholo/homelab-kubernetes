@@ -61,6 +61,10 @@ spec:
         - name: "metrics"
           containerPort: 9100
           protocol: "TCP"
+        - name: "minecraft"
+          containerPort: 25565
+          hostPort: 25565
+          protocol: "TCP"
         - name: "traefik"
           containerPort: 9000
           hostPort: 9000
@@ -90,6 +94,7 @@ spec:
           - "--global.checknewversion"
           - "--global.sendanonymoususage"
           - "--entryPoints.metrics.address=:9100/tcp"
+          - "--entryPoints.minecraft.address=:25565/tcp"
           - "--entryPoints.traefik.address=:9000/tcp"
           - "--entryPoints.web.address=:8000/tcp"
           - "--entryPoints.websecure.address=:8443/tcp"
