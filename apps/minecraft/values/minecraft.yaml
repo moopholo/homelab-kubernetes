@@ -1,6 +1,6 @@
 minecraftServer:
   eula: "TRUE"
-  type: PURPUR
+  type: AIRPLANE
   difficulty: normal
   memory: 6G
   maxWorldSize: "1000000"
