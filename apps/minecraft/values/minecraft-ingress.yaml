@@ -1,0 +1,10 @@
+routes:
+  minecraft:
+    tcp: true
+    entryPoints: [minecraft]
+    routes:
+      - match: HostSNI(`*`)
+        kind: Rule
+        services:
+          - name: minecraft-minecraft
+            port: minecraft
