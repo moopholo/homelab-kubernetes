@@ -1,0 +1,15 @@
+container:
+  env:
+    VELOCITY_FORWARDING_SECRET:
+      valueFrom:
+        secretKeyRef:
+          name: velocity-forwarding-secret
+          key: token
+
+    VELOCITY_SERVERS: |
+      {
+        "adventure": 30066
+      }
+
+    VELOCITY_SERVERS_TRY: |
+      ["adventure"]

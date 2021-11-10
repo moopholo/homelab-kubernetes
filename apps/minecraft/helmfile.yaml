@@ -5,6 +5,14 @@ repositories:
     url: https://helm.monetact.net
 
 releases:
+  - name: velocity
+    namespace: minecraft
+    chart: moopholo/velocity
+    version: "~0.2"
+    missingFileHandler: Warn
+    values:
+      - values/velocity.yaml
+
   - name: minecraft
     namespace: minecraft
     chart: minecraft/minecraft
