@@ -2,6 +2,6 @@ version: v0.141.0
 dependencies:
 - name: metrics-server
   repository: https://charts.bitnami.com/bitnami
-  version: 5.10.7
-digest: sha256:97974dc97647d83db249209821d029e795639ca60a54c74c6dd3ee25ecf18c91
-generated: "2021-10-30T10:10:10.623373518Z"
+  version: 5.10.8
+digest: sha256:d74e263d6f4f58b610c31cfeafcf3fccfee3c8e0e152eb9d223e67e011b520b1
+generated: "2021-11-11T10:11:26.677798208Z"
