@@ -5,7 +5,7 @@ kind: Deployment
 metadata:
   name: argocd-server
   labels:
-    helm.sh/chart: argo-cd-3.26.5
+    helm.sh/chart: argo-cd-3.26.7
     app.kubernetes.io/name: argocd-server
     app.kubernetes.io/instance: argocd
     app.kubernetes.io/component: server
@@ -22,7 +22,7 @@ spec:
   template:
     metadata:
       labels:
-        helm.sh/chart: argo-cd-3.26.5
+        helm.sh/chart: argo-cd-3.26.7
         app.kubernetes.io/name: argocd-server
         app.kubernetes.io/instance: argocd
         app.kubernetes.io/component: server
@@ -65,6 +65,8 @@ spec:
           name: ssh-known-hosts
         - mountPath: /app/config/server/tls
           name: argocd-repo-server-tls
+        - mountPath: /home/argocd/.aws
+          name: aws-config
         - mountPath: /tmp
           name: tmp-dir
         ports:
@@ -103,6 +105,8 @@ spec:
         name: static-files
       - emptyDir: {}
         name: tmp-dir
+      - emptyDir: {}
+        name: aws-config
       - configMap:
           name: argocd-ssh-known-hosts-cm
         name: ssh-known-hosts
