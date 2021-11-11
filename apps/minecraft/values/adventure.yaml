@@ -6,7 +6,7 @@ minecraftServer:
   maxWorldSize: "1000000"
   forcegameMode: true
   maxTickTime: "-1"
-  viewDistance: "10"
+  viewDistance: "6"
 
   rcon:
     enabled: true
@@ -63,3 +63,6 @@ extraEnv:
   USE_AIKAR_FLAGS: "TRUE"
   GUI: "FALSE"
   TZ: America/Los_Angeles
+
+  CFG_PAPER_NO_TICK_VIEW_DISTANCE: "10"
+  CFG_VELOCITY_ENABLED: "true"
