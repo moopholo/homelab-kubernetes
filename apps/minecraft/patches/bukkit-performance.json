@@ -1,0 +1,75 @@
+{
+  "file": "/data/bukkit.yml",
+  "ops": [
+    {
+      "$put": {
+        "path": "$['spawn-limits']",
+        "key": "monsters",
+        "value": 30
+      }
+    },
+    {
+      "$put": {
+        "path": "$['spawn-limits']",
+        "key": "animals",
+        "value": 10
+      }
+    },
+    {
+      "$put": {
+        "path": "$['spawn-limits']",
+        "key": "water-animals",
+        "value": 10
+      }
+    },
+    {
+      "$put": {
+        "path": "$['spawn-limits']",
+        "key": "water-ambient",
+        "value": 10
+      }
+    },
+    {
+      "$put": {
+        "path": "$['spawn-limits']",
+        "key": "ambient",
+        "value": 10
+      }
+    },
+    {
+      "$put": {
+        "path": "$['ticks-per']",
+        "key": "animal-spawns",
+        "value": 400
+      }
+    },
+    {
+      "$put": {
+        "path": "$['ticks-per']",
+        "key": "monster-spawns",
+        "value": 10
+      }
+    },
+    {
+      "$put": {
+        "path": "$['ticks-per']",
+        "key": "ambient-spawns",
+        "value": 80
+      }
+    },
+    {
+      "$put": {
+        "path": "$['ticks-per']",
+        "key": "water-ambient-spawns",
+        "value": 20
+      }
+    },
+    {
+      "$put": {
+        "path": "$['ticks-per']",
+        "key": "ambient-spawns",
+        "value": 40
+      }
+    }
+  ]
+}

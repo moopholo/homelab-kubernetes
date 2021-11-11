@@ -1,3 +1,7 @@
+listenPort: 25577
+service:
+  port: 25577
+
 container:
   env:
     VELOCITY_FORWARDING_SECRET:
@@ -8,7 +12,7 @@ container:
 
     VELOCITY_SERVERS: |
       {
-        "adventure": 30066
+        "adventure": "minecraft-adventure:25565"
       }
 
     VELOCITY_SERVERS_TRY: |

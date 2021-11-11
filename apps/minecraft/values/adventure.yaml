@@ -38,6 +38,15 @@ persistence:
     enabled: true
     Size: 1Ti
 
+extraVolumes:
+  - volumeMounts:
+      - name: patch-definitions
+        mountPath: /patches
+    volumes:
+      - name: patch-definitions
+        configmapRef:
+          name: adventure-patch-definitions
+
 extraEnv:
   # -- Plugins and Mods
   # Chunky - https://www.spigotmc.org/resources/chunky.81534/
@@ -48,6 +57,8 @@ extraEnv:
   # ChestSort - https://www.spigotmc.org/resources/chestsort-api.59773/
   # OhTheDungeon - https://www.spigotmc.org/resources/discontinued-oh-the-dungeons-youll-go.76437/
   SPIGET_RESOURCES: 81534,84278,39590,28140,34315,59773,76437
+
+  PATCH_DEFINITIONS: /patches
 
   USE_AIKAR_FLAGS: "TRUE"
   GUI: "FALSE"

@@ -6,5 +6,5 @@ routes:
       - match: HostSNI(`*`)
         kind: Rule
         services:
-          - name: minecraft-minecraft
-            port: minecraft
+          - name: velocity
+            port: proxy
