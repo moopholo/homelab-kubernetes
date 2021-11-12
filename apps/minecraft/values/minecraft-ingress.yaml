@@ -4,7 +4,6 @@ routes:
     entryPoints: [minecraft]
     routes:
       - match: HostSNI(`*`)
-        kind: Rule
         services:
           - name: velocity
             port: proxy
