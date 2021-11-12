@@ -33,7 +33,7 @@ releases:
 
   - name: adventure
     namespace: minecraft
-    chart: minecraft/minecraft
+    chart: ./charts/minecraft
     version: "~3.4"
     missingFileHandler: Warn
     values:

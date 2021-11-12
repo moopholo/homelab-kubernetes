@@ -66,3 +66,8 @@ extraEnv:
 
   CFG_PAPER_NO_TICK_VIEW_DISTANCE: "10"
   CFG_VELOCITY_ENABLED: "true"
+  CFG_VELOCITY_SECRET:
+    valueFrom:
+      secretKeyRef:
+        name: velocity-forwarding-secret
+        key: token
