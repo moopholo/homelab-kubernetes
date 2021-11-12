@@ -14,10 +14,10 @@ container:
           name: velocity-forwarding-secret
           key: token
 
-    VELOCITY_SERVERS: |
+    VELOCITY_SERVERS: >-
       {
         "adventure": "minecraft-adventure:25565"
       }
 
-    VELOCITY_SERVERS_TRY: |
+    VELOCITY_SERVERS_TRY: >-
       ["adventure"]
