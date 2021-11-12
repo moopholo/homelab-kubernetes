@@ -14,8 +14,9 @@ spec:
   entryPoints:
   - minecraft
   routes:
-  - kind: Rule
-    match: HostSNI(`*`)
+  - match: HostSNI(`*`)
     services:
-    - name: minecraft-minecraft
-      port: minecraft
+    - name: velocity
+      port: proxy
+      proxyProtocol:
+        version: 2

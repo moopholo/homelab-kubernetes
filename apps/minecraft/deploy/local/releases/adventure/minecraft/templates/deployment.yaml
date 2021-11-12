@@ -3,28 +3,28 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: minecraft-minecraft
+  name: adventure-minecraft
   labels:
-    app: minecraft-minecraft
-    chart: "minecraft-3.4.2"
-    release: "minecraft"
+    app: adventure-minecraft
+    chart: "minecraft-3.5.0"
+    release: "adventure"
     heritage: "Helm"
 spec:
   strategy:
     type: Recreate
   selector:
     matchLabels:
-      app: minecraft-minecraft
+      app: adventure-minecraft
   template:
     metadata:
       labels:
-        app: minecraft-minecraft
+        app: adventure-minecraft
     spec:
       securityContext:
         runAsUser: 1000
         fsGroup: 2000
       containers:
-      - name: minecraft-minecraft
+      - name: adventure-minecraft
         image: "itzg/minecraft-server:latest"
         imagePullPolicy: Always
         resources:
@@ -89,7 +89,7 @@ spec:
         - name: SPAWN_NPCS
           value: "true"
         - name: VIEW_DISTANCE
-          value: "10"
+          value: "6"
         - name: SEED
           value: ""
         - name: MODE
@@ -119,8 +119,19 @@ spec:
             secretKeyRef:
               name: minecraft-rcon-credentials
               key: password
+        - name: CFG_PAPER_NO_TICK_VIEW_DISTANCE
+          value: "10"
+        - name: CFG_VELOCITY_ENABLED
+          value: "true"
+        - name: CFG_VELOCITY_SECRET
+          valueFrom:
+            secretKeyRef:
+              key: token
+              name: velocity-forwarding-secret
         - name: GUI
           value: "FALSE"
+        - name: PATCH_DEFINITIONS
+          value: "/patches"
         - name: SPIGET_RESOURCES
           value: "81534,84278,39590,28140,34315,59773,76437"
         - name: TZ
@@ -141,7 +152,12 @@ spec:
         volumeMounts:
         - name: datadir
           mountPath: /data
+        - mountPath: /patches
+          name: patch-definitions
       volumes:
       - name: datadir
         persistentVolumeClaim:
-          claimName: minecraft-minecraft-datadir
+          claimName: adventure-minecraft-datadir
+      - configmapRef:
+          name: adventure-patch-definitions
+        name: patch-definitions

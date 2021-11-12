@@ -3,11 +3,11 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: minecraft-minecraft-datadir
+  name: adventure-minecraft-datadir
   labels:
-    app: minecraft-minecraft
-    chart: "minecraft-3.4.2"
-    release: "minecraft"
+    app: adventure-minecraft
+    chart: "minecraft-3.5.0"
+    release: "adventure"
     heritage: "Helm"
   annotations:
     volume.beta.kubernetes.io/storage-class: "ceph-block"
