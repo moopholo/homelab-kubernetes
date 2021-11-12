@@ -3,15 +3,17 @@ repositories:
     url: https://itzg.github.io/minecraft-server-charts/
   - name: moopholo
     url: https://helm.monetact.net
+  - name: bedag
+    url: https://bedag.github.io/helm-charts/
 
 releases:
-  - name: minecraft
+  - name: velocity
     namespace: minecraft
-    chart: minecraft/minecraft
-    version: "~3.4"
+    chart: moopholo/velocity
+    version: "~0.2"
     missingFileHandler: Warn
     values:
-      - values/minecraft.yaml
+      - values/velocity.yaml
 
   - name: minecraft-ingress
     namespace: minecraft
@@ -20,3 +22,19 @@ releases:
     missingFileHandler: Warn
     values:
       - values/minecraft-ingress.yaml
+
+  - name: config-patches
+    namespace: minecraft
+    chart: bedag/raw
+    version: "1.1.0"
+    missingFileHandler: Warn
+    values:
+      - values/config-patches.yaml.gotmpl
+
+  - name: adventure
+    namespace: minecraft
+    chart: ./charts/minecraft
+    version: "~3.4"
+    missingFileHandler: Warn
+    values:
+      - values/adventure.yaml

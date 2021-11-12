@@ -1,0 +1,27 @@
+{
+  "file": "/data/paper.yml",
+  "ops": [
+    {
+      "$put": {
+        "path": "$.settings['velocity-support']",
+        "key": "enabled",
+        "value": "${CFG_VELOCITY_ENABLED}",
+        "value-type": "bool"
+      }
+    },
+    {
+      "$put": {
+        "path": "$.settings['velocity-support']",
+        "key": "secret",
+        "value": "${CFG_VELOCITY_SECRET}"
+      }
+    },
+    {
+      "$put": {
+        "path": "$.settings['velocity-support']",
+        "key": "online-mode",
+        "value": true
+      }
+    }
+  ]
+}

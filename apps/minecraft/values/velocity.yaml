@@ -1,0 +1,23 @@
+image:
+  repository: albertdixon/velocity
+
+listenPort: 25577
+service:
+  port: 25577
+
+container:
+  env:
+    VELOCITY_ADVANCED_PROXY_PROTOCOL: true
+    VELOCITY_FORWARDING_SECRET:
+      valueFrom:
+        secretKeyRef:
+          name: velocity-forwarding-secret
+          key: token
+
+    VELOCITY_SERVERS: >-
+      {
+        "adventure": "minecraft-adventure:25565"
+      }
+
+    VELOCITY_SERVERS_TRY: >-
+      ["adventure"]

@@ -1,0 +1,97 @@
+{
+  "file": "/data/paper.yml",
+  "ops": [
+    {
+      "$put": {
+        "path": "$.settings",
+        "key": "use-alternative-luck-formula",
+        "value": true
+      }
+    },
+    {
+      "$put": {
+        "path": "$['world-settings'].default.viewdistances",
+        "key": "no-tick-view-distance",
+        "value": "${CFG_PAPER_NO_TICK_VIEW_DISTANCE}",
+        "value-type": "int"
+      }
+    },
+    {
+      "$put": {
+        "path": "$['world-settings'].default['anti-xray']",
+        "key": "enabled",
+        "value": true
+      }
+    },
+    {
+      "$put": {
+        "path": "$['world-settings'].default['anti-xray']",
+        "key": "engine-mode",
+        "value": 2
+      }
+    },
+    {
+      "$put": {
+        "path": "$['world-settings'].default.hoppers",
+        "key": "disable-move-event",
+        "value": true
+      }
+    },
+    {
+      "$put": {
+        "path": "$['world-settings'].default",
+        "key": "max-auto-save-chunks-per-tick",
+        "value": 12
+      }
+    },
+    {
+      "$put": {
+        "path": "$['world-settings'].default",
+        "key": "optimize-explosions",
+        "value": true
+      }
+    },
+    {
+      "$put": {
+        "path": "$['world-settings'].default",
+        "key": "grass-spread-tick-rate",
+        "value": 2
+      }
+    },
+    {
+      "$put": {
+        "path": "$['world-settings'].default",
+        "key": "non-player-arrow-despawn-rate",
+        "value": 240
+      }
+    },
+    {
+      "$put": {
+        "path": "$['world-settings'].default",
+        "key": "armor-stands-tick",
+        "value": false
+      }
+    },
+    {
+      "$put": {
+        "path": "$['world-settings'].default",
+        "key": "use-faster-eigencraft-redstone",
+        "value": true
+      }
+    },
+    {
+      "$put": {
+        "path": "$['world-settings'].default",
+        "key": "per-player-mob-spawns",
+        "value": true
+      }
+    },
+    {
+      "$put": {
+        "path": "$['world-settings'].default",
+        "key": "prevent-moving-into-unloaded-chunks",
+        "value": true
+      }
+    }
+  ]
+}

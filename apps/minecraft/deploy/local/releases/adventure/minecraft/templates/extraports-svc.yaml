@@ -3,13 +3,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: minecraft-minecraft-dynmap
+  name: adventure-minecraft-dynmap
   annotations: 
     null
   labels:
-    app: minecraft-minecraft-dynmap
-    chart: "minecraft-3.4.2"
-    release: "minecraft"
+    app: adventure-minecraft-dynmap
+    chart: "minecraft-3.5.0"
+    release: "adventure"
     heritage: "Helm"
 spec:
   type: ClusterIP
@@ -19,4 +19,4 @@ spec:
     targetPort: dynmap
     protocol: TCP
   selector:
-    app: minecraft-minecraft
+    app: adventure-minecraft
