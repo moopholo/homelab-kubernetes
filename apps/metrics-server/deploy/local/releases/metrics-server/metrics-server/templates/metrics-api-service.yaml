@@ -6,7 +6,7 @@ metadata:
   name: v1beta1.metrics.k8s.io
   labels:
     app.kubernetes.io/name: metrics-server
-    helm.sh/chart: metrics-server-5.10.8
+    helm.sh/chart: metrics-server-5.10.10
     app.kubernetes.io/instance: metrics-server
     app.kubernetes.io/managed-by: Helm
 spec:
