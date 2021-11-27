@@ -9,7 +9,7 @@ metadata:
     app: prometheus-node-exporter
     heritage: Helm
     release: prometheus-node-exporter
-    chart: prometheus-node-exporter-2.2.0
+    chart: prometheus-node-exporter-2.2.1
 spec:
   privileged: false
   # Required to prevent escalations to root.
