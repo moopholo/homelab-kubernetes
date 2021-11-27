@@ -6,7 +6,7 @@ metadata:
   name: traefik
   labels:
     app.kubernetes.io/name: traefik
-    helm.sh/chart: traefik-10.6.1
+    helm.sh/chart: traefik-10.6.2
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/instance: traefik
   annotations:
@@ -27,7 +27,7 @@ spec:
         prometheus.io/port: "9100"
       labels:
         app.kubernetes.io/name: traefik
-        helm.sh/chart: traefik-10.6.1
+        helm.sh/chart: traefik-10.6.2
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/instance: traefik
     spec:
@@ -35,7 +35,7 @@ spec:
       terminationGracePeriodSeconds: 60
       hostNetwork: false
       containers:
-      - image: "arm64v8/traefik:2.5.3"
+      - image: "arm64v8/traefik:2.5.4"
         imagePullPolicy: IfNotPresent
         name: traefik
         resources:

@@ -6,7 +6,7 @@ metadata:
   name: traefik
   labels:
     app.kubernetes.io/name: traefik
-    helm.sh/chart: traefik-10.6.1
+    helm.sh/chart: traefik-10.6.2
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/instance: traefik
 roleRef:
