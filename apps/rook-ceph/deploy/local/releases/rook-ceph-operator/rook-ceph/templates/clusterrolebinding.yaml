@@ -25,7 +25,7 @@ metadata:
   labels:
     operator: rook
     storage-backend: ceph
-    chart: "rook-ceph-v1.7.7"
+    chart: "rook-ceph-v1.7.8"
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -129,7 +129,7 @@ metadata:
   labels:
     operator: rook
     storage-backend: ceph
-    chart: "rook-ceph-v1.7.7"
+    chart: "rook-ceph-v1.7.8"
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -233,7 +233,7 @@ metadata:
   labels:
     operator: rook
     storage-backend: ceph
-    chart: "rook-ceph-v1.7.7"
+    chart: "rook-ceph-v1.7.8"
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
