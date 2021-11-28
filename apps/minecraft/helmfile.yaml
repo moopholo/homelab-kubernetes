@@ -33,8 +33,8 @@ releases:
 
   - name: adventure
     namespace: minecraft
-    chart: ./charts/minecraft
-    version: "~3.4"
+    chart: minecraft/minecraft
+    version: "~3.6"
     missingFileHandler: Warn
     values:
       - values/adventure.yaml
