@@ -8,7 +8,7 @@ metadata:
     null
   labels:
     app: adventure-minecraft-dynmap
-    chart: "minecraft-3.5.0"
+    chart: "minecraft-3.6.0"
     release: "adventure"
     heritage: "Helm"
 spec:

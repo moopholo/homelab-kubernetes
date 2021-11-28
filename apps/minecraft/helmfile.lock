@@ -1,4 +1,4 @@
-version: v0.142.0
+version: v0.141.0
 dependencies:
 - name: minecraft
   repository: https://itzg.github.io/minecraft-server-charts/
@@ -12,5 +12,5 @@ dependencies:
 - name: velocity
   repository: https://helm.monetact.net
   version: 0.2.0
-digest: sha256:d44ba5ea7e55ce0d5dad725ca1ce2709bdfd9a7e33793d0f31e2428d1e1a84f4
-generated: "2021-11-28T09:35:48.661667-08:00"
+digest: sha256:ca703afa2767946f278408b213803ec64979164a01ac56ebfa701eceaa6f6f9d
+generated: "2021-11-28T17:38:26.424657921Z"
