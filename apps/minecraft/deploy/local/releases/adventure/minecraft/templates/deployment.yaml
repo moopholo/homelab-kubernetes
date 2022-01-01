@@ -6,7 +6,7 @@ metadata:
   name: adventure-minecraft
   labels:
     app: adventure-minecraft
-    chart: "minecraft-3.6.0"
+    chart: "minecraft-3.6.2"
     release: "adventure"
     heritage: "Helm"
 spec:
@@ -88,6 +88,8 @@ spec:
           value: "true"
         - name: SPAWN_NPCS
           value: "true"
+        - name: SPAWN_PROTECTION
+          value: "16"
         - name: VIEW_DISTANCE
           value: "6"
         - name: SEED
