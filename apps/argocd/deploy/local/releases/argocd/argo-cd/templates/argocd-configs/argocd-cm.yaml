@@ -5,7 +5,7 @@ kind: ConfigMap
 metadata:
   name: argocd-cm
   labels:
-    helm.sh/chart: argo-cd-3.26.11
+    helm.sh/chart: argo-cd-3.29.4
     app.kubernetes.io/name: argocd-cm
     app.kubernetes.io/instance: argocd
     app.kubernetes.io/component: server

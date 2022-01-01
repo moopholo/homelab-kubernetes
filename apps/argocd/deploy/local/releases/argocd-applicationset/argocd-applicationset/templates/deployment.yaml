@@ -5,7 +5,7 @@ kind: Deployment
 metadata:
   name: argocd-applicationset
   labels:
-    helm.sh/chart: argocd-applicationset-1.6.0
+    helm.sh/chart: argocd-applicationset-1.7.0
     app.kubernetes.io/name: argocd-applicationset
     app.kubernetes.io/instance: argocd-applicationset
     app.kubernetes.io/version: "v0.2.0"
@@ -51,6 +51,9 @@ spec:
           ports:
             - name: http
               containerPort: 8081
+              protocol: TCP
+            - name: metrics
+              containerPort: 8080
               protocol: TCP
           resources:
             {}
