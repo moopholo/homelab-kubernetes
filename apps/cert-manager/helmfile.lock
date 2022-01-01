@@ -5,6 +5,6 @@ dependencies:
   version: v1.5.4
 - name: cert-manager-webhook-dnsimple
   repository: https://charts.neoskop.dev
-  version: 0.1.0
-digest: sha256:3627f9f3634e6f128a79ec1feb4f67572d3573bc55e55b87cef82ad8f09e86de
-generated: "2021-11-03T02:47:42.111372829Z"
+  version: 0.1.1
+digest: sha256:c53fbf5f5ac44e2214a97ceda0cf2975f268ab21e2224f37e800e8acdb83d8db
+generated: "2022-01-01T10:13:27.320666299Z"
