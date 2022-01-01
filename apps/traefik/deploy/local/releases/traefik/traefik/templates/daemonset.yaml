@@ -6,7 +6,7 @@ metadata:
   name: traefik
   labels:
     app.kubernetes.io/name: traefik
-    helm.sh/chart: traefik-10.6.2
+    helm.sh/chart: traefik-10.9.1
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/instance: traefik
   annotations:
@@ -19,6 +19,7 @@ spec:
     type: RollingUpdate
     rollingUpdate:
       maxUnavailable: 1
+  minReadySeconds: 0
   template: 
     metadata:
       annotations:
@@ -27,7 +28,7 @@ spec:
         prometheus.io/port: "9100"
       labels:
         app.kubernetes.io/name: traefik
-        helm.sh/chart: traefik-10.6.2
+        helm.sh/chart: traefik-10.9.1
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/instance: traefik
     spec:
@@ -35,7 +36,7 @@ spec:
       terminationGracePeriodSeconds: 60
       hostNetwork: false
       containers:
-      - image: "arm64v8/traefik:2.5.4"
+      - image: "arm64v8/traefik:2.5.6"
         imagePullPolicy: IfNotPresent
         name: traefik
         resources:
