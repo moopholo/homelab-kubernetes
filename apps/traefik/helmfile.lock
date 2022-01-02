@@ -5,9 +5,9 @@ dependencies:
   version: 1.1.0
 - name: traefik
   repository: https://helm.traefik.io/traefik
-  version: 10.6.2
+  version: 10.9.1
 - name: traefik-custom-resources
   repository: https://helm.monetact.net
   version: 0.3.0
-digest: sha256:b85e86fa6560b47bf9c3db38b5e2eb3ef015da2ad125020abe533f5c21594fa4
-generated: "2021-11-27T10:12:59.507963872Z"
+digest: sha256:4cd537f203a7b4fcf7c12e9ddfd2b41353b338017c452485abb8442346d29f74
+generated: "2022-01-01T10:18:21.112491604Z"
