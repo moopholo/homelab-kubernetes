@@ -5,7 +5,7 @@ kind: Deployment
 metadata:
   name: argocd-dex-server
   labels:
-    helm.sh/chart: argo-cd-3.29.4
+    helm.sh/chart: argo-cd-3.30.0
     app.kubernetes.io/name: argocd-dex-server
     app.kubernetes.io/instance: argocd
     app.kubernetes.io/component: dex-server
@@ -20,7 +20,7 @@ spec:
   template:
     metadata:
       labels:
-        helm.sh/chart: argo-cd-3.29.4
+        helm.sh/chart: argo-cd-3.30.0
         app.kubernetes.io/name: argocd-dex-server
         app.kubernetes.io/instance: argocd
         app.kubernetes.io/component: dex-server
@@ -34,7 +34,7 @@ spec:
         runAsUser: 65534
       initContainers:
       - name: copyutil
-        image: alinbalutoiu/argocd:linux-arm64-v2.0.5
+        image: alinbalutoiu/argocd:linux-arm64-v2.2.2
         imagePullPolicy: IfNotPresent
         resources:
           {}
