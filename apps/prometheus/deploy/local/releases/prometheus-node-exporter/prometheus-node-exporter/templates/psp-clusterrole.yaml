@@ -8,7 +8,7 @@ metadata:
     app: prometheus-node-exporter
     heritage: Helm
     release: prometheus-node-exporter
-    chart: prometheus-node-exporter-2.4.1
+    chart: prometheus-node-exporter-2.5.0
 rules:
 - apiGroups: ['extensions']
   resources: ['podsecuritypolicies']
