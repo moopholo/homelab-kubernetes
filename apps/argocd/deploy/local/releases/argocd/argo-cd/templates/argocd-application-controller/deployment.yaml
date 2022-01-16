@@ -5,13 +5,13 @@ kind: Deployment
 metadata:
   name: argocd-application-controller
   labels:
-    helm.sh/chart: argo-cd-3.29.4
+    helm.sh/chart: argo-cd-3.30.0
     app.kubernetes.io/name: argocd-application-controller
     app.kubernetes.io/instance: argocd
     app.kubernetes.io/component: application-controller
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: argocd
-    app.kubernetes.io/version: "linux-arm64-v2.0.5"
+    app.kubernetes.io/version: "linux-arm64-v2.2.2"
 spec:
   selector:
     matchLabels:
@@ -22,13 +22,13 @@ spec:
   template:
     metadata:
       labels:
-        helm.sh/chart: argo-cd-3.29.4
+        helm.sh/chart: argo-cd-3.30.0
         app.kubernetes.io/name: argocd-application-controller
         app.kubernetes.io/instance: argocd
         app.kubernetes.io/component: application-controller
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/part-of: argocd
-        app.kubernetes.io/version: "linux-arm64-v2.0.5"
+        app.kubernetes.io/version: "linux-arm64-v2.2.2"
     spec:
       securityContext:
         fsGroup: 65534
@@ -55,7 +55,7 @@ spec:
         - error
         - --redis
         - argocd-redis:6379
-        image: alinbalutoiu/argocd:linux-arm64-v2.0.5
+        image: alinbalutoiu/argocd:linux-arm64-v2.2.2
         imagePullPolicy: IfNotPresent
         name: application-controller
         securityContext:

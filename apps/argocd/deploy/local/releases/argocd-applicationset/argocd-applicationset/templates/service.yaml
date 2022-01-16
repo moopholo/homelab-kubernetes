@@ -1,7 +1,7 @@
 ---
-# Source: argocd-applicationset/templates/serviceaccount.yaml
+# Source: argocd-applicationset/templates/service.yaml
 apiVersion: v1
-kind: ServiceAccount
+kind: Service
 metadata:
   name: argocd-applicationset
   labels:
@@ -12,3 +12,12 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: argo-cd-applicationset
     app.kubernetes.io/component: controller
+spec:
+  ports:
+  - name: webhook
+    port: 7000
+    protocol: TCP
+    targetPort: webhook
+  selector:
+      app.kubernetes.io/name: argocd-applicationset
+      app.kubernetes.io/instance: argocd-applicationset
