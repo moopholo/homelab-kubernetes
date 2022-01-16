@@ -6,7 +6,7 @@ metadata:
   name: adventure-minecraft
   labels:
     app: adventure-minecraft
-    chart: "minecraft-3.6.2"
+    chart: "minecraft-3.6.3"
     release: "adventure"
     heritage: "Helm"
 spec:
@@ -154,12 +154,17 @@ spec:
         volumeMounts:
         - name: datadir
           mountPath: /data
+        - name: backupdir
+          mountPath: /backups
+          readOnly: true
         - mountPath: /patches
           name: patch-definitions
       volumes:
       - name: datadir
         persistentVolumeClaim:
           claimName: adventure-minecraft-datadir
+      - name: backupdir
+        emptyDir: {}
       - configmapRef:
           name: adventure-patch-definitions
         name: patch-definitions
