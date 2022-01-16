@@ -6,7 +6,7 @@ metadata:
   name: adventure-minecraft
   labels:
     app: adventure-minecraft
-    chart: "minecraft-3.6.2"
+    chart: "minecraft-3.6.3"
     release: "adventure"
     heritage: "Helm"
   annotations:
