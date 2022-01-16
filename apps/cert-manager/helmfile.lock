@@ -2,9 +2,9 @@ version: v0.141.0
 dependencies:
 - name: cert-manager
   repository: https://charts.jetstack.io
-  version: v1.5.4
+  version: v1.6.1
 - name: cert-manager-webhook-dnsimple
   repository: https://charts.neoskop.dev
   version: 0.1.1
-digest: sha256:c53fbf5f5ac44e2214a97ceda0cf2975f268ab21e2224f37e800e8acdb83d8db
-generated: "2022-01-01T10:13:27.320666299Z"
+digest: sha256:aea3070631baa955162159d48f57d3215992e488c249510b2f39156dc26e671a
+generated: "2022-01-16T23:08:50.558988503Z"
