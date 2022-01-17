@@ -20,7 +20,7 @@ spec:
     - name: https-redirect
     services:
     - name: rook-ceph-mgr-dashboard
-      port: 8080
+      port: 7000
 ---
 # Source: traefik-custom-resources/templates/ingressroute.yaml
 apiVersion: traefik.containo.us/v1alpha1
@@ -41,7 +41,7 @@ spec:
     match: Host(`rook-ceph.homelab.monetact.net`)
     services:
     - name: rook-ceph-mgr-dashboard
-      port: 8080
+      port: 7000
   tls:
     store:
       name: default
