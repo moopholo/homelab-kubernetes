@@ -165,6 +165,6 @@ spec:
           claimName: adventure-minecraft-datadir
       - name: backupdir
         emptyDir: {}
-      - configmapRef:
+      - configMap:
           name: adventure-patch-definitions
         name: patch-definitions
