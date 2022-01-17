@@ -6,10 +6,10 @@ metadata:
   name: velocity
   namespace: minecraft
   labels:
-    helm.sh/chart: velocity-0.2.0
+    helm.sh/chart: velocity-0.3.0
     app.kubernetes.io/name: velocity
     app.kubernetes.io/instance: velocity
-    app.kubernetes.io/version: "3.0.1"
+    app.kubernetes.io/version: "3.1.1"
     app.kubernetes.io/managed-by: Helm
   annotations:
     {}
@@ -34,7 +34,7 @@ spec:
         - name: velocity
           securityContext:
             {}
-          image: "albertdixon/velocity:3.0.1"
+          image: "albertdixon/velocity:3.1.1"
           imagePullPolicy: IfNotPresent
           env:
           - name: VELOCITY_ADVANCED_PROXY_PROTOCOL
