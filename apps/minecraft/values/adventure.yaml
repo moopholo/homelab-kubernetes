@@ -44,7 +44,7 @@ extraVolumes:
         mountPath: /patches
     volumes:
       - name: patch-definitions
-        configmapRef:
+        configMap:
           name: adventure-patch-definitions
 
 extraEnv:
