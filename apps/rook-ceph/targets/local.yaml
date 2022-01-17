@@ -6,7 +6,7 @@ rook-ceph:
     device-filter: "^sda"
   dashboard:
     domain: rook-ceph.homelab.monetact.net
-    port: 8080
+    port: 7000
   obj-store:
     gateway:
       port: 6080
