@@ -6,6 +6,7 @@ repositories:
 
 apiVersions:
   - "apiregistration.k8s.io/v1"
+  - "cert-manager.io/v1"
 
 releases:
   - name: cert-manager
