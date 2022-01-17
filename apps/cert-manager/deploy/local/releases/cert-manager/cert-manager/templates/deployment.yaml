@@ -47,6 +47,8 @@ spec:
           - --cluster-resource-namespace=cert-manager
           - --leader-election-namespace=cert-manager
           - --enable-certificate-owner-ref=true
+          - --dns01-recursive-nameservers=1.1.1.1:53,8.8.8.8:53
+          - --dns01-recursive-nameservers-only
           ports:
           - containerPort: 9402
             protocol: TCP
