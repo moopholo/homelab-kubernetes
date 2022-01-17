@@ -10,7 +10,7 @@ releases:
   - name: velocity
     namespace: minecraft
     chart: moopholo/velocity
-    version: "~0.2"
+    version: "~0.3"
     missingFileHandler: Warn
     values:
       - values/velocity.yaml
