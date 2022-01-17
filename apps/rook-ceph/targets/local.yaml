@@ -1,6 +1,9 @@
 rook-ceph:
+  kubernetes-version: "1.22"
   csi:
     kubelet-root-dir: /var/lib/kubelet
+  storage:
+    device-filter: "^sda"
   dashboard:
     domain: rook-ceph.homelab.monetact.net
     port: 7000
