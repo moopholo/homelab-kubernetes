@@ -3,7 +3,7 @@ rook-ceph:
     kubelet-root-dir: /var/lib/kubelet
   dashboard:
     domain: rook-ceph.homelab.monetact.net
-    port: 8080
+    port: 6180
   obj-store:
     gateway:
       port: 6080
