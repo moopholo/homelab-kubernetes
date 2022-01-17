@@ -1,6 +1,6 @@
 rook-ceph:
   csi:
-    kubelet-root-dir: /var/snap/microk8s/common/var/lib/kubelet
+    kubelet-root-dir: /var/lib/kubelet
   dashboard:
     domain: rook-ceph.homelab.monetact.net
     port: 8080
