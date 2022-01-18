@@ -9,5 +9,5 @@ dependencies:
 - name: traefik-custom-resources
   repository: https://helm.monetact.net
   version: 0.3.0
-digest: sha256:d31b3eef8d35d4dcd09cfcbdb75f9742ba87bd031fac23b4a9f43148d70ae87a
-generated: "2022-01-16T22:23:32.409027794Z"
+digest: sha256:07561eeb9f3ef18685d3252939a14fe4cfd59ed777f6d9c08e65b860ba8f714c
+generated: "2022-01-18T10:11:23.300883806Z"
