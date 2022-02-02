@@ -6,7 +6,7 @@ metadata:
   name: metrics-server
   labels:
     app.kubernetes.io/name: metrics-server
-    helm.sh/chart: metrics-server-5.10.13
+    helm.sh/chart: metrics-server-5.11.0
     app.kubernetes.io/instance: metrics-server
     app.kubernetes.io/managed-by: Helm
 rules:
@@ -23,7 +23,7 @@ rules:
   - apiGroups:
       - ""
     resources:
-      - nodes/stats
+      - nodes/metrics
     verbs:
       - get
       - create
@@ -34,7 +34,7 @@ kind: ClusterRole
 metadata:
   labels:
     app.kubernetes.io/name: metrics-server
-    helm.sh/chart: metrics-server-5.10.13
+    helm.sh/chart: metrics-server-5.11.0
     app.kubernetes.io/instance: metrics-server
     app.kubernetes.io/managed-by: Helm
     rbac.authorization.k8s.io/aggregate-to-admin: "true"
