@@ -5,7 +5,7 @@ kind: Deployment
 metadata:
   name: argocd-repo-server
   labels:
-    helm.sh/chart: argo-cd-3.30.0
+    helm.sh/chart: argo-cd-3.33.1
     app.kubernetes.io/name: argocd-repo-server
     app.kubernetes.io/instance: argocd
     app.kubernetes.io/component: repo-server
@@ -22,7 +22,7 @@ spec:
   template:
     metadata:
       labels:
-        helm.sh/chart: argo-cd-3.30.0
+        helm.sh/chart: argo-cd-3.33.1
         app.kubernetes.io/name: argocd-repo-server
         app.kubernetes.io/instance: argocd
         app.kubernetes.io/component: repo-server
@@ -46,6 +46,13 @@ spec:
         - text
         - --loglevel
         - info
+        env:
+        - name: HELM_CACHE_HOME
+          value: /helm-working-dir
+        - name: HELM_CONFIG_HOME
+          value: /helm-working-dir
+        - name: HELM_DATA_HOME
+          value: /helm-working-dir
         volumeMounts:
         - mountPath: /app/config/gpg/source
           name: gpg-keys
@@ -57,6 +64,8 @@ spec:
           name: argocd-repo-server-tls
         - mountPath: /tmp
           name: tmp-dir
+        - mountPath: /helm-working-dir
+          name: helm-working-dir
         - mountPath: /home/argocd/cmp-server/plugins
           name: plugins
         ports:
@@ -92,6 +101,8 @@ spec:
       - configMap:
           name: argocd-ssh-known-hosts-cm
         name: ssh-known-hosts
+      - name: helm-working-dir
+        emptyDir: {}
       - name: argocd-repo-server-tls
         secret:
           items:
@@ -117,6 +128,8 @@ spec:
         - /var/run/argocd/argocd-cmp-server
         image: alinbalutoiu/argocd:linux-arm64-v2.2.2
         name: copyutil
+        resources:
+          {}
         volumeMounts:
         - mountPath: /var/run/argocd
           name: var-files
