@@ -3,6 +3,24 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
+  name: forward-auth
+  namespace: longhorn-system
+  labels:
+    helm.sh/chart: traefik-custom-resources-0.3.0
+    app.kubernetes.io/name: forward-auth
+    app.kubernetes.io/instance: longhorn-dashboard
+    app.kubernetes.io/managed-by: Helm
+spec:
+  forwardAuth:
+    address: https://pomerium-proxy.pomerium
+    tls:
+      insecureSkipVerify: true
+    trustForwardHeader: true
+---
+# Source: traefik-custom-resources/templates/middleware.yaml
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
   name: https-redirect
   namespace: longhorn-system
   labels:
