@@ -1,18 +1,19 @@
 ---
-# Source: metrics-server/templates/metrics-server-crb.yaml
+# Source: metrics-server/templates/clusterrolebinding.yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: metrics-server
+  name: system:metrics-server
   labels:
+    helm.sh/chart: metrics-server-3.7.0
     app.kubernetes.io/name: metrics-server
-    helm.sh/chart: metrics-server-5.11.0
     app.kubernetes.io/instance: metrics-server
+    app.kubernetes.io/version: "0.5.2"
     app.kubernetes.io/managed-by: Helm
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: metrics-server
+  name: system:metrics-server
 subjects:
   - kind: ServiceAccount
     name: metrics-server

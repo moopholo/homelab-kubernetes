@@ -5,9 +5,10 @@ kind: Deployment
 metadata:
   name: metrics-server
   labels:
+    helm.sh/chart: metrics-server-3.7.0
     app.kubernetes.io/name: metrics-server
-    helm.sh/chart: metrics-server-5.11.0
     app.kubernetes.io/instance: metrics-server
+    app.kubernetes.io/version: "0.5.2"
     app.kubernetes.io/managed-by: Helm
 spec:
   replicas: 1
@@ -15,60 +16,41 @@ spec:
     matchLabels:
       app.kubernetes.io/name: metrics-server
       app.kubernetes.io/instance: metrics-server
-  strategy:
-    type: RollingUpdate
   template:
     metadata:
       labels:
         app.kubernetes.io/name: metrics-server
-        helm.sh/chart: metrics-server-5.11.0
         app.kubernetes.io/instance: metrics-server
-        app.kubernetes.io/managed-by: Helm
     spec:
-      
       serviceAccountName: metrics-server
-      affinity:
-        podAffinity:
-          
-        podAntiAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-            - podAffinityTerm:
-                labelSelector:
-                  matchLabels:
-                    app.kubernetes.io/name: metrics-server
-                    app.kubernetes.io/instance: metrics-server
-                namespaces:
-                  - "metrics-server"
-                topologyKey: kubernetes.io/hostname
-              weight: 1
-        nodeAffinity:
-          
-      securityContext:
-        fsGroup: 65534
-      dnsPolicy: ClusterFirst
+      priorityClassName: "system-cluster-critical"
       containers:
         - name: metrics-server
-          image: k8s.gcr.io/metrics-server/metrics-server:0.6.0-debian-10-r0
-          imagePullPolicy: "IfNotPresent"
-          ports:
-            - name: https
-              containerPort: 8443
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            runAsUser: 1000
+          image: k8s.gcr.io/metrics-server/metrics-server:v0.5.2
+          imagePullPolicy: IfNotPresent
           args:
-            - --secure-port=8443
+            - --secure-port=4443
             - --cert-dir=/tmp
-            - --kubelet-insecure-tls
             - --kubelet-preferred-address-types=InternalIP,Hostname
             - --kubelet-use-node-status-port
+            - --kubelet-insecure-tls
             - --metric-resolution=15s
-          resources:
-            limits: {}
-            requests: {}
+          ports:
+          - name: https
+            protocol: TCP
+            containerPort: 4443
           livenessProbe:
             failureThreshold: 3
             httpGet:
               path: /livez
               port: https
               scheme: HTTPS
+            initialDelaySeconds: 0
             periodSeconds: 10
           readinessProbe:
             failureThreshold: 3
@@ -76,13 +58,11 @@ spec:
               path: /readyz
               port: https
               scheme: HTTPS
+            initialDelaySeconds: 20
             periodSeconds: 10
-          securityContext:
-            readOnlyRootFilesystem: false
-            runAsNonRoot: true
           volumeMounts:
-            - mountPath: /tmp
-              name: tmpdir
+            - name: tmp
+              mountPath: /tmp
       volumes:
-        - emptyDir: {}
-          name: tmpdir
+        - name: tmp
+          emptyDir: {}
