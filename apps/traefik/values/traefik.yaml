@@ -1,6 +1,9 @@
 image:
   name: arm64v8/traefik
 
+additionalArguments:
+  - --entryPoints.websecure.forwardedHeaders.insecure
+
 deployment:
   enabled: true
   kind: DaemonSet

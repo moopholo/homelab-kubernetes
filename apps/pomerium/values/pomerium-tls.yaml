@@ -1,0 +1,43 @@
+issuers:
+  pomerium-selfsigned:
+    selfSigned: {}
+  pomerium-ca:
+    ca:
+      secretName: pomerium-ca-tls
+
+certificates:
+  pomerium:
+    secretName: pomerium-tls
+    issuerRef:
+      name: pomerium-ca
+    usages:
+      - server auth
+      - client auth
+    dnsNames:
+      - pomerium-proxy.pomerium.svc.cluster.local
+      - pomerium-authorize.pomerium.svc.cluster.local
+      - pomerium-databroker.pomerium.svc.cluster.local
+      - pomerium-authenticate.pomerium.svc.cluster.local
+      - pomerium-proxy.pomerium.svc
+      - pomerium-authorize.pomerium.svc
+      - pomerium-databroker.pomerium.svc
+      - pomerium-authenticate.pomerium.svc
+      - pomerium-proxy.pomerium
+      - pomerium-authorize.pomerium
+      - pomerium-databroker.pomerium
+      - pomerium-authenticate.pomerium
+
+  pomerium-redis:
+    secretName: pomerium-redis-tls
+    issuerRef:
+      name: pomerium-ca
+    dnsNames:
+      - pomerium-redis-master.pomerium.svc.cluster.local
+      - pomerium-redis-headless.pomerium.svc.cluster.local
+      - pomerium-redis-replicas.pomerium.svc.cluster.local
+      - pomerium-redis-master.pomerium.svc
+      - pomerium-redis-headless.pomerium.svc
+      - pomerium-redis-replicas.pomerium.svc
+      - pomerium-redis-master.pomerium
+      - pomerium-redis-headless.pomerium
+      - pomerium-redis-replicas.pomerium

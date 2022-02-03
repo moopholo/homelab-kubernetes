@@ -1,0 +1,92 @@
+---
+# Source: pomerium/templates/proxy-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/name: pomerium-proxy
+    helm.sh/chart: pomerium-28.0.2
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/instance: pomerium
+    app.kubernetes.io/component: proxy
+  name: pomerium-proxy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: pomerium-proxy
+      app.kubernetes.io/instance: pomerium
+  template:
+    metadata:
+      annotations:
+        checksum: 8d78849114a6dd9730fc418787ef9e1a3831554924bcc5a5aacdfadb994ae093
+      labels:
+        app.kubernetes.io/name: pomerium-proxy
+        helm.sh/chart: pomerium-28.0.2
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/instance: pomerium
+    spec:
+      containers:
+      - name: pomerium
+        image: pomerium/pomerium:v0.16.2
+        imagePullPolicy: IfNotPresent
+        args:
+          - --config=/etc/pomerium/config.yaml
+        env:
+        - name: INSECURE_SERVER
+          value: "false"
+        - name: HTTP_REDIRECT_ADDR
+          value: :80
+        - name: ADDRESS
+          value: :443        
+        - name: CERTIFICATE_FILE
+          value: /pomerium/tls/tls.crt
+        - name: CERTIFICATE_KEY_FILE
+          value: /pomerium/tls/tls.key
+        - name: SERVICES
+          value: proxy        
+        envFrom:
+          - secretRef:
+              name: pomerium-shared-env
+        ports:
+          - containerPort: 443
+            name: https
+            protocol: TCP
+          - name: http
+            containerPort: 80
+            protocol: TCP
+          - containerPort: 9090
+            name: metrics
+            protocol: TCP
+        livenessProbe:
+          httpGet:
+            path: /ping
+            port: https
+            scheme: HTTPS
+        readinessProbe:
+          httpGet:
+            path: /ping
+            port: https
+            scheme: HTTPS
+        resources:
+          {}
+        volumeMounts:
+          - mountPath: /etc/pomerium/
+            name: config
+          - mountPath: /pomerium/tls
+            name: service-tls
+          - mountPath: /pomerium/ca
+            name: ca-tls
+      serviceAccountName: pomerium-proxy
+      volumes:
+        - name: config
+          secret:
+            secretName: pomerium
+        - name: ca-tls
+          secret:
+            secretName: pomerium-tls
+            optional: true
+        - name: service-tls
+          secret:
+            secretName: pomerium-tls
+            optional: true

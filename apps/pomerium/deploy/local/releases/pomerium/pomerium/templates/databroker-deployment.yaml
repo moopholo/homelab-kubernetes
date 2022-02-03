@@ -1,0 +1,96 @@
+---
+# Source: pomerium/templates/databroker-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/name: pomerium-databroker
+    helm.sh/chart: pomerium-28.0.2
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/instance: pomerium
+    app.kubernetes.io/component: databroker
+  name: pomerium-databroker
+  annotations:
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: pomerium-databroker
+      app.kubernetes.io/instance: pomerium
+  template:
+    metadata:
+      annotations:
+        checksum: 8d78849114a6dd9730fc418787ef9e1a3831554924bcc5a5aacdfadb994ae093
+      labels:
+        app.kubernetes.io/name: pomerium-databroker
+        helm.sh/chart: pomerium-28.0.2
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/instance: pomerium
+    spec:
+      containers:
+      - name: pomerium
+        image: pomerium/pomerium:v0.16.2
+        imagePullPolicy: IfNotPresent
+        args:
+          - --config=/etc/pomerium/config.yaml
+        env:        
+        - name: CERTIFICATE_FILE
+          value: /pomerium/tls/tls.crt
+        - name: CERTIFICATE_KEY_FILE
+          value: /pomerium/tls/tls.key
+        - name: SERVICES
+          value: databroker
+        - name: DATABROKER_STORAGE_TYPE
+          value: redis                
+        - name: DATABROKER_STORAGE_CERT_FILE
+          value: /pomerium/databroker-client-tls/tls.crt
+        - name: DATABROKER_STORAGE_KEY_FILE
+          value: /pomerium/databroker-client-tls/tls.key
+        - name: DATABROKER_STORAGE_CA_FILE
+          value: /pomerium/databroker-client-tls/ca.crt
+        envFrom:
+          - secretRef:
+              name: pomerium-shared-env
+          - secretRef:
+              name: pomerium-redis-credentials
+        ports:
+          - containerPort: 443
+            name: https
+            protocol: TCP
+          - containerPort: 9090
+            name: metrics
+            protocol: TCP
+        livenessProbe:
+          tcpSocket:
+            port: https
+          initialDelaySeconds: 15
+        readinessProbe:
+          tcpSocket:
+            port: https
+        resources:
+          {}
+        volumeMounts:
+          - mountPath: /pomerium/databroker-client-tls
+            name: databroker-client-tls
+          - mountPath: /etc/pomerium/
+            name: config
+          - mountPath: /pomerium/tls
+            name: service-tls
+          - mountPath: /pomerium/ca
+            name: ca-tls
+      serviceAccountName: pomerium-databroker
+      volumes:
+        - name: databroker-client-tls
+          secret:
+            secretName: pomerium-tls
+        - name: config
+          secret:
+            secretName: pomerium
+        - name: ca-tls
+          secret:
+            secretName: pomerium-tls
+            optional: true
+        - name: service-tls
+          secret:
+            secretName: pomerium-tls
+            optional: true

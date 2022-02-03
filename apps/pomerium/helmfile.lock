@@ -1,0 +1,13 @@
+version: v0.141.0
+dependencies:
+- name: cert-manager-tls
+  repository: https://helm.monetact.net
+  version: 1.1.0
+- name: pomerium
+  repository: https://helm.pomerium.io
+  version: 28.0.2
+- name: traefik-custom-resources
+  repository: https://helm.monetact.net
+  version: 2.0.7
+digest: sha256:2c2bb39a1d0937bb8cc54e5895783e4b8710b4cfd6a9fac9ca7312d2e7ab570a
+generated: "2022-02-03T05:29:55.322465211Z"

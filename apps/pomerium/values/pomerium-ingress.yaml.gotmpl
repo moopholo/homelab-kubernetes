@@ -1,0 +1,35 @@
+middlewares:
+  https-redirect:
+    redirectScheme:
+      scheme: https
+      permanent: true
+
+serversTransport:
+  pomerium:
+    rootCAsSecrets: [pomerium-ca-tls]
+
+routes:
+  pomerium-authenticate-http:
+    entryPoints: [web]
+    routes:
+      - match: Host(`authenticate.{{ requiredEnv `POMERIUM_ROOT_DOMAIN` }}`)
+        middlewares:
+          - name: https-redirect
+        kind: Rule
+        services:
+          - name: pomerium-authenticate
+            port: 80
+
+  pomerium-authenticate-https:
+    entryPoints: [websecure]
+    tls:
+      store:
+        name: default
+    routes:
+      - match: Host(`authenticate.{{ requiredEnv `POMERIUM_ROOT_DOMAIN` }}`)
+        kind: Rule
+        services:
+          - name: pomerium-authenticate
+            port: https
+            scheme: https
+            serversTransport: pomerium

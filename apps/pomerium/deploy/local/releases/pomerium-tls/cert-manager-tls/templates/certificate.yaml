@@ -1,0 +1,62 @@
+---
+# Source: cert-manager-tls/templates/certificate.yaml
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: pomerium
+  namespace: pomerium
+  labels:
+    helm.sh/chart: cert-manager-tls-1.1.0
+    app.kubernetes.io/name: pomerium
+    app.kubernetes.io/instance: pomerium-tls
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+spec:
+  dnsNames:
+  - pomerium-proxy.pomerium.svc.cluster.local
+  - pomerium-authorize.pomerium.svc.cluster.local
+  - pomerium-databroker.pomerium.svc.cluster.local
+  - pomerium-authenticate.pomerium.svc.cluster.local
+  - pomerium-proxy.pomerium.svc
+  - pomerium-authorize.pomerium.svc
+  - pomerium-databroker.pomerium.svc
+  - pomerium-authenticate.pomerium.svc
+  - pomerium-proxy.pomerium
+  - pomerium-authorize.pomerium
+  - pomerium-databroker.pomerium
+  - pomerium-authenticate.pomerium
+  issuerRef:
+    name: pomerium-ca
+  secretName: pomerium-tls
+  usages:
+  - server auth
+  - client auth
+---
+# Source: cert-manager-tls/templates/certificate.yaml
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: pomerium-redis
+  namespace: pomerium
+  labels:
+    helm.sh/chart: cert-manager-tls-1.1.0
+    app.kubernetes.io/name: pomerium-redis
+    app.kubernetes.io/instance: pomerium-tls
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+spec:
+  dnsNames:
+  - pomerium-redis-master.pomerium.svc.cluster.local
+  - pomerium-redis-headless.pomerium.svc.cluster.local
+  - pomerium-redis-replicas.pomerium.svc.cluster.local
+  - pomerium-redis-master.pomerium.svc
+  - pomerium-redis-headless.pomerium.svc
+  - pomerium-redis-replicas.pomerium.svc
+  - pomerium-redis-master.pomerium
+  - pomerium-redis-headless.pomerium
+  - pomerium-redis-replicas.pomerium
+  issuerRef:
+    name: pomerium-ca
+  secretName: pomerium-redis-tls

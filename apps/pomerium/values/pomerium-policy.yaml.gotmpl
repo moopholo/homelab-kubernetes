@@ -1,0 +1,7 @@
+config:
+  policy:
+    - from: https://rook-ceph.{{ env `POMERIUM_ROOT_DOMAIN` }}
+      to: http://rook-ceph-mgr-dashboard.rook-ceph:8080
+      allowed_groups:
+        - 'moopholo:family'
+        - family

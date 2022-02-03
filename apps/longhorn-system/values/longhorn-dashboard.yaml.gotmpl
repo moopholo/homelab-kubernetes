@@ -4,6 +4,13 @@ middlewares:
       scheme: https
       permanent: true
 
+  forward-auth:
+    forwardAuth:
+      address: https://pomerium-proxy.pomerium
+      trustForwardHeader: true
+      tls:
+        insecureSkipVerify: true
+
 routes:
   longhorn-dashboard-http:
     entryPoints: [web]

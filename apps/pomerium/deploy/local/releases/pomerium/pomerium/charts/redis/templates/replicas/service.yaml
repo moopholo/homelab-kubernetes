@@ -1,0 +1,24 @@
+---
+# Source: pomerium/charts/redis/templates/replicas/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: pomerium-redis-replicas
+  namespace: "pomerium"
+  labels:
+    app.kubernetes.io/name: redis
+    helm.sh/chart: redis-14.7.2
+    app.kubernetes.io/instance: pomerium
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/component: replica
+spec:
+  type: ClusterIP
+  ports:
+    - name: tcp-redis
+      port: 6379
+      targetPort: redis
+      nodePort: null
+  selector:
+    app.kubernetes.io/name: redis
+    app.kubernetes.io/instance: pomerium
+    app.kubernetes.io/component: replica
