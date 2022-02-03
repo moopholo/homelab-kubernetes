@@ -1,4 +1,6 @@
 grafana:
+  storage:
+    class-name: longhorn
   ui:
     domain: grafana.homelab.monetact.net
   auth:
