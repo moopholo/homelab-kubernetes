@@ -4,8 +4,6 @@ repositories:
   - name: moopholo
     url: https://helm.monetact.net
 
-kubeVersion: v1.22
-
 releases:
   - name: longhorn
     namespace: longhorn
