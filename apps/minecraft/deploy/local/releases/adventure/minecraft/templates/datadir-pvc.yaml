@@ -10,11 +10,11 @@ metadata:
     release: "adventure"
     heritage: "Helm"
   annotations:
-    volume.beta.kubernetes.io/storage-class: "ceph-block"
+    volume.beta.kubernetes.io/storage-class: "longhorn"
 spec:
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
       storage: "1Ti"
-  storageClassName: "ceph-block"
+  storageClassName: "longhorn"
