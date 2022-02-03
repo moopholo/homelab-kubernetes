@@ -6,7 +6,7 @@ releases:
   - name: prometheus
     namespace: prometheus
     chart: prometheus-community/prometheus
-    version: "~14"
+    version: "~15"
     missingFileHandler: Warn
     values:
       - values/prometheus.yaml

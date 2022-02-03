@@ -7,14 +7,14 @@ metadata:
     component: "server"
     app: prometheus
     release: prometheus
-    chart: prometheus-14.12.0
+    chart: prometheus-15.1.2
     heritage: Helm
   name: prometheus-server
   namespace: prometheus
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: "ceph-block"
+  storageClassName: "longhorn"
   resources:
     requests:
       storage: "600Gi"
