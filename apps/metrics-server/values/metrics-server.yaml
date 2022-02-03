@@ -1,6 +1,7 @@
 image:
   registry: k8s.gcr.io
   repository: metrics-server/metrics-server
+  tag: v0.6.0
 
 apiService:
   create: true
