@@ -41,6 +41,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+
       - id: render
         uses: moopholo/helmfile-render@v1
         with:
