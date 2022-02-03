@@ -1,0 +1,47 @@
+---
+# Source: traefik-custom-resources/templates/ingressroute.yaml
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: longhorn-dashboard-http
+  namespace: longhorn
+  labels:
+    helm.sh/chart: traefik-custom-resources-0.3.0
+    app.kubernetes.io/name: longhorn-dashboard-http
+    app.kubernetes.io/instance: longhorn-dashboard
+    app.kubernetes.io/managed-by: Helm
+spec:
+  entryPoints:
+  - web
+  routes:
+  - kind: Rule
+    match: Host(`longhorn.homelab.monetact.net`)
+    middlewares:
+    - name: https-redirect
+    services:
+    - name: longhorn-dashboard
+      port: 80
+---
+# Source: traefik-custom-resources/templates/ingressroute.yaml
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: longhorn-dashboard-https
+  namespace: longhorn
+  labels:
+    helm.sh/chart: traefik-custom-resources-0.3.0
+    app.kubernetes.io/name: longhorn-dashboard-https
+    app.kubernetes.io/instance: longhorn-dashboard
+    app.kubernetes.io/managed-by: Helm
+spec:
+  entryPoints:
+  - websecure
+  routes:
+  - kind: Rule
+    match: Host(`longhorn.homelab.monetact.net`)
+    services:
+    - name: longhorn-dashboard
+      port: 80
+  tls:
+    store:
+      name: default
