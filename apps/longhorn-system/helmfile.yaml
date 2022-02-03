@@ -1,0 +1,23 @@
+repositories:
+  - name: longhorn
+    url: https://charts.longhorn.io
+  - name: moopholo
+    url: https://helm.monetact.net
+
+kubeVersion: v1.22
+
+releases:
+  - name: longhorn
+    namespace: longhorn
+    chart: longhorn/longhorn
+    missingFileHandler: Warn
+    values:
+      - values/longhorn.yaml.gotmpl
+
+  - name: longhorn-dashboard
+    namespace: longhorn
+    chart: moopholo/traefik-custom-resources
+    version: "~0"
+    missingFileHandler: Warn
+    values:
+      - values/longhorn-dashboard.yaml.gotmpl

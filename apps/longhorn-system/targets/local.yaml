@@ -1,0 +1,4 @@
+longhorn:
+  dashboard:
+    domain: longhorn.homelab.monetact.net
+    port: 80
