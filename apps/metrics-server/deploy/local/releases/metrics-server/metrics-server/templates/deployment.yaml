@@ -48,7 +48,7 @@ spec:
       dnsPolicy: ClusterFirst
       containers:
         - name: metrics-server
-          image: k8s.gcr.io/metrics-server/metrics-server:v0.5.1
+          image: k8s.gcr.io/metrics-server/metrics-server:0.6.0-debian-10-r0
           imagePullPolicy: "IfNotPresent"
           ports:
             - name: https
