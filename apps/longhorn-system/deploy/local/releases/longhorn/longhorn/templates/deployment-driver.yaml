@@ -4,7 +4,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: longhorn-driver-deployer
-  namespace: longhorn
+  namespace: longhorn-system
   labels:
     app.kubernetes.io/name: longhorn
     helm.sh/chart: longhorn-1.2.3

@@ -4,7 +4,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: longhorn-default-setting
-  namespace: longhorn
+  namespace: longhorn-system
   labels:
     app.kubernetes.io/name: longhorn
     helm.sh/chart: longhorn-1.2.3
@@ -17,7 +17,7 @@ data:
     backup-target-credential-secret: 
     allow-recurring-job-while-volume-detached: 
     create-default-disk-labeled-nodes: 
-    default-data-path: 
+    default-data-path: /var/lib/longhorn
     replica-soft-anti-affinity: 
     replica-auto-balance: 
     storage-over-provisioning-percentage: 

@@ -11,7 +11,7 @@ metadata:
     app.kubernetes.io/version: v1.2.3
     app: longhorn-manager
   name: longhorn-backend
-  namespace: longhorn
+  namespace: longhorn-system
 spec:
   type: ClusterIP
   sessionAffinity: ClientIP
@@ -34,7 +34,7 @@ metadata:
     app.kubernetes.io/version: v1.2.3
     app: longhorn-manager
   name: longhorn-manager
-  namespace: longhorn
+  namespace: longhorn-system
 spec:
   selector:
     matchLabels:

@@ -4,7 +4,7 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   name: longhorn-dashboard-http
-  namespace: longhorn
+  namespace: longhorn-system
   labels:
     helm.sh/chart: traefik-custom-resources-0.3.0
     app.kubernetes.io/name: longhorn-dashboard-http
@@ -27,7 +27,7 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   name: longhorn-dashboard-https
-  namespace: longhorn
+  namespace: longhorn-system
   labels:
     helm.sh/chart: traefik-custom-resources-0.3.0
     app.kubernetes.io/name: longhorn-dashboard-https

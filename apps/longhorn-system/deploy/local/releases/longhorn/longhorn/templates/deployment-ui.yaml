@@ -11,7 +11,7 @@ metadata:
     app.kubernetes.io/version: v1.2.3
     app: longhorn-ui
   name: longhorn-frontend
-  namespace: longhorn
+  namespace: longhorn-system
 spec:
   type: ClusterIP
   selector:
@@ -34,7 +34,7 @@ metadata:
     app.kubernetes.io/version: v1.2.3
     app: longhorn-ui
   name: longhorn-ui
-  namespace: longhorn
+  namespace: longhorn-system
 spec:
   replicas: 1
   selector:

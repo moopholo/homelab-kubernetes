@@ -4,7 +4,7 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
   name: https-redirect
-  namespace: longhorn
+  namespace: longhorn-system
   labels:
     helm.sh/chart: traefik-custom-resources-0.3.0
     app.kubernetes.io/name: https-redirect

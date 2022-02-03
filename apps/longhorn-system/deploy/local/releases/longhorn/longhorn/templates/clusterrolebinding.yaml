@@ -17,4 +17,4 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: longhorn-service-account
-  namespace: longhorn
+  namespace: longhorn-system
