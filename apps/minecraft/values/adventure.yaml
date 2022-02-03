@@ -33,7 +33,7 @@ resources:
     cpu: 2000m
 
 persistence:
-  storageClass: ceph-block
+  storageClass: longhorn
   dataDir:
     enabled: true
     Size: 1Ti
