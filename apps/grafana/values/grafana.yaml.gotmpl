@@ -10,7 +10,7 @@ admin:
 
 persistence:
   enabled: true
-  storageClassName: ceph-block
+  storageClassName: {{ env `GRAFANA_STORAGE_CLASS_NAME` }}
 
 revisionHistoryLimit: 2
 deploymentStrategy:
