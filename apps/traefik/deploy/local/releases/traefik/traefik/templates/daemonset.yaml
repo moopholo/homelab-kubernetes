@@ -111,6 +111,7 @@ spec:
           - "--accesslog.filters.retryattempts"
           - "--accesslog.fields.defaultmode=keep"
           - "--accesslog.fields.headers.defaultmode=drop"
+          - "--entryPoints.websecure.forwardedHeaders.insecure"
       volumes:
         - name: data
           emptyDir: {}
