@@ -37,6 +37,28 @@ spec:
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
+  name: pomerium-ca
+  namespace: pomerium
+  labels:
+    helm.sh/chart: cert-manager-tls-1.1.0
+    app.kubernetes.io/name: pomerium-ca
+    app.kubernetes.io/instance: pomerium-tls
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+spec:
+  commonName: pomerium-root-ca
+  isCA: true
+  issuerRef:
+    name: pomerium-selfsigned
+  secretName: pomerium-ca-tls
+  usages:
+  - signing
+---
+# Source: cert-manager-tls/templates/certificate.yaml
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
   name: pomerium-redis
   namespace: pomerium
   labels:

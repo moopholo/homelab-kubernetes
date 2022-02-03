@@ -39,6 +39,7 @@ forwardAuth:
 
 config:
   generateTLS: false
+  generateSigningKey: false
   rootDomain: {{ env `POMERIUM_ROOT_DOMAIN` }}
   existingCASecret: pomerium-tls
   existingSharedSecret: pomerium-shared-env
