@@ -2,12 +2,12 @@ version: v0.141.0
 dependencies:
 - name: rook-ceph
   repository: https://charts.rook.io/release
-  version: v1.7.6
+  version: v1.8.2
 - name: rook-ceph-cluster
   repository: https://charts.rook.io/release
-  version: v1.7.6
+  version: v1.8.2
 - name: traefik-custom-resources
   repository: https://helm.monetact.net
-  version: 0.2.15
-digest: sha256:be89a5540988a235f94250b17c7a47df36bfeec5f7932afda9655d973751c053
-generated: "2021-10-30T22:33:03.69020871Z"
+  version: 0.3.0
+digest: sha256:e77eddbab1a41c20cf690b4d58dc2e8bbb9e0f7aca7c0d937b9bd3dd467b235c
+generated: "2022-01-17T19:54:40.571868048Z"

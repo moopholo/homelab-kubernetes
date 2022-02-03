@@ -29,6 +29,13 @@ ports:
   websecure:
     port: 8443
     hostPort: 443
+  minecraft:
+    port: 25565
+    hostPort: 25565
+  # minecraft-bedrock:
+  #   port: 19132
+  #   hostPort: 19132
+  #   protocol: UDP
 
 logs:
   access:

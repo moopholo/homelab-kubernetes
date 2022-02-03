@@ -4,11 +4,15 @@ repositories:
   - name: jetstack
     url: https://charts.jetstack.io
 
+apiVersions:
+  - "apiregistration.k8s.io/v1"
+  - "cert-manager.io/v1"
+
 releases:
   - name: cert-manager
     namespace: cert-manager
     chart: jetstack/cert-manager
-    version: ~1.5
+    version: "~1.6"
     missingFileHandler: Warn
     values:
       - values/cert-manager.yaml

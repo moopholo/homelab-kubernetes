@@ -10,9 +10,9 @@ metadata:
     app.kubernetes.io/name: cert-manager
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/component: "controller"
-    app.kubernetes.io/version: "v1.5.4"
+    app.kubernetes.io/version: "v1.6.2"
     app.kubernetes.io/managed-by: Helm
-    helm.sh/chart: cert-manager-v1.5.4
+    helm.sh/chart: cert-manager-v1.6.2
 spec:
   replicas: 1
   selector:
@@ -27,9 +27,9 @@ spec:
         app.kubernetes.io/name: cert-manager
         app.kubernetes.io/instance: cert-manager
         app.kubernetes.io/component: "controller"
-        app.kubernetes.io/version: "v1.5.4"
+        app.kubernetes.io/version: "v1.6.2"
         app.kubernetes.io/managed-by: Helm
-        helm.sh/chart: cert-manager-v1.5.4
+        helm.sh/chart: cert-manager-v1.6.2
       annotations:
         prometheus.io/path: "/metrics"
         prometheus.io/scrape: 'true'
@@ -40,13 +40,15 @@ spec:
         runAsNonRoot: true
       containers:
         - name: cert-manager
-          image: "quay.io/jetstack/cert-manager-controller:v1.5.4"
+          image: "quay.io/jetstack/cert-manager-controller:v1.6.2"
           imagePullPolicy: IfNotPresent
           args:
           - --v=2
           - --cluster-resource-namespace=cert-manager
           - --leader-election-namespace=cert-manager
           - --enable-certificate-owner-ref=true
+          - --dns01-recursive-nameservers=1.1.1.1:53,8.8.8.8:53
+          - --dns01-recursive-nameservers-only
           ports:
           - containerPort: 9402
             protocol: TCP

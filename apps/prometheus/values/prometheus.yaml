@@ -1,0 +1,24 @@
+kubeStateMetrics:
+  enabled: false
+nodeExporter:
+  enabled: false
+pushgateway:
+  enabled: false
+
+alertmanager:
+  strategy:
+    type: Recreate
+
+server:
+  # image:
+  #   tag: v2.31.0
+
+  strategy:
+    type: Recreate
+
+  extraArgs:
+    storage.tsdb.retention.size: 540GB
+
+  persistentVolume:
+    storageClass: longhorn
+    size: 600Gi

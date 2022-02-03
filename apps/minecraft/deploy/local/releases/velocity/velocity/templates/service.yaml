@@ -1,0 +1,25 @@
+---
+# Source: velocity/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: velocity
+  namespace: minecraft
+  labels:
+    helm.sh/chart: velocity-0.3.0
+    app.kubernetes.io/name: velocity
+    app.kubernetes.io/instance: velocity
+    app.kubernetes.io/version: "3.1.1"
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    {}
+spec:
+  type: ClusterIP
+  ports:
+    - port: 25577
+      targetPort: proxy
+      protocol: TCP
+      name: proxy
+  selector:
+    app.kubernetes.io/name: velocity
+    app.kubernetes.io/instance: velocity

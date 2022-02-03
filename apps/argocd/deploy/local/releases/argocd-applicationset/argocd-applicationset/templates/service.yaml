@@ -1,0 +1,23 @@
+---
+# Source: argocd-applicationset/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: argocd-applicationset
+  labels:
+    helm.sh/chart: argocd-applicationset-1.9.1
+    app.kubernetes.io/name: argocd-applicationset
+    app.kubernetes.io/instance: argocd-applicationset
+    app.kubernetes.io/version: "v0.3.0"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: argo-cd-applicationset
+    app.kubernetes.io/component: controller
+spec:
+  ports:
+  - name: webhook
+    port: 7000
+    protocol: TCP
+    targetPort: webhook
+  selector:
+      app.kubernetes.io/name: argocd-applicationset
+      app.kubernetes.io/instance: argocd-applicationset

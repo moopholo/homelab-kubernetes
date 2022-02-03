@@ -10,7 +10,7 @@ releases:
     chart: rook-release/rook-ceph
     missingFileHandler: Warn
     values:
-      - values/rook-ceph-operator.yaml
+      - values/rook-ceph-operator.yaml.gotmpl
 
   - name: rook-ceph-cluster
     namespace: rook-ceph

@@ -1,0 +1,16 @@
+version: v0.141.0
+dependencies:
+- name: minecraft
+  repository: https://itzg.github.io/minecraft-server-charts/
+  version: 3.6.3
+- name: raw
+  repository: https://bedag.github.io/helm-charts/
+  version: 1.1.0
+- name: traefik-custom-resources
+  repository: https://helm.monetact.net
+  version: 2.0.7
+- name: velocity
+  repository: https://helm.monetact.net
+  version: 0.3.0
+digest: sha256:0a1e20439c09b7ffbd4fa2615b13088c7ef6bf55bc87b558b6e8730cfd7a04af
+generated: "2022-01-17T17:19:34.580460336Z"

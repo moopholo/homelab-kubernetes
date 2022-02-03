@@ -1,0 +1,10 @@
+version: v0.141.0
+dependencies:
+- name: longhorn
+  repository: https://charts.longhorn.io
+  version: 1.2.3
+- name: traefik-custom-resources
+  repository: https://helm.monetact.net
+  version: 0.3.0
+digest: sha256:9772fb792b93a53e34f92fb6eed1e25b832739a933a946e0c67c132f11c573d8
+generated: "2022-02-03T02:00:06.47001777Z"

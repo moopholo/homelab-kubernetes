@@ -5,10 +5,10 @@ kind: Deployment
 metadata:
   name: argocd-applicationset
   labels:
-    helm.sh/chart: argocd-applicationset-1.6.0
+    helm.sh/chart: argocd-applicationset-1.9.1
     app.kubernetes.io/name: argocd-applicationset
     app.kubernetes.io/instance: argocd-applicationset
-    app.kubernetes.io/version: "v0.2.0"
+    app.kubernetes.io/version: "v0.3.0"
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: argo-cd-applicationset
     app.kubernetes.io/component: controller
@@ -46,11 +46,17 @@ spec:
             - --debug=false
             - --dry-run=false
             - --loglevel=error
-          image: "albertdixon/argocd-applicationset:arm64-master"
+          image: "albertdixon/argocd-applicationset:linux-arm64-master"
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
               containerPort: 8081
+              protocol: TCP
+            - name: metrics
+              containerPort: 8080
+              protocol: TCP
+            - name: webhook
+              containerPort: 7000
               protocol: TCP
           resources:
             {}

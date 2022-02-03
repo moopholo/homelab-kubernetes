@@ -6,7 +6,7 @@ metadata:
   name: traefik
   labels:
     app.kubernetes.io/name: traefik
-    helm.sh/chart: traefik-10.6.0
+    helm.sh/chart: traefik-10.13.0
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/instance: traefik
   annotations:
@@ -19,6 +19,7 @@ spec:
     type: RollingUpdate
     rollingUpdate:
       maxUnavailable: 1
+  minReadySeconds: 0
   template: 
     metadata:
       annotations:
@@ -27,7 +28,7 @@ spec:
         prometheus.io/port: "9100"
       labels:
         app.kubernetes.io/name: traefik
-        helm.sh/chart: traefik-10.6.0
+        helm.sh/chart: traefik-10.13.0
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/instance: traefik
     spec:
@@ -35,7 +36,7 @@ spec:
       terminationGracePeriodSeconds: 60
       hostNetwork: false
       containers:
-      - image: "arm64v8/traefik:2.5.3"
+      - image: "arm64v8/traefik:2.6.0"
         imagePullPolicy: IfNotPresent
         name: traefik
         resources:
@@ -60,6 +61,10 @@ spec:
         ports:
         - name: "metrics"
           containerPort: 9100
+          protocol: "TCP"
+        - name: "minecraft"
+          containerPort: 25565
+          hostPort: 25565
           protocol: "TCP"
         - name: "traefik"
           containerPort: 9000
@@ -90,6 +95,7 @@ spec:
           - "--global.checknewversion"
           - "--global.sendanonymoususage"
           - "--entryPoints.metrics.address=:9100/tcp"
+          - "--entryPoints.minecraft.address=:25565/tcp"
           - "--entryPoints.traefik.address=:9000/tcp"
           - "--entryPoints.web.address=:8000/tcp"
           - "--entryPoints.websecure.address=:8443/tcp"

@@ -1,0 +1,33 @@
+repositories:
+  - name: piraeus-charts
+    url: https://piraeus.io/helm-charts/
+  - name: moopholo
+    url: https://helm.monetact.net
+
+releases:
+  - name: snapshot-controller-webhook-ca
+    namespace: snapshot-controller
+    chart: moopholo/cert-manager-tls
+    version: "~2"
+    missingFileHandler: Warn
+    values:
+      - values/snapshot-controller-webhook-ca.yaml
+      - common:
+          annotations:
+            argocd.argoproj.io/sync-wave: "-1"
+
+  - name: snapshot-controller
+    namespace: snapshot-controller
+    chart: piraeus-charts/snapshot-controller
+    version: "~1.2"
+    missingFileHandler: Warn
+    values:
+      - values/snapshot-controller.yaml
+
+  - name: snapshot-validation-webhook
+    namespace: snapshot-controller
+    chart: piraeus-charts/snapshot-validation-webhook
+    version: "~1.2"
+    missingFileHandler: Warn
+    values:
+      - values/snapshot-validation-webhook.yaml.gotmpl

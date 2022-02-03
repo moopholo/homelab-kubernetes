@@ -1,0 +1,13 @@
+version: v0.141.0
+dependencies:
+- name: cert-manager-tls
+  repository: https://helm.monetact.net
+  version: 2.0.6
+- name: snapshot-controller
+  repository: https://piraeus.io/helm-charts/
+  version: 1.2.1
+- name: snapshot-validation-webhook
+  repository: https://piraeus.io/helm-charts/
+  version: 1.2.1
+digest: sha256:79af15c0168909408fc50e0a6f1a6b0a0f7199c33d6d4ae3e1482e8dc80ba0fd
+generated: "2022-02-02T10:12:13.190604112Z"

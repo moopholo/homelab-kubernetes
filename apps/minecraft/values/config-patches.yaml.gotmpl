@@ -1,0 +1,15 @@
+resources:
+  - apiVersion: v1
+    kind: ConfigMap
+    metadata:
+      name: adventure-patch-definitions
+      namespace: {{ .Release.Namespace }}
+    data:
+      paper-velocity.json: |
+        {{- readFile `../patches/paper-velocity.json` | nindent 10 }}
+
+      paper-performance.json: |
+        {{- readFile `../patches/paper-performance.json` | nindent 10 }}
+
+      bukkit-performance.json: |
+        {{- readFile `../patches/bukkit-performance.json` | nindent 10 }}

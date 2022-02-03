@@ -6,19 +6,19 @@ metadata:
   name: cert-manager-webhook-dnsimple
   labels:
     app: cert-manager-webhook-dnsimple
-    chart: cert-manager-webhook-dnsimple-0.1.0
+    chart: cert-manager-webhook-dnsimple-0.1.1
     release: cert-manager-webhook-dnsimple
     heritage: Helm
 ---
 # Source: cert-manager-webhook-dnsimple/templates/rbac.yaml
 # Grant cert-manager permission to validate using our apiserver
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   name: cert-manager-webhook-dnsimple:domain-solver
   labels:
     app: cert-manager-webhook-dnsimple
-    chart: cert-manager-webhook-dnsimple-0.1.0
+    chart: cert-manager-webhook-dnsimple-0.1.1
     release: cert-manager-webhook-dnsimple
     heritage: Helm
 rules:
@@ -32,13 +32,13 @@ rules:
 # Source: cert-manager-webhook-dnsimple/templates/rbac.yaml
 # apiserver gets the auth-delegator role to delegate auth decisions to
 # the core apiserver
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   name: cert-manager-webhook-dnsimple:auth-delegator
   labels:
     app: cert-manager-webhook-dnsimple
-    chart: cert-manager-webhook-dnsimple-0.1.0
+    chart: cert-manager-webhook-dnsimple-0.1.1
     release: cert-manager-webhook-dnsimple
     heritage: Helm
 roleRef:
@@ -52,13 +52,13 @@ subjects:
     namespace: cert-manager
 ---
 # Source: cert-manager-webhook-dnsimple/templates/rbac.yaml
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   name: cert-manager-webhook-dnsimple:domain-solver
   labels:
     app: cert-manager-webhook-dnsimple
-    chart: cert-manager-webhook-dnsimple-0.1.0
+    chart: cert-manager-webhook-dnsimple-0.1.1
     release: cert-manager-webhook-dnsimple
     heritage: Helm
 roleRef:
@@ -75,14 +75,14 @@ subjects:
 # Grant the webhook permission to read the ConfigMap containing the Kubernetes
 # apiserver's requestheader-ca-certificate.
 # This ConfigMap is automatically created by the Kubernetes apiserver.
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: cert-manager-webhook-dnsimple:webhook-authentication-reader
   namespace: kube-system
   labels:
     app: cert-manager-webhook-dnsimple
-    chart: cert-manager-webhook-dnsimple-0.1.0
+    chart: cert-manager-webhook-dnsimple-0.1.1
     release: cert-manager-webhook-dnsimple
     heritage: Helm
 roleRef:

@@ -1,0 +1,9 @@
+grafana:
+  storage:
+    class-name: longhorn
+  ui:
+    domain: grafana.homelab.monetact.net
+  auth:
+    github:
+      team-ids: 5230329
+      allowed-orgs: moopholo

@@ -6,9 +6,9 @@ metadata:
   name: sops-operator
   labels:
     app.kubernetes.io/name: sops-secrets-operator
-    helm.sh/chart: sops-secrets-operator-0.9.6
+    helm.sh/chart: sops-secrets-operator-0.10.3
     app.kubernetes.io/instance: sops-operator
-    app.kubernetes.io/version: "0.3.6"
+    app.kubernetes.io/version: "0.4.3"
     app.kubernetes.io/managed-by: Helm
 spec:
   replicas: 1
@@ -18,14 +18,17 @@ spec:
       app.kubernetes.io/instance: sops-operator
   template:
     metadata:
+      annotations:
+        kubectl.kubernetes.io/default-container: sops-secrets-operator
       labels:
+        control-plane: controller-sops-secrets-operator
         app.kubernetes.io/name: sops-secrets-operator
         app.kubernetes.io/instance: sops-operator
     spec:
       serviceAccountName: sops-operator
       containers:
         - name: sops-secrets-operator
-          image: "isindir/sops-secrets-operator:0.3.6"
+          image: "isindir/sops-secrets-operator:0.4.3"
           imagePullPolicy: Always
           volumeMounts:
           - name: age-keys

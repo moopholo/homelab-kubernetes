@@ -19,6 +19,7 @@ parameters:
   csi.storage.k8s.io/provisioner-secret-name: rook-csi-cephfs-provisioner
   csi.storage.k8s.io/provisioner-secret-namespace: rook-ceph
 reclaimPolicy: Delete
+allowVolumeExpansion: true
 ---
 # Source: rook-ceph-cluster/templates/cephfilesystem.yaml
 apiVersion: ceph.rook.io/v1

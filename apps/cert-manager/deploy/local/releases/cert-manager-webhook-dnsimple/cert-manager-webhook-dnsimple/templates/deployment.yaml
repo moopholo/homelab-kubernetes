@@ -6,7 +6,7 @@ metadata:
   name: cert-manager-webhook-dnsimple
   labels:
     app: cert-manager-webhook-dnsimple
-    chart: cert-manager-webhook-dnsimple-0.1.0
+    chart: cert-manager-webhook-dnsimple-0.1.1
     release: cert-manager-webhook-dnsimple
     heritage: Helm
 spec:
@@ -24,7 +24,7 @@ spec:
       serviceAccountName: cert-manager-webhook-dnsimple
       containers:
         - name: cert-manager-webhook-dnsimple
-          image: "ghcr.io/moopholo/cert-manager-webhook-dnsimple:sha-6bd78fa"
+          image: "ghcr.io/moopholo/cert-manager-webhook-dnsimple:sha-5ff5997"
           imagePullPolicy: IfNotPresent
           args:
             - --tls-cert-file=/tls/tls.crt

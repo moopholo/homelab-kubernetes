@@ -1,14 +1,14 @@
 ---
 # Source: cert-manager-webhook-dnsimple/templates/pki.yaml
 # Generate a CA Certificate used to sign certificates for the webhook
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: cert-manager-webhook-dnsimple-ca
   namespace: "cert-manager"
   labels:
     app: cert-manager-webhook-dnsimple
-    chart: cert-manager-webhook-dnsimple-0.1.0
+    chart: cert-manager-webhook-dnsimple-0.1.1
     release: cert-manager-webhook-dnsimple
     heritage: Helm
 spec:
@@ -21,14 +21,14 @@ spec:
 ---
 # Source: cert-manager-webhook-dnsimple/templates/pki.yaml
 # Finally, generate a serving certificate for the webhook to use
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: cert-manager-webhook-dnsimple-webhook-tls
   namespace: "cert-manager"
   labels:
     app: cert-manager-webhook-dnsimple
-    chart: cert-manager-webhook-dnsimple-0.1.0
+    chart: cert-manager-webhook-dnsimple-0.1.1
     release: cert-manager-webhook-dnsimple
     heritage: Helm
 spec:
@@ -44,14 +44,14 @@ spec:
 # Source: cert-manager-webhook-dnsimple/templates/pki.yaml
 # Create a selfsigned Issuer, in order to create a root CA certificate for
 # signing webhook serving certificates
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
   name: cert-manager-webhook-dnsimple-selfsign
   namespace: "cert-manager"
   labels:
     app: cert-manager-webhook-dnsimple
-    chart: cert-manager-webhook-dnsimple-0.1.0
+    chart: cert-manager-webhook-dnsimple-0.1.1
     release: cert-manager-webhook-dnsimple
     heritage: Helm
 spec:
@@ -59,14 +59,14 @@ spec:
 ---
 # Source: cert-manager-webhook-dnsimple/templates/pki.yaml
 # Create an Issuer that uses the above generated CA certificate to issue certs
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
   name: cert-manager-webhook-dnsimple-ca
   namespace: "cert-manager"
   labels:
     app: cert-manager-webhook-dnsimple
-    chart: cert-manager-webhook-dnsimple-0.1.0
+    chart: cert-manager-webhook-dnsimple-0.1.1
     release: cert-manager-webhook-dnsimple
     heritage: Helm
 spec:

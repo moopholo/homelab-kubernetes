@@ -8,6 +8,8 @@ clusterResourceNamespace: cert-manager
 
 extraArgs:
   - --enable-certificate-owner-ref=true
+  - --dns01-recursive-nameservers=1.1.1.1:53,8.8.8.8:53
+  - --dns01-recursive-nameservers-only
 
 containerSecurityContext:
   capabilities:
@@ -15,3 +17,8 @@ containerSecurityContext:
       - ALL
   readOnlyRootFilesystem: true
   runAsNonRoot: true
+
+prometheus:
+  enabled: true
+  servicemonitor:
+    enabled: false

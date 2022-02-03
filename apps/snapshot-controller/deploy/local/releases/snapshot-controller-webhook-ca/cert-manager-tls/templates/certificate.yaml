@@ -1,0 +1,25 @@
+---
+# Source: cert-manager-tls/templates/certificate.yaml
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: snapshot-controller-ca
+  namespace: snapshot-controller
+  labels:
+    helm.sh/chart: cert-manager-tls-2.0.6
+    app.kubernetes.io/name: snapshot-controller-ca
+    app.kubernetes.io/instance: snapshot-controller-webhook-ca
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+spec:
+  commonName: snapshot-controller-ca
+  isCA: true
+  issuerRef:
+    name: snapshot-controller-selfsigned
+  secretName: snapshot-controller-ca-tls
+  subject:
+    organizationalUnits:
+    - snapshot-controller
+    organizations:
+    - moopholo

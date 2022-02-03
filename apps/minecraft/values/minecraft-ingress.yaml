@@ -1,0 +1,11 @@
+routes:
+  minecraft:
+    tcp: true
+    entryPoints: [minecraft]
+    routes:
+      - match: HostSNI(`*`)
+        services:
+          - name: velocity
+            port: proxy
+            proxyProtocol:
+              version: 2

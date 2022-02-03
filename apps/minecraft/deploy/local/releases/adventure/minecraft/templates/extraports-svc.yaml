@@ -1,0 +1,22 @@
+---
+# Source: minecraft/templates/extraports-svc.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: adventure-minecraft-dynmap
+  annotations: 
+    null
+  labels:
+    app: adventure-minecraft-dynmap
+    chart: "minecraft-3.6.3"
+    release: "adventure"
+    heritage: "Helm"
+spec:
+  type: ClusterIP
+  ports:
+  - name: dynmap
+    port: 8123
+    targetPort: dynmap
+    protocol: TCP
+  selector:
+    app: adventure-minecraft

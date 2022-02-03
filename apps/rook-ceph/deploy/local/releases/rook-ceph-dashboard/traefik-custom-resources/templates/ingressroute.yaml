@@ -6,7 +6,7 @@ metadata:
   name: rook-ceph-dashboard-http
   namespace: rook-ceph
   labels:
-    helm.sh/chart: traefik-custom-resources-0.2.15
+    helm.sh/chart: traefik-custom-resources-0.3.0
     app.kubernetes.io/name: rook-ceph-dashboard-http
     app.kubernetes.io/instance: rook-ceph-dashboard
     app.kubernetes.io/managed-by: Helm
@@ -20,7 +20,7 @@ spec:
     - name: https-redirect
     services:
     - name: rook-ceph-mgr-dashboard
-      port: 8080
+      port: 7000
 ---
 # Source: traefik-custom-resources/templates/ingressroute.yaml
 apiVersion: traefik.containo.us/v1alpha1
@@ -29,7 +29,7 @@ metadata:
   name: rook-ceph-dashboard-https
   namespace: rook-ceph
   labels:
-    helm.sh/chart: traefik-custom-resources-0.2.15
+    helm.sh/chart: traefik-custom-resources-0.3.0
     app.kubernetes.io/name: rook-ceph-dashboard-https
     app.kubernetes.io/instance: rook-ceph-dashboard
     app.kubernetes.io/managed-by: Helm
@@ -41,7 +41,7 @@ spec:
     match: Host(`rook-ceph.homelab.monetact.net`)
     services:
     - name: rook-ceph-mgr-dashboard
-      port: 8080
+      port: 7000
   tls:
     store:
       name: default

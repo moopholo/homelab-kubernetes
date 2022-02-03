@@ -1,12 +1,12 @@
 repositories:
-  - name: bitnami
-    url: https://charts.bitnami.com/bitnami
+  - name: metrics-server
+    url: https://kubernetes-sigs.github.io/metrics-server/
 
 releases:
   - name: metrics-server
     namespace: metrics-server
-    chart: bitnami/metrics-server
-    version: "~5"
+    chart: metrics-server/metrics-server
+    version: "~3"
     missingFileHandler: Warn
     values:
       - values/metrics-server.yaml

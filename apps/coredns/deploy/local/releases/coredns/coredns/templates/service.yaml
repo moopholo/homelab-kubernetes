@@ -7,7 +7,7 @@ metadata:
   labels:
     app.kubernetes.io/managed-by: "Helm"
     app.kubernetes.io/instance: "coredns"
-    helm.sh/chart: "coredns-1.16.3"
+    helm.sh/chart: "coredns-1.16.5"
     k8s-app: "coredns"
     kubernetes.io/cluster-service: "true"
     kubernetes.io/name: "CoreDNS"
@@ -20,6 +20,6 @@ spec:
     k8s-app: "coredns"
     app.kubernetes.io/name: coredns
   ports:
-  - {port: 53, protocol: UDP, name: udp-53}
-  - {port: 53, protocol: TCP, name: tcp-53}
+  - {"name":"udp-53","port":53,"protocol":"UDP"}
+  - {"name":"tcp-53","port":53,"protocol":"TCP"}
   type: ClusterIP

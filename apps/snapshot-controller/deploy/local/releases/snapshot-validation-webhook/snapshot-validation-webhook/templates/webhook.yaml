@@ -1,0 +1,64 @@
+---
+# Source: snapshot-validation-webhook/templates/webhook.yaml
+# Check if the TLS secret already exists and initialize variables for later use at the top level
+---
+# Source: snapshot-validation-webhook/templates/webhook.yaml
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: snapshot-validation-webhook
+  labels:
+    helm.sh/chart: snapshot-validation-webhook-1.2.1
+    app.kubernetes.io/name: snapshot-validation-webhook
+    app.kubernetes.io/instance: snapshot-validation-webhook
+    app.kubernetes.io/version: "v4.2.1"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  secretName: snapshot-validation-webhook-tls
+  dnsNames:
+    - snapshot-validation-webhook.snapshot-controller.svc
+  issuerRef:
+    kind: Issuer
+    name: snapshot-controller-ca
+  privateKey:
+    rotationPolicy: Always
+---
+# Source: snapshot-validation-webhook/templates/webhook.yaml
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingWebhookConfiguration
+metadata:
+  name: snapshot-validation-webhook
+  labels:
+    helm.sh/chart: snapshot-validation-webhook-1.2.1
+    app.kubernetes.io/name: snapshot-validation-webhook
+    app.kubernetes.io/instance: snapshot-validation-webhook
+    app.kubernetes.io/version: "v4.2.1"
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    cert-manager.io/inject-ca-from: snapshot-controller/snapshot-validation-webhook
+webhooks:
+  - name: snapshot-validation-webhook.csi.kubernetes.io
+    rules:
+      - apiGroups:
+        - snapshot.storage.k8s.io
+        apiVersions:
+        - v1
+        - v1beta1
+        operations:
+        - CREATE
+        - UPDATE
+        resources:
+        - volumesnapshots
+        - volumesnapshotcontents
+        scope: "*"
+    clientConfig:
+      service:
+        namespace: snapshot-controller
+        name: snapshot-validation-webhook
+        path: "/volumesnapshot"
+    admissionReviewVersions:
+    - v1
+    - v1beta1
+    sideEffects: None
+    failurePolicy: Fail
+    timeoutSeconds: 2

@@ -1,0 +1,67 @@
+---
+# Source: velocity/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: velocity
+  namespace: minecraft
+  labels:
+    helm.sh/chart: velocity-0.3.0
+    app.kubernetes.io/name: velocity
+    app.kubernetes.io/instance: velocity
+    app.kubernetes.io/version: "3.1.1"
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    {}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: velocity
+      app.kubernetes.io/instance: velocity
+  template:
+    metadata:
+      annotations:
+        {}
+      labels:
+        app.kubernetes.io/name: velocity
+        app.kubernetes.io/instance: velocity
+    spec:
+      serviceAccountName: velocity
+      securityContext:
+        {}
+      containers:
+        - name: velocity
+          securityContext:
+            {}
+          image: "albertdixon/velocity:3.1.1"
+          imagePullPolicy: IfNotPresent
+          env:
+          - name: VELOCITY_ADVANCED_PROXY_PROTOCOL
+            value: 'true'
+          - name: VELOCITY_FORWARDING_SECRET
+            valueFrom:
+              secretKeyRef:
+                key: token
+                name: velocity-forwarding-secret
+          - name: VELOCITY_SERVERS
+            value: '{
+  "adventure": "minecraft-adventure:25565"
+}'
+          - name: VELOCITY_SERVERS_TRY
+            value: '["adventure"]'
+          ports:
+            - name: proxy
+              containerPort: 25577
+              protocol: TCP
+          startupProbe:
+            tcpSocket:
+              port: proxy
+            failureThreshold: 12
+            periodSeconds: 10
+          readinessProbe:
+            tcpSocket:
+              port: proxy
+            periodSeconds: 5
+          resources:
+            {}

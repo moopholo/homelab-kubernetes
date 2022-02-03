@@ -1,0 +1,214 @@
+---
+# Source: raw/templates/resources.yaml
+apiVersion: v1
+data:
+  bukkit-performance.json: |
+    {
+      "file": "/data/bukkit.yml",
+      "ops": [
+        {
+          "$put": {
+            "path": "$['spawn-limits']",
+            "key": "monsters",
+            "value": 30
+          }
+        },
+        {
+          "$put": {
+            "path": "$['spawn-limits']",
+            "key": "animals",
+            "value": 10
+          }
+        },
+        {
+          "$put": {
+            "path": "$['spawn-limits']",
+            "key": "water-animals",
+            "value": 10
+          }
+        },
+        {
+          "$put": {
+            "path": "$['spawn-limits']",
+            "key": "water-ambient",
+            "value": 10
+          }
+        },
+        {
+          "$put": {
+            "path": "$['spawn-limits']",
+            "key": "ambient",
+            "value": 10
+          }
+        },
+        {
+          "$put": {
+            "path": "$['ticks-per']",
+            "key": "animal-spawns",
+            "value": 400
+          }
+        },
+        {
+          "$put": {
+            "path": "$['ticks-per']",
+            "key": "monster-spawns",
+            "value": 10
+          }
+        },
+        {
+          "$put": {
+            "path": "$['ticks-per']",
+            "key": "ambient-spawns",
+            "value": 80
+          }
+        },
+        {
+          "$put": {
+            "path": "$['ticks-per']",
+            "key": "water-ambient-spawns",
+            "value": 20
+          }
+        },
+        {
+          "$put": {
+            "path": "$['ticks-per']",
+            "key": "ambient-spawns",
+            "value": 40
+          }
+        }
+      ]
+    }
+  paper-performance.json: |
+    {
+      "file": "/data/paper.yml",
+      "ops": [
+        {
+          "$put": {
+            "path": "$.settings",
+            "key": "use-alternative-luck-formula",
+            "value": true
+          }
+        },
+        {
+          "$put": {
+            "path": "$['world-settings'].default.viewdistances",
+            "key": "no-tick-view-distance",
+            "value": "${CFG_PAPER_NO_TICK_VIEW_DISTANCE}",
+            "value-type": "int"
+          }
+        },
+        {
+          "$put": {
+            "path": "$['world-settings'].default['anti-xray']",
+            "key": "enabled",
+            "value": true
+          }
+        },
+        {
+          "$put": {
+            "path": "$['world-settings'].default['anti-xray']",
+            "key": "engine-mode",
+            "value": 2
+          }
+        },
+        {
+          "$put": {
+            "path": "$['world-settings'].default.hoppers",
+            "key": "disable-move-event",
+            "value": true
+          }
+        },
+        {
+          "$put": {
+            "path": "$['world-settings'].default",
+            "key": "max-auto-save-chunks-per-tick",
+            "value": 12
+          }
+        },
+        {
+          "$put": {
+            "path": "$['world-settings'].default",
+            "key": "optimize-explosions",
+            "value": true
+          }
+        },
+        {
+          "$put": {
+            "path": "$['world-settings'].default",
+            "key": "grass-spread-tick-rate",
+            "value": 2
+          }
+        },
+        {
+          "$put": {
+            "path": "$['world-settings'].default",
+            "key": "non-player-arrow-despawn-rate",
+            "value": 240
+          }
+        },
+        {
+          "$put": {
+            "path": "$['world-settings'].default",
+            "key": "armor-stands-tick",
+            "value": false
+          }
+        },
+        {
+          "$put": {
+            "path": "$['world-settings'].default",
+            "key": "use-faster-eigencraft-redstone",
+            "value": true
+          }
+        },
+        {
+          "$put": {
+            "path": "$['world-settings'].default",
+            "key": "per-player-mob-spawns",
+            "value": true
+          }
+        },
+        {
+          "$put": {
+            "path": "$['world-settings'].default",
+            "key": "prevent-moving-into-unloaded-chunks",
+            "value": true
+          }
+        }
+      ]
+    }
+  paper-velocity.json: |
+    {
+      "file": "/data/paper.yml",
+      "ops": [
+        {
+          "$put": {
+            "path": "$.settings['velocity-support']",
+            "key": "enabled",
+            "value": "${CFG_VELOCITY_ENABLED}",
+            "value-type": "bool"
+          }
+        },
+        {
+          "$put": {
+            "path": "$.settings['velocity-support']",
+            "key": "secret",
+            "value": "${CFG_VELOCITY_SECRET}"
+          }
+        },
+        {
+          "$put": {
+            "path": "$.settings['velocity-support']",
+            "key": "online-mode",
+            "value": true
+          }
+        }
+      ]
+    }
+kind: ConfigMap
+metadata:
+  labels:
+    app.kubernetes.io/instance: config-patches
+    app.kubernetes.io/name: raw
+    app.kubernetes.io/version: 1.0.0
+  name: adventure-patch-definitions
+  namespace: minecraft

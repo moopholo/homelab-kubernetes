@@ -1,5 +1,11 @@
 operatorNamespace: rook-ceph
 
+{{- with (env `ROOK_CEPH_KUBERNETES_VERSION`) }}
+kubeVersion: {{ . }}{{ end }}
+
+toolbox:
+  enabled: true
+
 cephClusterSpec:
   dashboard:
     enabled: true
@@ -7,7 +13,7 @@ cephClusterSpec:
     port: {{ requiredEnv `ROOK_CEPH_DASHBOARD_PORT` }}
 
   cephVersion:
-    image: quay.io/ceph/ceph:v16.2
+    # image: quay.io/ceph/ceph:v16.2
     allowUnsupported: true
 
   network:
@@ -16,7 +22,7 @@ cephClusterSpec:
   storage:
     useAllNodes: true
     useAllDevices: false
-    deviceFilter: "^sd."
+    deviceFilter: {{ requiredEnv `ROOK_CEPH_STORAGE_DEVICE_FILTER` | squote }}
 
 cephObjectStores:
   - name: ceph-objectstore

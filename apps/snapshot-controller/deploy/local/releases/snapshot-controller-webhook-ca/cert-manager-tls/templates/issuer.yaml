@@ -1,0 +1,33 @@
+---
+# Source: cert-manager-tls/templates/issuer.yaml
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: snapshot-controller-ca
+  namespace: snapshot-controller
+  labels:
+    helm.sh/chart: cert-manager-tls-2.0.6
+    app.kubernetes.io/name: snapshot-controller-ca
+    app.kubernetes.io/instance: snapshot-controller-webhook-ca
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+spec:
+  ca:
+    secretName: snapshot-controller-ca-tls
+---
+# Source: cert-manager-tls/templates/issuer.yaml
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: snapshot-controller-selfsigned
+  namespace: snapshot-controller
+  labels:
+    helm.sh/chart: cert-manager-tls-2.0.6
+    app.kubernetes.io/name: snapshot-controller-selfsigned
+    app.kubernetes.io/instance: snapshot-controller-webhook-ca
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+spec:
+  selfSigned: {}
