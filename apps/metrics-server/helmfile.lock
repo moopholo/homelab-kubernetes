@@ -1,7 +1,7 @@
 version: v0.141.0
 dependencies:
 - name: metrics-server
-  repository: https://charts.bitnami.com/bitnami
-  version: 5.11.0
-digest: sha256:dc898fbac62bb20e8c66a141fa1b96bc2a87bff9b7126407926cbe1f17006591
-generated: "2022-02-02T10:11:18.735708702Z"
+  repository: https://kubernetes-sigs.github.io/metrics-server/
+  version: 3.7.0
+digest: sha256:3b607021ec2d7e9ceafe03b32bdd70e160e887071a1a02f37811c75aae9c357f
+generated: "2022-02-03T04:45:48.96157079Z"

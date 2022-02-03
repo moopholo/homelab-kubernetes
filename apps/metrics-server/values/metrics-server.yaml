@@ -1,26 +1,24 @@
-image:
-  registry: k8s.gcr.io
-  repository: metrics-server/metrics-server
-
 apiService:
   create: true
 
-command: []
+metrics:
+  enabled: true
+
+service:
+  annotations:
+    kubernetes.io/cluster-service: "true"
+    kubernetes.io/name: "Metrics-Server"
+
+defaultArgs:
+  - --cert-dir=/tmp
+  - --kubelet-preferred-address-types=InternalIP,Hostname
+  - --kubelet-use-node-status-port
+  - --kubelet-insecure-tls
+  - --metric-resolution=15s
+
 extraArgs:
   kubelet-use-node-status-port: ""
   kubelet-insecure-tls: ""
   kubelet-preferred-address-types: InternalIP,Hostname
   metric-resolution: 15s
   cert-dir: /tmp
-
-extraVolumes:
-  - name: tmpdir
-    emptyDir: {}
-
-extraVolumeMounts:
-  - name: tmpdir
-    mountPath: /tmp
-
-podSecurityContext:
-  enabled: true
-  fsGroup: 65534
