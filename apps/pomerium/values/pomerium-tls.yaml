@@ -6,6 +6,14 @@ issuers:
       secretName: pomerium-ca-tls
 
 certificates:
+  pomerium-ca:
+    secretName: pomerium-ca-tls
+    commonName: pomerium-root-ca
+    isCA: true
+    issuerRef:
+      name: pomerium-selfsigned
+    usages: [signing]
+
   pomerium:
     secretName: pomerium-tls
     issuerRef:
