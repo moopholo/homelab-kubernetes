@@ -19,7 +19,7 @@ releases:
   - name: pomerium
     namespace: pomerium
     chart: pomerium/pomerium
-    version: "~25"
+    version: "~28"
     missingFileHandler: Warn
     values:
       - values/pomerium.yaml.gotmpl
