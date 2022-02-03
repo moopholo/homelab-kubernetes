@@ -5,7 +5,7 @@ kind: Deployment
 metadata:
   labels:
     app.kubernetes.io/name: pomerium-databroker
-    helm.sh/chart: pomerium-25.0.0
+    helm.sh/chart: pomerium-28.0.2
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/instance: pomerium
     app.kubernetes.io/component: databroker
@@ -23,13 +23,13 @@ spec:
         checksum: 8d78849114a6dd9730fc418787ef9e1a3831554924bcc5a5aacdfadb994ae093
       labels:
         app.kubernetes.io/name: pomerium-databroker
-        helm.sh/chart: pomerium-25.0.0
+        helm.sh/chart: pomerium-28.0.2
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/instance: pomerium
     spec:
       containers:
       - name: pomerium
-        image: pomerium/pomerium:v0.15.5
+        image: pomerium/pomerium:v0.16.2
         imagePullPolicy: IfNotPresent
         args:
           - --config=/etc/pomerium/config.yaml
@@ -52,7 +52,7 @@ spec:
           - secretRef:
               name: pomerium-shared-env
           - secretRef:
-              name: pomerium-redis-password
+              name: pomerium-redis-credentials
         ports:
           - containerPort: 443
             name: https

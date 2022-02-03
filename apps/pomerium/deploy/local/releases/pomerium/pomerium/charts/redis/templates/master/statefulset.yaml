@@ -33,7 +33,7 @@ spec:
       annotations:
         checksum/configmap: 0e8c0a64b6955521b8fdfcddd371be1e6a74ac9cb0ff48ddd5cd0ea2cd61af24
         checksum/health: bd1b7a0e60568113e185c194305fe5a9cfe57bd382d517452b4ad4df708cf08e
-        checksum/scripts: a0f9168a6225ed5cf4b72ff914ee25f0101f1d67d5f367a3b8ff5e2f80d563dc
+        checksum/scripts: 0af0c0d65762de15c21a9b6fe8d528a4001eb3e1ea02e2705ae30d235f1e23bb
         checksum/secret: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
     spec:
       
@@ -75,7 +75,12 @@ spec:
             - name: REDIS_REPLICATION_MODE
               value: master
             - name: ALLOW_EMPTY_PASSWORD
-              value: "yes"
+              value: "no"
+            - name: REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: pomerium-redis-credentials
+                  key: password
             - name: REDIS_TLS_ENABLED
               value: "yes"
             - name: REDIS_TLS_PORT

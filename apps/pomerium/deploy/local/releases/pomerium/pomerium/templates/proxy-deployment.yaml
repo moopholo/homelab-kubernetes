@@ -5,7 +5,7 @@ kind: Deployment
 metadata:
   labels:
     app.kubernetes.io/name: pomerium-proxy
-    helm.sh/chart: pomerium-25.0.0
+    helm.sh/chart: pomerium-28.0.2
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/instance: pomerium
     app.kubernetes.io/component: proxy
@@ -22,17 +22,23 @@ spec:
         checksum: 8d78849114a6dd9730fc418787ef9e1a3831554924bcc5a5aacdfadb994ae093
       labels:
         app.kubernetes.io/name: pomerium-proxy
-        helm.sh/chart: pomerium-25.0.0
+        helm.sh/chart: pomerium-28.0.2
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/instance: pomerium
     spec:
       containers:
       - name: pomerium
-        image: pomerium/pomerium:v0.15.5
+        image: pomerium/pomerium:v0.16.2
         imagePullPolicy: IfNotPresent
         args:
           - --config=/etc/pomerium/config.yaml
-        env:        
+        env:
+        - name: INSECURE_SERVER
+          value: "false"
+        - name: HTTP_REDIRECT_ADDR
+          value: :80
+        - name: ADDRESS
+          value: :443        
         - name: CERTIFICATE_FILE
           value: /pomerium/tls/tls.crt
         - name: CERTIFICATE_KEY_FILE

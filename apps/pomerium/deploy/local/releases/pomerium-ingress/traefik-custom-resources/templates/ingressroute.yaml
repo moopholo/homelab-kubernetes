@@ -6,7 +6,7 @@ metadata:
   name: pomerium-authenticate-http
   namespace: pomerium
   labels:
-    helm.sh/chart: traefik-custom-resources-2.0.6
+    helm.sh/chart: traefik-custom-resources-2.0.7
     app.kubernetes.io/name: pomerium-authenticate-http
     app.kubernetes.io/instance: pomerium-ingress
     app.kubernetes.io/managed-by: Helm
@@ -29,7 +29,7 @@ metadata:
   name: pomerium-authenticate-https
   namespace: pomerium
   labels:
-    helm.sh/chart: traefik-custom-resources-2.0.6
+    helm.sh/chart: traefik-custom-resources-2.0.7
     app.kubernetes.io/name: pomerium-authenticate-https
     app.kubernetes.io/instance: pomerium-ingress
     app.kubernetes.io/managed-by: Helm

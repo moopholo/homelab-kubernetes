@@ -27,7 +27,8 @@ data:
     ARGS+=("--tls-key-file" "${REDIS_TLS_KEY_FILE}")
     ARGS+=("--tls-ca-cert-file" "${REDIS_TLS_CA_FILE}")
     ARGS+=("--tls-auth-clients" "${REDIS_TLS_AUTH_CLIENTS}")
-    ARGS+=("--protected-mode" "no")
+    ARGS+=("--requirepass" "${REDIS_PASSWORD}")
+    ARGS+=("--masterauth" "${REDIS_PASSWORD}")
     ARGS+=("--include" "/opt/bitnami/redis/etc/redis.conf")
     ARGS+=("--include" "/opt/bitnami/redis/etc/master.conf")
     exec redis-server "${ARGS[@]}"
@@ -50,7 +51,8 @@ data:
     ARGS+=("--tls-auth-clients" "${REDIS_TLS_AUTH_CLIENTS}")
     ARGS+=("--tls-replication" "yes")
     ARGS+=("--slaveof" "${REDIS_MASTER_HOST}" "${REDIS_MASTER_PORT_NUMBER}")
-    ARGS+=("--protected-mode" "no")
+    ARGS+=("--requirepass" "${REDIS_PASSWORD}")
+    ARGS+=("--masterauth" "${REDIS_MASTER_PASSWORD}")
     ARGS+=("--include" "/opt/bitnami/redis/etc/redis.conf")
     ARGS+=("--include" "/opt/bitnami/redis/etc/replica.conf")
     exec redis-server "${ARGS[@]}"
