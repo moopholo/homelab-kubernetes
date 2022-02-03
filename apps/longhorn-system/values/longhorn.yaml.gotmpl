@@ -2,4 +2,7 @@ persistence:
   defaultFsType: xfs
 
 csi:
-  kubeletRootDir: /var/lib/kubelet
+  kubeletRootDir: {{ requiredEnv `LONGHORN_KUBELET_ROOT_DIR` }}
+
+defaultSettings:
+  defaultDataPath: {{ requiredEnv `LONGHORN_DATA_PATH` }}

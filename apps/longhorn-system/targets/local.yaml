@@ -1,4 +1,7 @@
 longhorn:
+  kubelet-root-dir: /var/lib/kubelet
+  data-path: /var/lib/longhorn
+
   dashboard:
     domain: longhorn.homelab.monetact.net
     port: 80
