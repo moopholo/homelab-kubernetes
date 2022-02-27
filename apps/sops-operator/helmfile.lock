@@ -2,6 +2,6 @@ version: v0.141.0
 dependencies:
 - name: sops-secrets-operator
   repository: https://isindir.github.io/sops-secrets-operator/
-  version: 0.10.3
-digest: sha256:25810669ec31b54ff05dc599643af92b3d729df5631c9038265d04640868c00a
-generated: "2022-02-02T10:12:18.099062215Z"
+  version: 0.10.4
+digest: sha256:7376f01dfad1d2460ae65b59d3808505fd9a5e1b4e262d3cdc31937f2ca0891c
+generated: "2022-02-27T10:16:02.254277823Z"
