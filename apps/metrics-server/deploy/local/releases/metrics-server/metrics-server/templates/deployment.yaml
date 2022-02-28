@@ -5,10 +5,10 @@ kind: Deployment
 metadata:
   name: metrics-server
   labels:
-    helm.sh/chart: metrics-server-3.7.0
+    helm.sh/chart: metrics-server-3.8.2
     app.kubernetes.io/name: metrics-server
     app.kubernetes.io/instance: metrics-server
-    app.kubernetes.io/version: "0.5.2"
+    app.kubernetes.io/version: "0.6.1"
     app.kubernetes.io/managed-by: Helm
 spec:
   replicas: 1
@@ -31,7 +31,7 @@ spec:
             readOnlyRootFilesystem: true
             runAsNonRoot: true
             runAsUser: 1000
-          image: k8s.gcr.io/metrics-server/metrics-server:v0.5.2
+          image: k8s.gcr.io/metrics-server/metrics-server:v0.6.1
           imagePullPolicy: IfNotPresent
           args:
             - --secure-port=4443
@@ -40,6 +40,7 @@ spec:
             - --kubelet-use-node-status-port
             - --kubelet-insecure-tls
             - --metric-resolution=15s
+            - --authorization-always-allow-paths=/metrics
           ports:
           - name: https
             protocol: TCP

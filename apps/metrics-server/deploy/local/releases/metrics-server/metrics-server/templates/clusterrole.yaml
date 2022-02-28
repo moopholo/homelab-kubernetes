@@ -5,18 +5,23 @@ kind: ClusterRole
 metadata:
   name: system:metrics-server
   labels:
-    helm.sh/chart: metrics-server-3.7.0
+    helm.sh/chart: metrics-server-3.8.2
     app.kubernetes.io/name: metrics-server
     app.kubernetes.io/instance: metrics-server
-    app.kubernetes.io/version: "0.5.2"
+    app.kubernetes.io/version: "0.6.1"
     app.kubernetes.io/managed-by: Helm
 rules:
   - apiGroups:
     - ""
     resources:
+    - nodes/metrics
+    verbs:
+    - get
+  - apiGroups:
+    - ""
+    resources:
       - pods
       - nodes
-      - nodes/stats
       - namespaces
       - configmaps
     verbs:
