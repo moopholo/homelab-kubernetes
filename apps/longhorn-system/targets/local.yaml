@@ -1,5 +1,5 @@
 longhorn:
-  kubelet-root-dir: /var/lib/kubelet
+  kubelet-root-dir: /var/snap/microk8s/common/var/lib/kubelet
   data-path: /var/lib/longhorn
 
   dashboard:

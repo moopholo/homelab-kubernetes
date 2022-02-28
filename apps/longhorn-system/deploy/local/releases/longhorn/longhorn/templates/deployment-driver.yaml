@@ -56,7 +56,7 @@ spec:
               fieldRef:
                 fieldPath: spec.serviceAccountName
           - name: KUBELET_ROOT_DIR
-            value: /var/lib/kubelet
+            value: /var/snap/microk8s/common/var/lib/kubelet
           - name: CSI_ATTACHER_IMAGE
             value: "longhornio/csi-attacher:v3.2.1"
           - name: CSI_PROVISIONER_IMAGE
