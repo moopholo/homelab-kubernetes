@@ -5,7 +5,7 @@ kind: PodSecurityPolicy
 metadata:
   name: argocd-applicationset
   labels:
-    helm.sh/chart: argocd-applicationset-1.9.1
+    helm.sh/chart: argocd-applicationset-1.11.0
     app.kubernetes.io/name: argocd-applicationset
     app.kubernetes.io/instance: argocd-applicationset
     app.kubernetes.io/version: "v0.3.0"
@@ -40,7 +40,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: argocd-applicationset-psp
   labels:
-    helm.sh/chart: argocd-applicationset-1.9.1
+    helm.sh/chart: argocd-applicationset-1.11.0
     app.kubernetes.io/name: argocd-applicationset
     app.kubernetes.io/instance: argocd-applicationset
     app.kubernetes.io/version: "v0.3.0"
@@ -60,7 +60,7 @@ kind: RoleBinding
 metadata:
   name: argocd-applicationset-psp
   labels:
-    helm.sh/chart: argocd-applicationset-1.9.1
+    helm.sh/chart: argocd-applicationset-1.11.0
     app.kubernetes.io/name: argocd-applicationset
     app.kubernetes.io/instance: argocd-applicationset
     app.kubernetes.io/version: "v0.3.0"
