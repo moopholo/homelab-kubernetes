@@ -11,7 +11,7 @@ items:
       name: traefik
       labels:
         app.kubernetes.io/name: traefik
-        helm.sh/chart: traefik-10.13.0
+        helm.sh/chart: traefik-10.14.2
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/instance: traefik
       annotations:
@@ -24,12 +24,12 @@ items:
       - port: 9000
         name: traefik
         targetPort: "traefik"
-        protocol: "TCP"
+        protocol: TCP
       - port: 80
         name: web
         targetPort: "web"
-        protocol: "TCP"
+        protocol: TCP
       - port: 443
         name: websecure
         targetPort: "websecure"
-        protocol: "TCP"
+        protocol: TCP
