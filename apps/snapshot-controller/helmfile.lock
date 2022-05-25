@@ -9,5 +9,5 @@ dependencies:
 - name: snapshot-validation-webhook
   repository: https://piraeus.io/helm-charts/
   version: 1.2.1
-digest: sha256:79af15c0168909408fc50e0a6f1a6b0a0f7199c33d6d4ae3e1482e8dc80ba0fd
-generated: "2022-02-02T10:12:13.190604112Z"
+digest: sha256:5350aa5922142f9bc425ac9152ea6ba07c8455c27cb0d0008a987f58ecc96a80
+generated: "2022-05-25T10:16:58.514072797Z"
