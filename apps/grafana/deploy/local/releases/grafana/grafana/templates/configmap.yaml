@@ -6,10 +6,10 @@ metadata:
   name: grafana
   namespace: grafana
   labels:
-    helm.sh/chart: grafana-6.21.2
+    helm.sh/chart: grafana-6.29.5
     app.kubernetes.io/name: grafana
     app.kubernetes.io/instance: grafana
-    app.kubernetes.io/version: "8.3.4"
+    app.kubernetes.io/version: "8.5.3"
     app.kubernetes.io/managed-by: Helm
 data:
   grafana.ini: |
@@ -55,6 +55,7 @@ data:
   download_dashboards.sh: |
     #!/usr/bin/env sh
     set -euf
+  
     curl -skf \
     --connect-timeout 60 \
     --max-time 60 \

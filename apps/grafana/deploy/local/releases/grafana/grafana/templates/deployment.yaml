@@ -6,10 +6,10 @@ metadata:
   name: grafana
   namespace: grafana
   labels:
-    helm.sh/chart: grafana-6.21.2
+    helm.sh/chart: grafana-6.29.5
     app.kubernetes.io/name: grafana
     app.kubernetes.io/instance: grafana
-    app.kubernetes.io/version: "8.3.4"
+    app.kubernetes.io/version: "8.5.3"
     app.kubernetes.io/managed-by: Helm
 spec:
   replicas: 1
@@ -26,8 +26,8 @@ spec:
         app.kubernetes.io/name: grafana
         app.kubernetes.io/instance: grafana
       annotations:
-        checksum/config: d528772fb33441215c9d37e463e452e8106a186bf57e07818c60ea76cc33997c
-        checksum/dashboards-json-config: bdc67c49dffdfd124fcb08864569bd7dbcf126c5036440e39af62a7242a66d4f
+        checksum/config: 89146ad135acde7605dcca5a1f91f9aac6ae0711784d24572569fad7506b8726
+        checksum/dashboards-json-config: 95f06e0bc1184c134d46dbb8fe111992ba1710a98d65938a81f0c52af981e783
         checksum/sc-dashboard-provider-config: 01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b
     spec:
       
@@ -67,7 +67,7 @@ spec:
       enableServiceLinks: true
       containers:
         - name: grafana
-          image: "grafana/grafana:8.3.4"
+          image: "grafana/grafana:8.5.3"
           imagePullPolicy: IfNotPresent
           volumeMounts:
             - name: config
