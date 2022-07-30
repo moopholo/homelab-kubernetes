@@ -6,13 +6,11 @@ metadata:
   name: rook-ceph
 spec:
   monitoring:
-    rulesNamespace: rook-ceph
     enabled: false
-    rulesNamespaceOverride: null
 
   cephVersion:
     allowUnsupported: true
-    image: quay.io/ceph/ceph:v16.2.7
+    image: quay.io/ceph/ceph:v16.2.10
   cleanupPolicy:
     allowUninstallWithVolumes: false
     confirmation: ""
@@ -53,7 +51,8 @@ spec:
       osd:
         disabled: false
   mgr:
-    count: 1
+    allowMultiplePerNode: false
+    count: 2
     modules:
     - enabled: true
       name: pg_autoscaler
@@ -62,7 +61,68 @@ spec:
     count: 3
   network:
     provider: host
+  priorityClassNames:
+    mgr: system-cluster-critical
+    mon: system-node-critical
+    osd: system-node-critical
   removeOSDsIfOutAndSafeToRemove: false
+  resources:
+    cleanup:
+      limits:
+        cpu: 500m
+        memory: 1Gi
+      requests:
+        cpu: 500m
+        memory: 100Mi
+    crashcollector:
+      limits:
+        cpu: 500m
+        memory: 60Mi
+      requests:
+        cpu: 100m
+        memory: 60Mi
+    logcollector:
+      limits:
+        cpu: 500m
+        memory: 1Gi
+      requests:
+        cpu: 100m
+        memory: 100Mi
+    mgr:
+      limits:
+        cpu: 1000m
+        memory: 1Gi
+      requests:
+        cpu: 500m
+        memory: 512Mi
+    mgr-sidecar:
+      limits:
+        cpu: 500m
+        memory: 100Mi
+      requests:
+        cpu: 100m
+        memory: 40Mi
+    mon:
+      limits:
+        cpu: 2000m
+        memory: 2Gi
+      requests:
+        cpu: 1000m
+        memory: 1Gi
+    osd:
+      limits:
+        cpu: 2000m
+        memory: 4Gi
+      requests:
+        cpu: 1000m
+        memory: 4Gi
+    prepareosd:
+      limits:
+        cpu: 500m
+        memory: 400Mi
+      requests:
+        cpu: 500m
+        memory: 50Mi
   skipUpgradeChecks: false
   storage:
     deviceFilter: ^sda
