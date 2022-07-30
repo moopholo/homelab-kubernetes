@@ -7,12 +7,12 @@ metadata:
   labels:
     app.kubernetes.io/managed-by: "Helm"
     app.kubernetes.io/instance: "coredns"
-    helm.sh/chart: "coredns-1.16.7"
+    helm.sh/chart: "coredns-1.19.4"
     k8s-app: "coredns"
     kubernetes.io/cluster-service: "true"
     kubernetes.io/name: "CoreDNS"
     app.kubernetes.io/name: coredns
-    app.kubernetes.io/version: "1.8.7"
+    app.kubernetes.io/version: "1.9.3"
 spec:
   replicas: 1
   strategy:
@@ -32,7 +32,7 @@ spec:
         app.kubernetes.io/name: coredns
         app.kubernetes.io/instance: "coredns"
       annotations:
-        checksum/config: d058ffcd8ef65878420ea5310f5652ad3ee7fa5db0f3adc093f89faf0209ea95
+        checksum/config: 9690762dda045c483693401b9cea03ac09deb47f6a7ac462fb3d789de6b3566c
         scheduler.alpha.kubernetes.io/critical-pod: ''
         scheduler.alpha.kubernetes.io/tolerations: '[{"key":"CriticalAddonsOnly", "operator":"Exists"}]'
     spec:
