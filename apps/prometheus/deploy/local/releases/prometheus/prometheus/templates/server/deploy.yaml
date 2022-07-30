@@ -7,7 +7,7 @@ metadata:
     component: "server"
     app: prometheus
     release: prometheus
-    chart: prometheus-15.1.2
+    chart: prometheus-15.11.0
     heritage: Helm
   name: prometheus-server
   namespace: prometheus
@@ -27,7 +27,7 @@ spec:
         component: "server"
         app: prometheus
         release: prometheus
-        chart: prometheus-15.1.2
+        chart: prometheus-15.11.0
         heritage: Helm
     spec:
       enableServiceLinks: true
@@ -36,6 +36,8 @@ spec:
         - name: prometheus-server-configmap-reload
           image: "jimmidyson/configmap-reload:v0.5.0"
           imagePullPolicy: "IfNotPresent"
+          securityContext:
+            {}
           args:
             - --volume-dir=/etc/config
             - --webhook-url=http://127.0.0.1:9090/-/reload
@@ -47,8 +49,10 @@ spec:
               readOnly: true
 
         - name: prometheus-server
-          image: "quay.io/prometheus/prometheus:v2.31.1"
+          image: "quay.io/prometheus/prometheus:v2.36.2"
           imagePullPolicy: "IfNotPresent"
+          securityContext:
+            {}
           args:
             - --storage.tsdb.retention.time=15d
             - --config.file=/etc/config/prometheus.yml
