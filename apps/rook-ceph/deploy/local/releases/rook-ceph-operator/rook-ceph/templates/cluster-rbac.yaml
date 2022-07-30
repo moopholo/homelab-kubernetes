@@ -10,9 +10,9 @@ metadata:
     operator: rook
     storage-backend: ceph
     app.kubernetes.io/part-of: rook-ceph-operator
-    app.kubernetes.io/managed-by: helm
+    app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/created-by: helm
-    helm.sh/chart: "rook-ceph-v1.8.2"
+    helm.sh/chart: "rook-ceph-v1.9.8"
 
   
 # imagePullSecrets:
@@ -29,9 +29,9 @@ metadata:
     operator: rook
     storage-backend: ceph
     app.kubernetes.io/part-of: rook-ceph-operator
-    app.kubernetes.io/managed-by: helm
+    app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/created-by: helm
-    helm.sh/chart: "rook-ceph-v1.8.2"
+    helm.sh/chart: "rook-ceph-v1.9.8"
 
   
 # imagePullSecrets:
@@ -48,9 +48,9 @@ metadata:
     operator: rook
     storage-backend: ceph
     app.kubernetes.io/part-of: rook-ceph-operator
-    app.kubernetes.io/managed-by: helm
+    app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/created-by: helm
-    helm.sh/chart: "rook-ceph-v1.8.2"
+    helm.sh/chart: "rook-ceph-v1.9.8"
 
   
 # imagePullSecrets:
@@ -63,6 +63,25 @@ kind: ServiceAccount
 metadata:
   name: rook-ceph-purge-osd
   namespace: rook-ceph # namespace:cluster
+
+  
+# imagePullSecrets:
+#   - name: my-registry-secret
+---
+# Source: rook-ceph/templates/cluster-rbac.yaml
+# Service account for RGW server
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: rook-ceph-rgw
+  namespace: rook-ceph # namespace:cluster
+  labels:
+    operator: rook
+    storage-backend: ceph
+    app.kubernetes.io/part-of: rook-ceph-operator
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/created-by: helm
+    helm.sh/chart: "rook-ceph-v1.9.8"
 
   
 # imagePullSecrets:
@@ -116,6 +135,23 @@ rules:
   - apiGroups: ["ceph.rook.io"]
     resources: ["cephclusters", "cephclusters/finalizers"]
     verbs: ["get", "list", "create", "update", "delete"]
+---
+# Source: rook-ceph/templates/cluster-rbac.yaml
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: rook-ceph-rgw
+  namespace: rook-ceph # namespace:cluster
+rules:
+  # Placeholder role so the rgw service account will
+  # be generated in the csv. Remove this role and role binding
+  # when fixing https://github.com/rook/rook/issues/10141.
+  - apiGroups:
+      - ""
+    resources:
+      - configmaps
+    verbs:
+      - get
 ---
 # Source: rook-ceph/templates/cluster-rbac.yaml
 # Aspects of ceph-mgr that operate within the cluster's namespace
@@ -209,7 +245,7 @@ rules:
     verbs: ["get", "list", "delete" ]
   - apiGroups: [""]
     resources: ["persistentvolumeclaims"]
-    verbs: ["get", "update", "delete"]
+    verbs: ["get", "update", "delete", "list"]
 ---
 # Source: rook-ceph/templates/cluster-rbac.yaml
 apiVersion: rbac.authorization.k8s.io/v1
@@ -221,9 +257,9 @@ metadata:
     operator: rook
     storage-backend: ceph
     app.kubernetes.io/part-of: rook-ceph-operator
-    app.kubernetes.io/managed-by: helm
+    app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/created-by: helm
-    helm.sh/chart: "rook-ceph-v1.8.2"
+    helm.sh/chart: "rook-ceph-v1.9.8"
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -246,6 +282,21 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: rook-ceph-osd
+    namespace: rook-ceph # namespace:cluster
+---
+# Source: rook-ceph/templates/cluster-rbac.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: rook-ceph-rgw-psp
+  namespace: rook-ceph # namespace:cluster
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: psp:rook
+subjects:
+  - kind: ServiceAccount
+    name: rook-ceph-rgw
     namespace: rook-ceph # namespace:cluster
 ---
 # Source: rook-ceph/templates/cluster-rbac.yaml
@@ -279,6 +330,21 @@ subjects:
     namespace: rook-ceph # namespace:cluster
 ---
 # Source: rook-ceph/templates/cluster-rbac.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: rook-ceph-purge-osd-psp
+  namespace: rook-ceph # namespace:cluster
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: psp:rook
+subjects:
+  - kind: ServiceAccount
+    name: rook-ceph-purge-osd
+    namespace: rook-ceph # namespace:cluster
+---
+# Source: rook-ceph/templates/cluster-rbac.yaml
 # Allow the operator to create resources in this cluster's namespace
 kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
@@ -308,6 +374,22 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: rook-ceph-osd
+    namespace: rook-ceph # namespace:cluster
+---
+# Source: rook-ceph/templates/cluster-rbac.yaml
+# Allow the rgw pods in this namespace to work with configmaps
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: rook-ceph-rgw
+  namespace: rook-ceph # namespace:cluster
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: rook-ceph-rgw
+subjects:
+  - kind: ServiceAccount
+    name: rook-ceph-rgw
     namespace: rook-ceph # namespace:cluster
 ---
 # Source: rook-ceph/templates/cluster-rbac.yaml

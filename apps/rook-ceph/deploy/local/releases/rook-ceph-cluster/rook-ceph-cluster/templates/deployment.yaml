@@ -20,7 +20,7 @@ spec:
       hostNetwork: true
       containers:
         - name: rook-ceph-tools
-          image: rook/ceph:v1.8.2
+          image: rook/ceph:v1.9.8
           command: ["/bin/bash"]
           args: ["-m", "-c", "/usr/local/bin/toolbox.sh"]
           imagePullPolicy: IfNotPresent
@@ -36,6 +36,13 @@ spec:
                 secretKeyRef:
                   name: rook-ceph-mon
                   key: ceph-secret
+          resources:
+            limits:
+              cpu: 500m
+              memory: 1Gi
+            requests:
+              cpu: 100m
+              memory: 128Mi
           volumeMounts:
             - mountPath: /etc/ceph
               name: ceph-config

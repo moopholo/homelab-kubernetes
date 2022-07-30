@@ -9,6 +9,7 @@ reclaimPolicy: Delete
 parameters:
   objectStoreName: ceph-objectstore
   objectStoreNamespace: rook-ceph
+
   region: us-east-1
 ---
 # Source: rook-ceph-cluster/templates/cephobjectstore.yaml
