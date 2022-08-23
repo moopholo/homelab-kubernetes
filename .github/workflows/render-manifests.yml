@@ -54,7 +54,7 @@ jobs:
           args: -ignore-missing-schemas -n 8 -summary /github/workspace/apps/${{ matrix.app-name }}/deploy/local
 
       - name: Commit Updates
-        uses: EndBug/add-and-commit@v8.0.2
+        uses: EndBug/add-and-commit@v9.1.0
         with:
           pull: --rebase --autostash
           push: false
