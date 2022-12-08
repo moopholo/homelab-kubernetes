@@ -7,12 +7,12 @@ metadata:
   labels:
     app.kubernetes.io/managed-by: "Helm"
     app.kubernetes.io/instance: "coredns"
-    helm.sh/chart: "coredns-1.16.7"
-    k8s-app: "coredns"
+    helm.sh/chart: "coredns-1.19.7"
+    k8s-app: coredns
     kubernetes.io/cluster-service: "true"
     kubernetes.io/name: "CoreDNS"
     app.kubernetes.io/name: coredns
-    app.kubernetes.io/version: "1.8.7"
+    app.kubernetes.io/version: "1.9.4"
 spec:
   replicas: 1
   strategy:
@@ -23,16 +23,16 @@ spec:
   selector:
     matchLabels:
       app.kubernetes.io/instance: "coredns"
-      k8s-app: "coredns"
+      k8s-app: coredns
       app.kubernetes.io/name: coredns
   template:
     metadata:
       labels:
-        k8s-app: "coredns"
+        k8s-app: coredns
         app.kubernetes.io/name: coredns
         app.kubernetes.io/instance: "coredns"
       annotations:
-        checksum/config: d058ffcd8ef65878420ea5310f5652ad3ee7fa5db0f3adc093f89faf0209ea95
+        checksum/config: 118df1e62308f11ebf7f742da85bfc665029f98db993ab96c136de2a96ab89d0
         scheduler.alpha.kubernetes.io/critical-pod: ''
         scheduler.alpha.kubernetes.io/tolerations: '[{"key":"CriticalAddonsOnly", "operator":"Exists"}]'
     spec:
@@ -57,6 +57,7 @@ spec:
         ports:
         - {containerPort: 53, protocol: UDP, name: udp-53}
         - {containerPort: 53, protocol: TCP, name: tcp-53}
+        - {containerPort: 9153, protocol: TCP, name: tcp-9153}
         
         livenessProbe:
           httpGet:
