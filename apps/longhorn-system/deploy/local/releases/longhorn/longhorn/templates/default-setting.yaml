@@ -7,45 +7,14 @@ metadata:
   namespace: longhorn-system
   labels:
     app.kubernetes.io/name: longhorn
-    helm.sh/chart: longhorn-1.2.3
+    helm.sh/chart: longhorn-1.3.2
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/instance: longhorn
-    app.kubernetes.io/version: v1.2.3
+    app.kubernetes.io/version: v1.3.2
 data:
   default-setting.yaml: |-
-    backup-target: 
-    backup-target-credential-secret: 
-    allow-recurring-job-while-volume-detached: 
-    create-default-disk-labeled-nodes: 
+    
+    
+    
+    
     default-data-path: /var/lib/longhorn
-    replica-soft-anti-affinity: 
-    replica-auto-balance: 
-    storage-over-provisioning-percentage: 
-    storage-minimal-available-percentage: 
-    upgrade-checker: 
-    default-replica-count: 
-    default-data-locality: 
-    default-longhorn-static-storage-class: 
-    backupstore-poll-interval: 
-    taint-toleration: 
-    system-managed-components-node-selector: 
-    priority-class: 
-    auto-salvage: 
-    auto-delete-pod-when-volume-detached-unexpectedly: 
-    disable-scheduling-on-cordoned-node: 
-    replica-zone-soft-anti-affinity: 
-    node-down-pod-deletion-policy: 
-    allow-node-drain-with-last-healthy-replica: 
-    mkfs-ext4-parameters: 
-    disable-replica-rebuild: 
-    replica-replenishment-wait-interval: 
-    concurrent-replica-rebuild-per-node-limit: 
-    disable-revision-counter: 
-    system-managed-pods-image-pull-policy: 
-    allow-volume-creation-with-degraded-availability: 
-    auto-cleanup-system-generated-snapshot: 
-    concurrent-automatic-engine-upgrade-per-node-limit: 
-    backing-image-cleanup-wait-interval: 
-    backing-image-recovery-wait-interval: 
-    guaranteed-engine-manager-cpu: 
-    guaranteed-replica-manager-cpu:
