@@ -53,7 +53,7 @@ jobs:
         with:
           args: -ignore-missing-schemas -n 8 -summary /github/workspace/apps/${{ matrix.app-name }}/deploy/local
 
-      - uses: peter-evans/create-pull-request@v3
+      - uses: peter-evans/create-pull-request@v5
         with:
           delete-branch: true
           labels: dependencies
