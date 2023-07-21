@@ -20,7 +20,7 @@ jobs:
       changes: ${{ steps.changed-apps.outputs.changes }}
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3.1.0
         with:
           fetch-depth: 3
       - id: changed-apps
@@ -40,7 +40,7 @@ jobs:
       matrix: ${{ fromJson(needs.find-changes.outputs.matrix) }}
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3.1.0
         with:
           ref: ${{ github.event.pull_request.head.ref }}
 
