@@ -8,7 +8,7 @@ metadata:
   namespace: "cert-manager"
   labels:
     app: cert-manager-webhook-dnsimple
-    chart: cert-manager-webhook-dnsimple-0.1.1
+    chart: cert-manager-webhook-dnsimple-0.1.2
     release: cert-manager-webhook-dnsimple
     heritage: Helm
 spec:
@@ -28,7 +28,7 @@ metadata:
   namespace: "cert-manager"
   labels:
     app: cert-manager-webhook-dnsimple
-    chart: cert-manager-webhook-dnsimple-0.1.1
+    chart: cert-manager-webhook-dnsimple-0.1.2
     release: cert-manager-webhook-dnsimple
     heritage: Helm
 spec:
@@ -51,7 +51,7 @@ metadata:
   namespace: "cert-manager"
   labels:
     app: cert-manager-webhook-dnsimple
-    chart: cert-manager-webhook-dnsimple-0.1.1
+    chart: cert-manager-webhook-dnsimple-0.1.2
     release: cert-manager-webhook-dnsimple
     heritage: Helm
 spec:
@@ -66,7 +66,7 @@ metadata:
   namespace: "cert-manager"
   labels:
     app: cert-manager-webhook-dnsimple
-    chart: cert-manager-webhook-dnsimple-0.1.1
+    chart: cert-manager-webhook-dnsimple-0.1.2
     release: cert-manager-webhook-dnsimple
     heritage: Helm
 spec:
