@@ -2,9 +2,9 @@ version: v0.141.0
 dependencies:
 - name: grafana
   repository: https://grafana.github.io/helm-charts
-  version: 6.21.2
+  version: 6.61.2
 - name: traefik-custom-resources
   repository: https://helm.monetact.net
   version: 2.0.7
-digest: sha256:87e332169292fcb1c77317fe614e9477e32a157bbd9fa302bc106ef7eb4d33e3
-generated: "2022-02-02T10:10:45.678104694Z"
+digest: sha256:3cf318992a89781aefb09ed8e9ab115726d2a1457185c14f24295e38d29b6ed6
+generated: "2024-03-28T10:10:25.765596797Z"
