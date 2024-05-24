@@ -6,7 +6,7 @@ metadata:
   name: cert-manager-webhook-dnsimple
   labels:
     app: cert-manager-webhook-dnsimple
-    chart: cert-manager-webhook-dnsimple-0.1.1
+    chart: cert-manager-webhook-dnsimple-0.1.2
     release: cert-manager-webhook-dnsimple
     heritage: Helm
 ---
@@ -18,7 +18,7 @@ metadata:
   name: cert-manager-webhook-dnsimple:domain-solver
   labels:
     app: cert-manager-webhook-dnsimple
-    chart: cert-manager-webhook-dnsimple-0.1.1
+    chart: cert-manager-webhook-dnsimple-0.1.2
     release: cert-manager-webhook-dnsimple
     heritage: Helm
 rules:
@@ -38,7 +38,7 @@ metadata:
   name: cert-manager-webhook-dnsimple:auth-delegator
   labels:
     app: cert-manager-webhook-dnsimple
-    chart: cert-manager-webhook-dnsimple-0.1.1
+    chart: cert-manager-webhook-dnsimple-0.1.2
     release: cert-manager-webhook-dnsimple
     heritage: Helm
 roleRef:
@@ -58,7 +58,7 @@ metadata:
   name: cert-manager-webhook-dnsimple:domain-solver
   labels:
     app: cert-manager-webhook-dnsimple
-    chart: cert-manager-webhook-dnsimple-0.1.1
+    chart: cert-manager-webhook-dnsimple-0.1.2
     release: cert-manager-webhook-dnsimple
     heritage: Helm
 roleRef:
@@ -82,7 +82,7 @@ metadata:
   namespace: kube-system
   labels:
     app: cert-manager-webhook-dnsimple
-    chart: cert-manager-webhook-dnsimple-0.1.1
+    chart: cert-manager-webhook-dnsimple-0.1.2
     release: cert-manager-webhook-dnsimple
     heritage: Helm
 roleRef:
