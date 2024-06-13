@@ -3,16 +3,17 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: coredns-coredns
+  name: coredns
+  namespace: coredns
   labels:
     app.kubernetes.io/managed-by: "Helm"
     app.kubernetes.io/instance: "coredns"
-    helm.sh/chart: "coredns-1.16.7"
-    k8s-app: "coredns"
+    helm.sh/chart: "coredns-1.30.0"
+    k8s-app: coredns
     kubernetes.io/cluster-service: "true"
     kubernetes.io/name: "CoreDNS"
     app.kubernetes.io/name: coredns
-    app.kubernetes.io/version: "1.8.7"
+    app.kubernetes.io/version: "1.11.1"
 spec:
   replicas: 1
   strategy:
@@ -23,17 +24,16 @@ spec:
   selector:
     matchLabels:
       app.kubernetes.io/instance: "coredns"
-      k8s-app: "coredns"
+      k8s-app: coredns
       app.kubernetes.io/name: coredns
   template:
     metadata:
       labels:
-        k8s-app: "coredns"
+        k8s-app: coredns
         app.kubernetes.io/name: coredns
         app.kubernetes.io/instance: "coredns"
       annotations:
-        checksum/config: d058ffcd8ef65878420ea5310f5652ad3ee7fa5db0f3adc093f89faf0209ea95
-        scheduler.alpha.kubernetes.io/critical-pod: ''
+        checksum/config: 3e9c76a387d854436d0e43445b9a1a50e63ec606bed524b2cea68e4ec256589e
         scheduler.alpha.kubernetes.io/tolerations: '[{"key":"CriticalAddonsOnly", "operator":"Exists"}]'
     spec:
       terminationGracePeriodSeconds: 30
@@ -55,8 +55,9 @@ spec:
             cpu: 100m
             memory: 128Mi
         ports:
-        - {containerPort: 53, protocol: UDP, name: udp-53}
-        - {containerPort: 53, protocol: TCP, name: tcp-53}
+        - {"containerPort":53,"name":"udp-53","protocol":"UDP"}
+        - {"containerPort":53,"name":"tcp-53","protocol":"TCP"}
+        - {"containerPort":9153,"name":"tcp-9153","protocol":"TCP"}
         
         livenessProbe:
           httpGet:
@@ -78,10 +79,14 @@ spec:
           timeoutSeconds: 5
           successThreshold: 1
           failureThreshold: 5
+        securityContext:
+          capabilities:
+            add:
+            - NET_BIND_SERVICE
       volumes:
         - name: config-volume
           configMap:
-            name: coredns-coredns
+            name: coredns
             items:
             - key: Corefile
               path: Corefile
