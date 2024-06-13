@@ -3,12 +3,12 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: coredns-coredns
+  name: coredns
   labels:
     app.kubernetes.io/managed-by: "Helm"
     app.kubernetes.io/instance: "coredns"
-    helm.sh/chart: "coredns-1.16.7"
-    k8s-app: "coredns"
+    helm.sh/chart: "coredns-1.30.0"
+    k8s-app: coredns
     kubernetes.io/cluster-service: "true"
     kubernetes.io/name: "CoreDNS"
     app.kubernetes.io/name: coredns
