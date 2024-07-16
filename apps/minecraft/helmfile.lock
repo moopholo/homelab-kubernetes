@@ -12,5 +12,5 @@ dependencies:
 - name: velocity
   repository: https://helm.monetact.net
   version: 0.3.0
-digest: sha256:2fb0f81d6742c012a116b1cc1c759e53e7ef5e82a7059a2110fffa8fae469b53
-generated: "2023-07-10T10:12:56.834482407Z"
+digest: sha256:fcfdb18fa4c2e5b969e7a3a46c80f193230c9c02624e2d992029a17315a8dd84
+generated: "2024-07-16T10:10:39.186577715Z"
