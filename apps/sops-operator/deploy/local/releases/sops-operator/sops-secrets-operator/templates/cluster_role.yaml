@@ -6,9 +6,9 @@ metadata:
   name: sops-operator
   labels:
     app.kubernetes.io/name: sops-secrets-operator
-    helm.sh/chart: sops-secrets-operator-0.10.4
+    helm.sh/chart: sops-secrets-operator-0.20.1
     app.kubernetes.io/instance: sops-operator
-    app.kubernetes.io/version: "0.4.4"
+    app.kubernetes.io/version: "0.14.1"
     app.kubernetes.io/managed-by: Helm
 rules:
 - apiGroups:
