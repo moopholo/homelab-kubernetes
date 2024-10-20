@@ -10,9 +10,9 @@ metadata:
     operator: rook
     storage-backend: ceph
     app.kubernetes.io/part-of: rook-ceph-operator
-    app.kubernetes.io/managed-by: helm
+    app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/created-by: helm
-    helm.sh/chart: "rook-ceph-v1.8.2"
+    helm.sh/chart: "rook-ceph-v1.15.4"
 rules:
 - apiGroups:
   - ""
@@ -42,12 +42,29 @@ rules:
   - create
   - update
   - delete
+  - deletecollection
 - apiGroups:
   - batch
   resources:
   - cronjobs
   verbs:
   - delete
+- apiGroups:
+  - cert-manager.io
+  resources:
+  - certificates
+  - issuers
+  verbs:
+  - get
+  - create
+  - delete
+- apiGroups:
+  - multicluster.x-k8s.io
+  resources:
+  - serviceexports
+  verbs:
+  - get
+  - create
 ---
 # Source: rook-ceph/templates/role.yaml
 kind: Role
@@ -56,12 +73,6 @@ metadata:
   name: cephfs-external-provisioner-cfg
   namespace: rook-ceph # namespace:operator
 rules:
-  - apiGroups: [""]
-    resources: ["endpoints"]
-    verbs: ["get", "watch", "list", "delete", "update", "create"]
-  - apiGroups: [""]
-    resources: ["configmaps"]
-    verbs: ["get", "list", "create", "delete"]
   - apiGroups: ["coordination.k8s.io"]
     resources: ["leases"]
     verbs: ["get", "watch", "list", "delete", "update", "create"]
@@ -73,12 +84,6 @@ metadata:
   name: rbd-external-provisioner-cfg
   namespace: rook-ceph # namespace:operator
 rules:
-  - apiGroups: [""]
-    resources: ["endpoints"]
-    verbs: ["get", "watch", "list", "delete", "update", "create"]
-  - apiGroups: [""]
-    resources: ["configmaps"]
-    verbs: ["get", "list", "watch", "create", "delete", "update"]
   - apiGroups: ["coordination.k8s.io"]
     resources: ["leases"]
     verbs: ["get", "watch", "list", "delete", "update", "create"]
