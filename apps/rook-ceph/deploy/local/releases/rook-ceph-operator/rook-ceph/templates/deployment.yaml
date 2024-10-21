@@ -4,88 +4,58 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: rook-ceph-operator
+  namespace: rook-ceph # namespace:operator
   labels:
     operator: rook
     storage-backend: ceph
     app.kubernetes.io/part-of: rook-ceph-operator
-    app.kubernetes.io/managed-by: helm
+    app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/created-by: helm
-    helm.sh/chart: "rook-ceph-v1.8.2"
+    helm.sh/chart: "rook-ceph-v1.15.4"
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: rook-ceph-operator
+  strategy:
+    type: Recreate
   template:
     metadata:
       labels:
         app: rook-ceph-operator
-        helm.sh/chart: "rook-ceph-v1.8.2"
+        helm.sh/chart: "rook-ceph-v1.15.4"
     spec:
+      tolerations:
+        - effect: NoExecute
+          key: node.kubernetes.io/unreachable
+          operator: Exists
+          tolerationSeconds: 5
       containers:
       - name: rook-ceph-operator
-        image: "rook/ceph:v1.8.2"
+        image: "docker.io/rook/ceph:v1.15.4"
         imagePullPolicy: IfNotPresent
         args: ["ceph", "operator"]
         securityContext:
+          capabilities:
+            drop:
+            - ALL
+          runAsGroup: 2016
           runAsNonRoot: true
           runAsUser: 2016
-          runAsGroup: 2016
         volumeMounts:
         - mountPath: /var/lib/rook
           name: rook-config
         - mountPath: /etc/ceph
           name: default-config-dir
-        - mountPath: /etc/webhook
-          name: webhook-cert
         env:
         - name: ROOK_CURRENT_NAMESPACE_ONLY
           value: "false"
         - name: ROOK_HOSTPATH_REQUIRES_PRIVILEGED
           value: "false"
-        - name: ROOK_LOG_LEVEL
-          value: INFO
-        - name: ROOK_ENABLE_SELINUX_RELABELING
-          value: "true"
         - name: ROOK_DISABLE_DEVICE_HOTPLUG
           value: "false"
-        - name: ROOK_CSI_ENABLE_RBD
-          value: "true"
-        - name: ROOK_CSI_ENABLE_CEPHFS
-          value: "true"
-        - name: CSI_ENABLE_CEPHFS_SNAPSHOTTER
-          value: "true"
-        - name: CSI_ENABLE_RBD_SNAPSHOTTER
-          value: "true"
-        - name: CSI_PLUGIN_PRIORITY_CLASSNAME
-          value: 
-        - name: CSI_PROVISIONER_PRIORITY_CLASSNAME
-          value: 
-        - name: CSI_ENABLE_OMAP_GENERATOR
-          value: "false"
-        - name: CSI_ENABLE_VOLUME_REPLICATION
-          value: "false"
-        - name: CSI_PLUGIN_ENABLE_SELINUX_HOST_MOUNT
-          value: "false"
-        - name: CSI_RBD_FSGROUPPOLICY
-          value: "ReadWriteOnceWithFSType"
-        - name: CSI_CEPHFS_FSGROUPPOLICY
-          value: "None"
-        - name: ROOK_CSI_KUBELET_DIR_PATH
-          value: "/var/lib/kubelet"
-        - name: ROOK_CSI_ENABLE_GRPC_METRICS
-          value: "false"
-        - name: CSI_FORCE_CEPHFS_KERNEL_CLIENT
-          value: "true"
-        - name: CSI_PROVISIONER_REPLICAS
-          value: "2"
-        - name: ROOK_ENABLE_DISCOVERY_DAEMON
-          value: "false"
-        - name: ROOK_CEPH_COMMANDS_TIMEOUT_SECONDS
-          value: "15"
-        - name: ROOK_OBC_WATCH_OPERATOR_NAMESPACE
-          value: "true"
-
+        - name: ROOK_DISCOVER_DEVICES_INTERVAL
+          value: "60m"
         - name: NODE_NAME
           valueFrom:
             fieldRef:
@@ -100,16 +70,13 @@ spec:
               fieldPath: metadata.namespace
         resources:
           limits:
-            cpu: 500m
-            memory: 256Mi
+            memory: 512Mi
           requests:
-            cpu: 100m
+            cpu: 200m
             memory: 128Mi
       serviceAccountName: rook-ceph-system
       volumes:
       - name: rook-config
         emptyDir: {}
       - name: default-config-dir
-        emptyDir: {}
-      - name: webhook-cert
         emptyDir: {}
