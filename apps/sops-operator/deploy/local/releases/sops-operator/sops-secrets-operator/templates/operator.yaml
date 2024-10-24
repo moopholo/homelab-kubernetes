@@ -6,9 +6,9 @@ metadata:
   name: sops-operator
   labels:
     app.kubernetes.io/name: sops-secrets-operator
-    helm.sh/chart: sops-secrets-operator-0.10.4
+    helm.sh/chart: sops-secrets-operator-0.20.1
     app.kubernetes.io/instance: sops-operator
-    app.kubernetes.io/version: "0.4.4"
+    app.kubernetes.io/version: "0.14.1"
     app.kubernetes.io/managed-by: Helm
 spec:
   replicas: 1
@@ -28,7 +28,7 @@ spec:
       serviceAccountName: sops-operator
       containers:
         - name: sops-secrets-operator
-          image: "isindir/sops-secrets-operator:0.4.4"
+          image: "isindir/sops-secrets-operator:0.14.1"
           imagePullPolicy: Always
           volumeMounts:
           - name: age-keys
@@ -38,14 +38,16 @@ spec:
           - /usr/local/bin/manager
           args:
           # The address the metric endpoint binds to. (default ":8080")
-          #- "--metrics-bind-address=127.0.0.1:8080"
-          - "--health-probe-bind-address=:8081"
+          #- "-metrics-bind-address=127.0.0.1:8080"
+          - "-health-probe-bind-address=:8081"
           # Enable leader election for controller manager. Enabling this will ensure there is only one active controller manager.
-          - "--leader-elect"
-          - "--requeue-decrypt-after=5"
-          - "--zap-encoder=json"
-          - "--zap-log-level=info"
-          - "--zap-stacktrace-level=error"
+          - "-leader-elect"
+          - "-requeue-decrypt-after=5"
+          - "-zap-devel=false"
+          - "-zap-encoder=json"
+          - "-zap-log-level=info"
+          - "-zap-stacktrace-level=error"
+          - "-zap-time-encoding=iso8601"
           livenessProbe:
             httpGet:
               path: /healthz
