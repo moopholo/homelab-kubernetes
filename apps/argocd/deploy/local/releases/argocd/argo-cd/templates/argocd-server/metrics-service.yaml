@@ -6,7 +6,7 @@ metadata:
   annotations:
     prometheus.io/scrape: "true"
   labels:
-    helm.sh/chart: argo-cd-3.33.8
+    helm.sh/chart: argo-cd-3.35.4
     app.kubernetes.io/name: argocd-server-metrics
     app.kubernetes.io/instance: argocd
     app.kubernetes.io/component: server
