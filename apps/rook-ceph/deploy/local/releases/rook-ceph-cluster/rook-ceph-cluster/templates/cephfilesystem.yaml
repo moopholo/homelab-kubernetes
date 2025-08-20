@@ -11,24 +11,29 @@ parameters:
   fsName: ceph-filesystem
   pool: ceph-filesystem-data0
   clusterID: rook-ceph
+
   csi.storage.k8s.io/controller-expand-secret-name: rook-csi-cephfs-provisioner
-  csi.storage.k8s.io/controller-expand-secret-namespace: rook-ceph
+  csi.storage.k8s.io/controller-expand-secret-namespace: 'rook-ceph'
   csi.storage.k8s.io/fstype: ext4
   csi.storage.k8s.io/node-stage-secret-name: rook-csi-cephfs-node
-  csi.storage.k8s.io/node-stage-secret-namespace: rook-ceph
+  csi.storage.k8s.io/node-stage-secret-namespace: 'rook-ceph'
   csi.storage.k8s.io/provisioner-secret-name: rook-csi-cephfs-provisioner
-  csi.storage.k8s.io/provisioner-secret-namespace: rook-ceph
+  csi.storage.k8s.io/provisioner-secret-namespace: 'rook-ceph'
+
 reclaimPolicy: Delete
 allowVolumeExpansion: true
+volumeBindingMode: Immediate
 ---
 # Source: rook-ceph-cluster/templates/cephfilesystem.yaml
 apiVersion: ceph.rook.io/v1
 kind: CephFilesystem
 metadata:
   name: ceph-filesystem
+  namespace: rook-ceph # namespace:cluster
 spec:
   dataPools:
   - failureDomain: host
+    name: data0
     replicated:
       size: 3
   metadataPool:
@@ -37,3 +42,30 @@ spec:
   metadataServer:
     activeCount: 1
     activeStandby: true
+    priorityClassName: system-cluster-critical
+    resources:
+      limits:
+        memory: 4Gi
+      requests:
+        cpu: 1000m
+        memory: 4Gi
+---
+# Source: rook-ceph-cluster/templates/cephfilesystem.yaml
+apiVersion: ceph.rook.io/v1
+kind: CephFilesystemSubVolumeGroup
+metadata:
+  name: ceph-filesystem-csi    # lets keep the svg crd name same as `filesystem name + csi` for the default csi svg
+  namespace: rook-ceph # namespace:cluster
+spec:
+  # The name of the subvolume group. If not set, the default is the name of the subvolumeGroup CR.
+  name: csi
+  # filesystemName is the metadata name of the CephFilesystem CR where the subvolume group will be created
+  filesystemName: ceph-filesystem
+  # reference https://docs.ceph.com/en/latest/cephfs/fs-volumes/#pinning-subvolumes-and-subvolume-groups
+  # only one out of (export, distributed, random) can be set at a time
+  # by default pinning is set with value: distributed=1
+  # for disabling default values set (distributed=0)
+  pinning:
+    distributed: 1            # distributed=<0, 1> (disabled=0)
+    # export:                 # export=<0-256> (disabled=-1)
+    # random:                 # random=[0.0, 1.0](disabled=0.0)

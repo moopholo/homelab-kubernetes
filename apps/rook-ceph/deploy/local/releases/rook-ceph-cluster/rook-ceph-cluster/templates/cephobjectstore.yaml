@@ -6,9 +6,11 @@ metadata:
   name: ceph-bucket
 provisioner: rook-ceph.ceph.rook.io/bucket
 reclaimPolicy: Delete
+volumeBindingMode: Immediate
 parameters:
   objectStoreName: ceph-objectstore
   objectStoreNamespace: rook-ceph
+
   region: us-east-1
 ---
 # Source: rook-ceph-cluster/templates/cephobjectstore.yaml
@@ -16,6 +18,7 @@ apiVersion: ceph.rook.io/v1
 kind: CephObjectStore
 metadata:
   name: ceph-objectstore
+  namespace: rook-ceph # namespace:cluster
 spec:
   dataPool:
     erasureCoded:
