@@ -7,11 +7,12 @@ metadata:
     component: "alertmanager"
     app: prometheus
     release: prometheus
-    chart: prometheus-15.1.2
+    chart: prometheus-15.18.0
     heritage: Helm
   name: prometheus-alertmanager
   namespace: prometheus
 data:
+  allow-snippet-annotations: "false"
   alertmanager.yml: |
     global: {}
     receivers:
