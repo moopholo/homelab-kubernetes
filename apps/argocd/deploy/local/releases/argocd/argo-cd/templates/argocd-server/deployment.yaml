@@ -5,7 +5,7 @@ kind: Deployment
 metadata:
   name: argocd-server
   labels:
-    helm.sh/chart: argo-cd-3.33.8
+    helm.sh/chart: argo-cd-3.35.4
     app.kubernetes.io/name: argocd-server
     app.kubernetes.io/instance: argocd
     app.kubernetes.io/component: server
@@ -22,7 +22,7 @@ spec:
   template:
     metadata:
       labels:
-        helm.sh/chart: argo-cd-3.33.8
+        helm.sh/chart: argo-cd-3.35.4
         app.kubernetes.io/name: argocd-server
         app.kubernetes.io/instance: argocd
         app.kubernetes.io/component: server
@@ -63,6 +63,8 @@ spec:
         volumeMounts:
         - mountPath: /app/config/ssh
           name: ssh-known-hosts
+        - mountPath: /app/config/tls
+          name: tls-certs
         - mountPath: /app/config/server/tls
           name: argocd-repo-server-tls
         - mountPath: /home/argocd/.aws
@@ -112,6 +114,9 @@ spec:
       - configMap:
           name: argocd-ssh-known-hosts-cm
         name: ssh-known-hosts
+      - configMap:
+          name: argocd-tls-certs-cm
+        name: tls-certs
       - name: argocd-repo-server-tls
         secret:
           items:
