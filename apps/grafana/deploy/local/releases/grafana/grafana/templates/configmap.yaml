@@ -6,10 +6,10 @@ metadata:
   name: grafana
   namespace: grafana
   labels:
-    helm.sh/chart: grafana-6.21.2
+    helm.sh/chart: grafana-6.61.2
     app.kubernetes.io/name: grafana
     app.kubernetes.io/instance: grafana
-    app.kubernetes.io/version: "8.3.4"
+    app.kubernetes.io/version: "10.1.5"
     app.kubernetes.io/managed-by: Helm
 data:
   grafana.ini: |
@@ -43,7 +43,6 @@ data:
     root_url = https://%(domain)s
     [users]
     auto_assign_org_role = Editor
-
   datasources.yaml: |
     apiVersion: 1
     datasources:
@@ -55,24 +54,30 @@ data:
   download_dashboards.sh: |
     #!/usr/bin/env sh
     set -euf
+  
     curl -skf \
     --connect-timeout 60 \
     --max-time 60 \
     -H "Accept: application/json" \
     -H "Content-Type: application/json;charset=UTF-8" \
-      "https://grafana.com/api/dashboards/2842/revisions/1/download" | sed '/-- .* --/! s/"datasource":.*,/"datasource": "Prometheus",/g'\
+      "https://grafana.com/api/dashboards/2842/revisions/1/download" \
+      | sed '/-- .* --/! s/"datasource":.*,/"datasource": "Prometheus",/g' \
     > "/var/lib/grafana/dashboards/default/ceph-cluster.json"
+      
     curl -skf \
     --connect-timeout 60 \
     --max-time 60 \
     -H "Accept: application/json" \
     -H "Content-Type: application/json;charset=UTF-8" \
-      "https://grafana.com/api/dashboards/5336/revisions/1/download" | sed '/-- .* --/! s/"datasource":.*,/"datasource": "Prometheus",/g'\
+      "https://grafana.com/api/dashboards/5336/revisions/1/download" \
+      | sed '/-- .* --/! s/"datasource":.*,/"datasource": "Prometheus",/g' \
     > "/var/lib/grafana/dashboards/default/ceph-osd.json"
+      
     curl -skf \
     --connect-timeout 60 \
     --max-time 60 \
     -H "Accept: application/json" \
     -H "Content-Type: application/json;charset=UTF-8" \
-      "https://grafana.com/api/dashboards/5342/revisions/1/download" | sed '/-- .* --/! s/"datasource":.*,/"datasource": "Prometheus",/g'\
+      "https://grafana.com/api/dashboards/5342/revisions/1/download" \
+      | sed '/-- .* --/! s/"datasource":.*,/"datasource": "Prometheus",/g' \
     > "/var/lib/grafana/dashboards/default/ceph-pools.json"
