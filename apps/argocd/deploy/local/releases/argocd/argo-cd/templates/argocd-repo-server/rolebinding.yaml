@@ -1,8 +1,9 @@
 ---
-# Source: argo-cd/templates/argocd-repo-server/service.yaml
-apiVersion: v1
-kind: Service
+# Source: argo-cd/templates/argocd-repo-server/rolebinding.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
 metadata:
+  name: argocd-repo-server
   labels:
     helm.sh/chart: argo-cd-3.35.4
     app.kubernetes.io/name: argocd-repo-server
@@ -10,13 +11,11 @@ metadata:
     app.kubernetes.io/component: repo-server
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: argocd
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
   name: argocd-repo-server
-spec:
-  ports:
-  - name: https-repo-server
-    protocol: TCP
-    port: 8081
-    targetPort: repo-server
-  selector:
-    app.kubernetes.io/name: argocd-repo-server
-    app.kubernetes.io/instance: argocd
+subjects:
+- kind: ServiceAccount
+  name: argocd-repo-server
+  namespace: argocd
