@@ -7,7 +7,7 @@ metadata:
     component: "server"
     app: prometheus
     release: prometheus
-    chart: prometheus-15.1.2
+    chart: prometheus-15.18.0
     heritage: Helm
   name: prometheus-server
   namespace: prometheus
@@ -27,7 +27,7 @@ spec:
         component: "server"
         app: prometheus
         release: prometheus
-        chart: prometheus-15.1.2
+        chart: prometheus-15.18.0
         heritage: Helm
     spec:
       enableServiceLinks: true
@@ -47,7 +47,7 @@ spec:
               readOnly: true
 
         - name: prometheus-server
-          image: "quay.io/prometheus/prometheus:v2.31.1"
+          image: "quay.io/prometheus/prometheus:v2.39.1"
           imagePullPolicy: "IfNotPresent"
           args:
             - --storage.tsdb.retention.time=15d
@@ -87,7 +87,6 @@ spec:
             - name: storage-volume
               mountPath: /data
               subPath: ""
-      hostNetwork: false
       dnsPolicy: ClusterFirst
       securityContext:
         fsGroup: 65534
