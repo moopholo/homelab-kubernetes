@@ -5,7 +5,7 @@ kind: Deployment
 metadata:
   name: argocd-repo-server
   labels:
-    helm.sh/chart: argo-cd-3.33.8
+    helm.sh/chart: argo-cd-3.35.4
     app.kubernetes.io/name: argocd-repo-server
     app.kubernetes.io/instance: argocd
     app.kubernetes.io/component: repo-server
@@ -22,7 +22,7 @@ spec:
   template:
     metadata:
       labels:
-        helm.sh/chart: argo-cd-3.33.8
+        helm.sh/chart: argo-cd-3.35.4
         app.kubernetes.io/name: argocd-repo-server
         app.kubernetes.io/instance: argocd
         app.kubernetes.io/component: repo-server
@@ -38,6 +38,8 @@ spec:
       - name: repo-server
         image: alinbalutoiu/argocd:linux-arm64-v2.2.2
         imagePullPolicy: IfNotPresent
+        command:
+        - entrypoint.sh
         args:
         - argocd-repo-server
         - --redis
@@ -60,6 +62,8 @@ spec:
           name: gpg-keyring
         - mountPath: /app/config/ssh
           name: ssh-known-hosts
+        - mountPath: /app/config/tls
+          name: tls-certs
         - mountPath: /app/config/reposerver/tls
           name: argocd-repo-server-tls
         - mountPath: /tmp
@@ -91,7 +95,7 @@ spec:
           failureThreshold: 3
         resources:
           {}
-      serviceAccountName: default
+      serviceAccountName: argocd-repo-server
       volumes:
       - name: gpg-keys
         configMap:
@@ -101,6 +105,9 @@ spec:
       - configMap:
           name: argocd-ssh-known-hosts-cm
         name: ssh-known-hosts
+      - configMap:
+          name: argocd-tls-certs-cm
+        name: tls-certs
       - name: helm-working-dir
         emptyDir: {}
       - name: argocd-repo-server-tls
