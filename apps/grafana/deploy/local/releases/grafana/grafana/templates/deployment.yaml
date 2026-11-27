@@ -6,10 +6,10 @@ metadata:
   name: grafana
   namespace: grafana
   labels:
-    helm.sh/chart: grafana-6.21.2
+    helm.sh/chart: grafana-6.61.2
     app.kubernetes.io/name: grafana
     app.kubernetes.io/instance: grafana
-    app.kubernetes.io/version: "8.3.4"
+    app.kubernetes.io/version: "10.1.5"
     app.kubernetes.io/managed-by: Helm
 spec:
   replicas: 1
@@ -26,9 +26,10 @@ spec:
         app.kubernetes.io/name: grafana
         app.kubernetes.io/instance: grafana
       annotations:
-        checksum/config: d528772fb33441215c9d37e463e452e8106a186bf57e07818c60ea76cc33997c
-        checksum/dashboards-json-config: bdc67c49dffdfd124fcb08864569bd7dbcf126c5036440e39af62a7242a66d4f
+        checksum/config: 7951e2c00a7eaeeafb6d425072a59c94e3b648bad5f8d408569083ca6b2fa40d
+        checksum/dashboards-json-config: 2993df31a1a242909be46f10d4eaf3c6fc32ec1d96013062a3eaab5b08d3a3b0
         checksum/sc-dashboard-provider-config: 01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b
+        kubectl.kubernetes.io/default-container: grafana
     spec:
       
       serviceAccountName: grafana
@@ -36,28 +37,41 @@ spec:
       securityContext:
         fsGroup: 472
         runAsGroup: 472
+        runAsNonRoot: true
         runAsUser: 472
       initContainers:
         - name: init-chown-data
-          image: "busybox:1.31.1"
+          image: "docker.io/library/busybox:1.31.1"
           imagePullPolicy: IfNotPresent
           securityContext:
+            capabilities:
+              add:
+              - CHOWN
             runAsNonRoot: false
             runAsUser: 0
-          command: ["chown", "-R", "472:472", "/var/lib/grafana"]
-          resources:
-            {}
+            seccompProfile:
+              type: RuntimeDefault
+          command:
+            - chown
+            - -R
+            - 472:472
+            - /var/lib/grafana
           volumeMounts:
             - name: storage
               mountPath: "/var/lib/grafana"
         - name: download-dashboards
-          image: "curlimages/curl:7.73.0"
+          image: "docker.io/curlimages/curl:7.85.0"
           imagePullPolicy: IfNotPresent
           command: ["/bin/sh"]
           args: [ "-c", "mkdir -p /var/lib/grafana/dashboards/default && /bin/sh -x /etc/grafana/download_dashboards.sh" ]
-          resources:
-            {}
           env:
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+            seccompProfile:
+              type: RuntimeDefault
           volumeMounts:
             - name: config
               mountPath: "/etc/grafana/download_dashboards.sh"
@@ -67,8 +81,15 @@ spec:
       enableServiceLinks: true
       containers:
         - name: grafana
-          image: "grafana/grafana:8.3.4"
+          image: "docker.io/grafana/grafana:10.1.5"
           imagePullPolicy: IfNotPresent
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+            seccompProfile:
+              type: RuntimeDefault
           volumeMounts:
             - name: config
               mountPath: "/etc/grafana/grafana.ini"
@@ -79,13 +100,20 @@ spec:
               mountPath: "/etc/grafana/provisioning/datasources/datasources.yaml"
               subPath: "datasources.yaml"
           ports:
-            - name: service
-              containerPort: 80
-              protocol: TCP
             - name: grafana
               containerPort: 3000
               protocol: TCP
+            - name: gossip-tcp
+              containerPort: 9094
+              protocol: TCP
+            - name: gossip-udp
+              containerPort: 9094
+              protocol: UDP
           env:
+            - name: POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
             - name: GF_PATHS_DATA
               value: /var/lib/grafana/
             - name: GF_PATHS_LOGS
@@ -110,8 +138,6 @@ spec:
             httpGet:
               path: /api/health
               port: 3000
-          resources:
-            {}
       volumes:
         - name: config
           configMap:
